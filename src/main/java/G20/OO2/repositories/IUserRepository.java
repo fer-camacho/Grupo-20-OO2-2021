@@ -12,7 +12,7 @@ import G20.OO2.entities.User;
 @Repository("userRepository")
 public interface IUserRepository extends JpaRepository<User, Serializable> {
 
-	@Query("SELECT u FROM User u JOIN FETCH u.userRoles WHERE u.username = (:username)")
+	@Query("SELECT u FROM User u JOIN FETCH u.userRole WHERE u.username = (:username)")
 	public abstract User findByUsernameAndFetchUserRolesEagerly(@Param("username") String username);
 
 	public User save(org.springframework.security.core.userdetails.User user);

@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		G20.OO2.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
-		return (UserDetails) buildUser(user, buildGrantedAuthorities(user.getUserRoles()));
+		return (UserDetails) buildUser(user, buildGrantedAuthorities(user.getUserRole()));
 	}
 	
 	private User buildUser(G20.OO2.entities.User user, List<GrantedAuthority> grantedAuthorities) {
@@ -45,14 +45,16 @@ public class UserService implements UserDetailsService {
 						grantedAuthorities);
 	}
 	
-	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {
+	private List<GrantedAuthority> buildGrantedAuthorities(UserRole userRole2) {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-		for(UserRole userRole: userRoles) {
-			grantedAuthorities.add(new SimpleGrantedAuthority(userRole.getRole()));
-		}
+		grantedAuthorities.add(new SimpleGrantedAuthority(userRole2.getRole()));
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
 	
+	@SuppressWarnings("unused")
+	private GrantedAuthority buildGrantedAuthority(UserRole userRole2) {
+		return new SimpleGrantedAuthority(userRole2.getRole());
+	}
 	
 	public G20.OO2.entities.User save(G20.OO2.entities.User user) {	
 		return userRepository.save(user);

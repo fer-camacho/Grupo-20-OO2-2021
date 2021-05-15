@@ -1,47 +1,37 @@
 package G20.OO2.entities;
 
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.CreationTimestamp;
-
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="user_role", uniqueConstraints=@UniqueConstraint(columnNames= {"role", "user_id"}))
+@Table(name="userRole")
 public class UserRole {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable=false)
-	private User user;
-	
 	@Column(name="role", nullable=false, length=100)
 	private String role;
 
+	@OneToMany(cascade= CascadeType.REFRESH, fetch=FetchType.LAZY, mappedBy="userRole")
+	private Set<User> users = new HashSet<User>();
+	
 	public UserRole() {}
-	
-	public UserRole(int id, User user, String role) {
+
+	public UserRole(int id, String role) {
+		super();
 		this.id = id;
-		this.user = user;
-		this.role = role;
-	}
-	
-	public UserRole(User user, String role) {		
-		this.user = user;
 		this.role = role;
 	}
 
@@ -53,19 +43,19 @@ public class UserRole {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public String getRole() {
 		return role;
 	}
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

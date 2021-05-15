@@ -55,8 +55,7 @@
 							<thead>
 								<tr class="row100 head">
 									<th class="cell100 column1">Id</th>
-									<th class="cell100 column2">Rol</th>
-									<th class="cell100 column3">Usuario</th>
+									<th class="cell100 column2">Perfil</th>
 								</tr>
 							</thead>
 						</table>
@@ -68,7 +67,6 @@
 								<tr th:each="rol : ${roles}" class="row100 body">
 									<td th:text="${rol.id}" class="cell100 column1"></td>
 									<td th:text="${rol.role}" class="cell100 column2"></td>
-									<td th:text="${rol.user.username}" class="cell100 column3"></td>
 								</tr>
 							</tbody>
 						</table>

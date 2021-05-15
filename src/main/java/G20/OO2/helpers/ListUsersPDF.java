@@ -54,17 +54,10 @@ public class ListUsersPDF extends AbstractPdfView {
 		tablaTitulo.addCell(titulo);
 		tablaTitulo.setSpacingAfter(20);
 		
-		PdfPTable tablaUsuarios = new PdfPTable(5);
-		tablaUsuarios.setWidths(new float[] {1f, 2f, 2f, 2f, 2f});
+		PdfPTable tablaUsuarios = new PdfPTable(7);
+		tablaUsuarios.setWidths(new float[] {1f, 2f, 2f, 3f, 3f, 2f, 2f});
 		
 		celda = new PdfPCell(new Phrase("ID", fuenteTituloCol));
-		celda.setBackgroundColor(Color.LIGHT_GRAY);
-		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-		celda.setVerticalAlignment(Element.ALIGN_CENTER);
-		celda.setPadding(10);
-		tablaUsuarios.addCell(celda);
-		
-		celda = new PdfPCell(new Phrase("APELLIDO", fuenteTituloCol));
 		celda.setBackgroundColor(Color.LIGHT_GRAY);
 		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 		celda.setVerticalAlignment(Element.ALIGN_CENTER);
@@ -78,7 +71,21 @@ public class ListUsersPDF extends AbstractPdfView {
 		celda.setPadding(10);
 		tablaUsuarios.addCell(celda);
 		
-		celda = new PdfPCell(new Phrase("NRO DOCUMENTO", fuenteTituloCol));
+		celda = new PdfPCell(new Phrase("APELLIDO", fuenteTituloCol));
+		celda.setBackgroundColor(Color.LIGHT_GRAY);
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setVerticalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(10);
+		tablaUsuarios.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("DOCUMENTO", fuenteTituloCol));
+		celda.setBackgroundColor(Color.LIGHT_GRAY);
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setVerticalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(10);
+		tablaUsuarios.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("EMAIL", fuenteTituloCol));
 		celda.setBackgroundColor(Color.LIGHT_GRAY);
 		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 		celda.setVerticalAlignment(Element.ALIGN_CENTER);
@@ -86,6 +93,13 @@ public class ListUsersPDF extends AbstractPdfView {
 		tablaUsuarios.addCell(celda);
 		
 		celda = new PdfPCell(new Phrase("USUARIO", fuenteTituloCol));
+		celda.setBackgroundColor(Color.LIGHT_GRAY);
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setVerticalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(10);
+		tablaUsuarios.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("PERFIL", fuenteTituloCol));
 		celda.setBackgroundColor(Color.LIGHT_GRAY);
 		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 		celda.setVerticalAlignment(Element.ALIGN_CENTER);
@@ -100,25 +114,37 @@ public class ListUsersPDF extends AbstractPdfView {
 			celda.setPadding(5);
 			tablaUsuarios.addCell(celda);
 			
-			celda = new PdfPCell(new Phrase(u.getApellido(), fuenteCeldas));
+			celda = new PdfPCell(new Phrase(u.getPersona().getNombre(), fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 			celda.setVerticalAlignment(Element.ALIGN_CENTER);
 			celda.setPadding(5);
 			tablaUsuarios.addCell(celda);
 			
-			celda = new PdfPCell(new Phrase(u.getNombre(), fuenteCeldas));
+			celda = new PdfPCell(new Phrase(u.getPersona().getApellido(), fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 			celda.setVerticalAlignment(Element.ALIGN_CENTER);
 			celda.setPadding(5);
 			tablaUsuarios.addCell(celda);
 			
-			celda = new PdfPCell(new Phrase(Long.toString(u.getNroDocumento()), fuenteCeldas));
+			celda = new PdfPCell(new Phrase(Long.toString(u.getPersona().getNroDocumento()), fuenteCeldas));
+			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda.setVerticalAlignment(Element.ALIGN_CENTER);
+			celda.setPadding(5);
+			tablaUsuarios.addCell(celda);
+			
+			celda = new PdfPCell(new Phrase(u.getEmail(), fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 			celda.setVerticalAlignment(Element.ALIGN_CENTER);
 			celda.setPadding(5);
 			tablaUsuarios.addCell(celda);
 			
 			celda = new PdfPCell(new Phrase(u.getUsername(), fuenteCeldas));
+			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda.setVerticalAlignment(Element.ALIGN_CENTER);
+			celda.setPadding(5);
+			tablaUsuarios.addCell(celda);
+			
+			celda = new PdfPCell(new Phrase(u.getUserRole().getRole(), fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 			celda.setVerticalAlignment(Element.ALIGN_CENTER);
 			celda.setPadding(5);

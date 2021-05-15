@@ -14,11 +14,19 @@ public class UserConverter {
 	@Qualifier("userConverter")
 	private UserConverter userConverter;
 	
+	@Autowired
+	@Qualifier("userRoleConverter")
+	private UserRoleConverter userRoleConverter;
+	
+	@Autowired
+	@Qualifier("personaConverter")
+	private PersonaConverter personaConverter;
+	
 	public UserModel entityToModel(User entity) {
-		return new UserModel(entity.getId(), entity.getNombre(), entity.getApellido(), entity.getTipo(), entity.getNroDocumento(), entity.getUsername(), entity.getPassword());
+		return new UserModel(entity.getId(), entity.getEmail(), entity.getUsername(), entity.getPassword(), entity.isEnabled(), userRoleConverter.entityToModel(entity.getUserRole()), personaConverter.entityToModel(entity.getPersona()));
 	}
 	
 	public User modelToEntity(UserModel model) {
-		return new User(model.getId(), model.getNombre(), model.getApellido(), model.getTipo(), model.getNroDocumento(), model.getUsername(), model.getPassword(), model.isEnabled());
+		return new User(model.getId(), model.getEmail(), model.getUsername(), model.getPassword(), model.isEnabled(), userRoleConverter.modelToEntity(model.getUserRole()), personaConverter.modelToEntity(model.getPersona()));
 	}
 }

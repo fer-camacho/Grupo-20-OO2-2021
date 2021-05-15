@@ -1,33 +1,38 @@
 package G20.OO2.models;
 
-import java.util.Set;
-
 public class UserModel {
 	private int id;
-	private String nombre;
-	private String apellido;
-	private String tipo;
-	private long nroDocumento;
+	private String email;
 	private String username;
 	private String password;
 	private boolean enabled;
-	private Set<UserRoleModel> userRoles;
+	private UserRoleModel userRole;
+	private PersonaModel persona;
 	
 	public UserModel() {
 		super();
 	}
 
-	public UserModel(int id, String nombre, String apellido, String tipo, long nroDocumento, String username,
-			String password) {
+	public UserModel(int id, String email, String username, String password, boolean enabled, UserRoleModel userRole) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.tipo = tipo;
-		this.nroDocumento = nroDocumento;
+		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.enabled = true;
+		this.enabled = enabled;
+		this.userRole = userRole;
+	}
+
+	public UserModel(int id, String email, String username, String password, boolean enabled, UserRoleModel userRole,
+			PersonaModel persona) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.userRole = userRole;
+		this.persona = persona;
 	}
 
 	public int getId() {
@@ -38,36 +43,12 @@ public class UserModel {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public long getNroDocumento() {
-		return nroDocumento;
-	}
-
-	public void setNroDocumento(long nroDocumento) {
-		this.nroDocumento = nroDocumento;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUsername() {
@@ -77,7 +58,7 @@ public class UserModel {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -94,15 +75,19 @@ public class UserModel {
 		this.enabled = enabled;
 	}
 
-	public Set<UserRoleModel> getUserRoles() {
-		return userRoles;
+	public UserRoleModel getUserRole() {
+		return userRole;
 	}
 
-	public void setUserRoles(Set<UserRoleModel> userRoles) {
-		this.userRoles = userRoles;
+	public void setUserRole(UserRoleModel userRole) {
+		this.userRole = userRole;
 	}
-	
-	
-	
-	
+
+	public PersonaModel getPersona() {
+		return persona;
+	}
+
+	public void setPersona(PersonaModel persona) {
+		this.persona = persona;
+	}
 }

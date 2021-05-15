@@ -1,9 +1,11 @@
 package G20.OO2.models;
 
+import java.util.Set;
+
 public class UserRoleModel {
 	private int id;
-	private UserModel user;
 	private String role;
+	private Set<UserModel> users;
 	
 	public UserRoleModel() {
 		super();
@@ -15,11 +17,11 @@ public class UserRoleModel {
 		this.role = role;
 	}
 
-	public UserRoleModel(int id, UserModel user, String role) {
+	public UserRoleModel(int id, String role, Set<UserModel> users) {
 		super();
 		this.id = id;
-		this.user = user;
 		this.role = role;
+		this.users = users;
 	}
 
 	public int getId() {
@@ -30,14 +32,6 @@ public class UserRoleModel {
 		this.id = id;
 	}
 
-	public UserModel getUser() {
-		return user;
-	}
-
-	public void setUser(UserModel user) {
-		this.user = user;
-	}
-
 	public String getRole() {
 		return role;
 	}
@@ -46,4 +40,11 @@ public class UserRoleModel {
 		this.role = role;
 	}
 
+	public Set<UserModel> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<UserModel> users) {
+		this.users = users;
+	}
 }

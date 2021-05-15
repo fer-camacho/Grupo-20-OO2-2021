@@ -1,42 +1,27 @@
 package G20.OO2.entities;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="user")
+@Table(name="user")//, uniqueConstraints=@UniqueConstraint(columnNames= {"user", "userRole_id"})
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="nombre")
-	private String nombre;
-	
-	@Column(name="apellido")
-	private String apellido;
-	
-	@Column(name="tipo")
-	private String tipo;
-	
-	@Column(name="nroDocumento")
-	private long nroDocumento;
-
+	@Column(name="email")
+	private String email;
 	
 	@Column(name="username", unique=true, nullable=false, length=45)
 	private String username;
@@ -47,64 +32,52 @@ public class User {
 	@Column(name="enabled")
 	private boolean enabled;
 	
-	@OneToMany(cascade= CascadeType.REFRESH, fetch=FetchType.LAZY, mappedBy="user")
-	private Set<UserRole> userRoles = new HashSet<UserRole>();
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="userRole_id", nullable=false)
+	private UserRole userRole;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="persona_id", nullable=false)
+	private Persona persona;
+	
 	public User() {}
-	
-	public User(long id_empleado, String username, String password, boolean enabled) {	
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-	}
-	
-	public User(String username, String password, boolean enabled) {
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-	}
-	
-	public User(int id, String nombre, String apellido, String tipo, long nroDocumento, String username,
-			String password, boolean enabled) {
+
+	public User(int id, String email, String username, String password, boolean enabled, UserRole userRole) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.tipo = tipo;
-		this.nroDocumento = nroDocumento;
+		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
+		this.userRole = userRole;
 	}
 
-	public User(String username, String password, boolean enabled, Set<UserRole> userRoles) {
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-		this.userRoles = userRoles;
-	}
-	
-	public User(int id, String nombre, String apellido, String tipo, long nroDocumento, String username,
-			String password, boolean enabled, LocalDateTime createdAt, LocalDateTime updatedAt,
-			Set<UserRole> userRoles) {
+	public User(int id, String email, String username, String password, boolean enabled, UserRole userRole,
+			Persona persona) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.tipo = tipo;
-		this.nroDocumento = nroDocumento;
+		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		this.userRoles = userRoles;
+		this.userRole = userRole;
+		this.persona = persona;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUsername() {
@@ -118,7 +91,7 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -131,43 +104,19 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
+	public UserRole getUserRole() {
+		return userRole;
 	}
 
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public Persona getPersona() {
+		return persona;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public long getNroDocumento() {
-		return nroDocumento;
-	}
-
-	public void setNroDocumento(long nroDocumento) {
-		this.nroDocumento = nroDocumento;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 }

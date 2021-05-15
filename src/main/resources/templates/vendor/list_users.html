@@ -58,7 +58,9 @@
 									<th class="cell100 column2">Nombre</th>
 									<th class="cell100 column3">Apellido</th>
 									<th class="cell100 column4">Documento</th>
-									<th class="cell100 column5">Nombre Usuario</th>
+									<th class="cell100 column5">Email</th>
+									<th class="cell100 column5">Usuario</th>
+									<th class="cell100 column5">Perfil asignado</th>
 								</tr>
 							</thead>
 						</table>
@@ -69,10 +71,12 @@
 							<tbody>
 								<tr th:each="usuario : ${usuarios}" class="row100 body">
 									<td th:text="${usuario.id}" class="cell100 column1"></td>
-									<td th:text="${usuario.nombre}" class="cell100 column2"></td>
-									<td th:text="${usuario.apellido}" class="cell100 column3"></td>
-									<td th:text="${usuario.nroDocumento}" class="cell100 column4"></td>
+									<td th:text="${usuario.persona.nombre}" class="cell100 column2"></td>
+									<td th:text="${usuario.persona.apellido}" class="cell100 column3"></td>
+									<td th:text="${usuario.persona.nroDocumento}" class="cell100 column4"></td>
+									<td th:text="${usuario.email}" class="cell100 column5"></td>
 									<td th:text="${usuario.username}" class="cell100 column5"></td>
+									<td th:text="${usuario.userRole.role}" class="cell100 column5"></td>
 								</tr>
 							</tbody>
 						</table>
