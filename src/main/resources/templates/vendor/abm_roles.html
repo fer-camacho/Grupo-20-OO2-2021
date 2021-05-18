@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V04</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate-grilla.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util-grilla.css">
+	<link rel="stylesheet" type="text/css" href="/css/main-grilla.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	 <nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_admin :: div"></nav>
+			
+		<nav th:if="${admin==false}" class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_audit :: div"></nav>
+
+
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Id</th>
+									<th class="cell100 column2">Perfil</th>
+									
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr th:each="rol : ${roles}" class="row100 body">
+									<td th:text="${rol.id}" class="cell100 column1"></td>
+									<td th:text="${rol.role}" class="cell100 column2"></td>
+									  <!--
+									<td class="cell100 column3">
+										<form th:action="@{/role/eliminar/{id}(id=${rol.id})}" method="get" role="form">
+											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
+										</form>
+									</td>
+									
+									
+									
+									<td class="cell100 column7">
+										<form th:action="@{/productos/eliminar/{id}(id=${producto.id})}" method="get" role="form">
+											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
+										</form>
+									</td>
+									-->
+								</tr>
+
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	
+	
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">El Deporte On-Line &copy; 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src="/js/main-grilla.js"></script>
+
+</body>
+</html></html>

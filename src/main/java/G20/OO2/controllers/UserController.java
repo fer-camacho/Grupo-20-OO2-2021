@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,29 +23,6 @@ import G20.OO2.services.implementations.UserService;
 
 @Controller
 public class UserController {
-	/* 
-	@GetMapping("/login")
-	public String login(Model model,
-						@RequestParam(name="error",required=false) String error,
-						@RequestParam(name="logout", required=false) String logout,
-						RedirectAttributes redirect) {
-		model.addAttribute("error", error);
-		model.addAttribute("logout", logout);
-		return ViewRouteHelper.USER_LOGIN;
-    }
-	
-	@GetMapping("/logout")
-	public String logout(Model model) {
-		SecurityContextHolder.clearContext();
-		return ViewRouteHelper.USER_LOGOUT;
-	}
-	
-	@PostMapping("/loginsuccess")
-	public String loginCheckPost()  {
-		//return loginCheckBase();
-		return "redirect:index";
-	} 
-	*/
 
 	@Autowired
 	@Qualifier("userService")
@@ -141,5 +120,26 @@ public class UserController {
 	@GetMapping("/logueo")
 	public String test2() {
 		return "user/test";
+	}
+	
+	@GetMapping("/rolenew")
+	public ModelAndView newRole() {
+		ModelAndView mAV = new ModelAndView("vendor/add_role");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if (roleString.equals("[ROLE_ADMIN]")) {
+			admin = true;
+		}
+		mAV.addObject("admin", admin);
+		mAV.addObject("userRole", new UserRoleModel());
+		return mAV;
+	}
+	
+	@PostMapping("/rolesave")
+	public String saveCategoria(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
+			RedirectAttributes redirect) {
+		UserRoleModel u = new UserRoleModel();
+		u = userRoleService.insertOrUpdate(userRoleModel);
+		return "redirect:/rolenew";
 	}
 }

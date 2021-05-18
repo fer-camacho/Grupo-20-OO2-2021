@@ -11,11 +11,11 @@ public class ViewRouteHelper {
 	public final static String DEGREE_FORM = "degree/form";
 	public final static String DEGREE_NEW = "degree/new";
 	
-	
 	//VENDOR
-	
 	public final static String LIST_USERS = "vendor/list_users";
 	public final static String LIST_ROLES = "vendor/list_roles";
+	public final static String ADD_ROLE = "vendor/add_role";
+	
 	//PERSON
 	public final static String PERSON_INDEX = "person/index";
 	public final static String PERSON_NEW = "person/new";
