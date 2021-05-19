@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
 import G20.OO2.entities.UserRole;
 import G20.OO2.models.UserModel;
 import G20.OO2.repositories.IUserRepository;
@@ -89,6 +88,11 @@ public class UserService implements UserDetailsService {
 	public String delete(int id) {
 		userRepository.deleteById(id);
 		return "usuario Eliminado";
+	}
+	
+	public UserModel insertOrUpdate(UserModel userModel) {
+		G20.OO2.entities.User user = userRepository.save(userConverter.modelToEntity(userModel));
+		return userConverter.entityToModel(user);
 	}
 }
 	

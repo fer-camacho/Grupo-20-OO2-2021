@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import G20.OO2.converters.PersonaConverter;
 import G20.OO2.entities.Persona;
@@ -12,6 +13,7 @@ import G20.OO2.models.PersonaModel;
 import G20.OO2.repositories.IPersonaRepository;
 import G20.OO2.services.IPersonaService;
 
+@Service("personaService")
 public class PersonaService implements IPersonaService {
 
 	@Autowired
@@ -22,7 +24,6 @@ public class PersonaService implements IPersonaService {
 	@Qualifier("personaConverter")
 	private PersonaConverter personaConverter;
 	
-	@Override
 	public List<PersonaModel> getAll() {
 		List<PersonaModel> personas = new ArrayList<>();
 		for (Persona p: personaRepository.findAll()) {

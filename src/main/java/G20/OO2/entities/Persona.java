@@ -32,7 +32,7 @@ public class Persona {
 	@Column(name="nroDocumento")
 	private long nroDocumento;
 	
-	@OneToMany(cascade= CascadeType.REFRESH, fetch=FetchType.LAZY, mappedBy="persona")
+	@OneToMany(cascade= CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="persona")
 	private Set<User> users;
 
 	public Persona() {

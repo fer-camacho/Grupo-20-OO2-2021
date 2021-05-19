@@ -7,6 +7,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `persona` WRITE;
 insert into `persona` VALUES(1, 'Perez', 'Juan', 35785268, 'DNI');
+insert into `persona` VALUES(2, 'Lopez', 'Alberto', 38456324, 'DNI');
 UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;

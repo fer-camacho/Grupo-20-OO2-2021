@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import G20.OO2.helpers.ViewRouteHelper;
+import G20.OO2.models.PersonaModel;
 import G20.OO2.models.UserModel;
 import G20.OO2.models.UserRoleModel;
+import G20.OO2.services.implementations.PersonaService;
 import G20.OO2.services.implementations.UserRoleService;
 import G20.OO2.services.implementations.UserService;
 
@@ -32,6 +35,10 @@ public class UserController {
 	@Autowired
 	@Qualifier("userRoleService")
 	private UserRoleService userRoleService;	
+	
+	@Autowired
+	@Qualifier("personaService")
+	private PersonaService personaService;
 	
 	@GetMapping("/login")
 	public String login(Model model,
@@ -173,7 +180,7 @@ public class UserController {
 			RedirectAttributes redirect) {
 		UserRoleModel u = new UserRoleModel();
 		u = userRoleService.insertOrUpdate(userRoleModel);
-		return "redirect:/rolenew";
+		return "redirect:/role/list";
 	}
 	
 	//////////////////////////// EDITAR ROL ////////////////////////////
@@ -194,9 +201,7 @@ public class UserController {
 	
 	@PostMapping("/rolesaveedit")
 	public String editRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
-			RedirectAttributes redirect) {		
-		//UserRoleModel u = userRoleService.listarId(userRoleModel.getId());
-		//userRoleModel.setRole(u.getRole());
+			RedirectAttributes redirect) {
 		userRoleService.insertOrUpdate(userRoleModel);
 		
 		return "redirect:/role/list/";
@@ -209,6 +214,36 @@ public class UserController {
 		//controlador para editar el rol
 		userRoleService.delete(id);
 		return "redirect:/role/list/";
+	}
+	
+	//////////////////////////// NUEVO USER ////////////////////////////
+	
+	@GetMapping("/usernew")
+	public ModelAndView newUser() {
+		ModelAndView mAV = new ModelAndView("vendor/add_user");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if (roleString.equals("[ROLE_ADMIN]")) {
+			admin = true;
+		}
+		
+		List<UserRoleModel> roles = userRoleService.getAll();
+		List<PersonaModel> personas = personaService.getAll();
+		mAV.addObject("admin", admin);
+		mAV.addObject("roles", roles);
+		mAV.addObject("personas", personas);
+		mAV.addObject("user", new UserModel());
+		return mAV;
+	}
+	
+	@PostMapping("/usersave")
+	public String saveuser(@ModelAttribute("user") UserModel userModel, BindingResult result,
+			RedirectAttributes redirect) {
+		UserModel u = new UserModel();
+		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
+		userModel.setPassword(p.encode(userModel.getPassword()));
+		u = userService.insertOrUpdate(userModel);
+		return "redirect:/user/list";
 	}
 	
 	////////////////////////////ELIMINAR USER ////////////////////////////
