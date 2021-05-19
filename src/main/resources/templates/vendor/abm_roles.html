@@ -40,6 +40,8 @@
 								<tr class="row100 head">
 									<th class="cell100 column1">Id</th>
 									<th class="cell100 column2">Perfil</th>
+									<th class="cell100 column3">Editar</th>
+									<th class="cell100 column4">Eliminar</th>
 									
 								</tr>
 							</thead>
@@ -59,14 +61,12 @@
 										</form>
 									</td>
 									
-									
-									<!-- 
 									<td class="cell100 column7">
-										<form th:action="@{/productos/eliminar/{id}(id=${producto.id})}" method="get" role="form">
+										<form th:action="@{/roledelete/{id}(id=${rol.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
 										</form>
 									</td>
-									-->
+									
 								</tr>
 
 								

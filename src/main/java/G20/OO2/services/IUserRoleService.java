@@ -16,6 +16,6 @@ public interface IUserRoleService {
 	
 	public UserRoleModel update(UserRoleModel userRoleModel);
 	
-	//public String delete(int id);
+	public String delete(int id);
 
 }

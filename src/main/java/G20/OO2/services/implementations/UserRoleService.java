@@ -43,15 +43,12 @@ public class UserRoleService implements  IUserRoleService{
 		userRoleRepository.save(role);
 		return userRoleConverter.entityToModel(role);
 	}
-	/*
+	
 	public String delete(int id) {
-		for (UserModel user: userService.findByUserRole(id)) {
-			
-		}
 		userRoleRepository.deleteById(id);
 		return "perfil Eliminado";
 	}
-	*/
+	
 	public List<UserRoleModel> getAll() {
 		List<UserRoleModel> roles = new ArrayList<>();
 		for (G20.OO2.entities.UserRole r: userRoleRepository.findAll()) {

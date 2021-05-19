@@ -27,7 +27,7 @@ public class UserRole {
 	private String role;
 
 	@JsonBackReference
-	@OneToMany(cascade= CascadeType.REFRESH, fetch=FetchType.LAZY, mappedBy="userRole")
+	@OneToMany(cascade= CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="userRole")
 	private Set<User> users = new HashSet<User>();
 	
 	public UserRole() {}
