@@ -3,6 +3,7 @@ package G20.OO2.services.implementations;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,14 @@ public class UserService implements UserDetailsService {
 		}
 		return usuarios;
 	}
+	
+	public List<UserModel> findByUserRole(int id) {
+		List<UserModel> usuarios = new ArrayList<>();
+		for (G20.OO2.entities.User u: userRepository.findByUserRole(id)) {
+			usuarios.add(userConverter.entityToModel(u));
+		}
+		return usuarios;
+	}
+
 }
 	

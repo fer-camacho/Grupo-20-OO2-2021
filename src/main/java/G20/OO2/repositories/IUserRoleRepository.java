@@ -12,5 +12,7 @@ public interface IUserRoleRepository extends JpaRepository<UserRole, Serializabl
 
 	@SuppressWarnings("unchecked")
 	public UserRole save(UserRole role);
+	
+	public abstract UserRole findById(int id);
 
 }

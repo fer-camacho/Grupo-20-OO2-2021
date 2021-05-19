@@ -11,4 +11,11 @@ public interface IUserRoleService {
 	public UserRoleModel insertOrUpdate(UserRoleModel userRoleModel);
 	
 	public UserRole insertOrUpdate(UserRole role);
+	
+	public UserRoleModel listarId(int id);
+	
+	public UserRoleModel update(UserRoleModel userRoleModel);
+	
+	//public String delete(int id);
+
 }

@@ -52,15 +52,15 @@
 								<tr th:each="rol : ${roles}" class="row100 body">
 									<td th:text="${rol.id}" class="cell100 column1"></td>
 									<td th:text="${rol.role}" class="cell100 column2"></td>
-									  <!--
-									<td class="cell100 column3">
-										<form th:action="@{/role/eliminar/{id}(id=${rol.id})}" method="get" role="form">
-											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
+									
+									<td class="cell100 column6">
+										<form th:action="@{/roleedit/{id}(id=${rol.id})}" method="get" role="form">
+											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
 										</form>
 									</td>
 									
 									
-									
+									<!-- 
 									<td class="cell100 column7">
 										<form th:action="@{/productos/eliminar/{id}(id=${producto.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />

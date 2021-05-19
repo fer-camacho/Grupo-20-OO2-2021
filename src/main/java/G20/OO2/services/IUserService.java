@@ -7,4 +7,6 @@ import G20.OO2.models.UserModel;
 public interface IUserService {
     
 	public List<UserModel> getAll();
+	
+	public List<UserModel> findByUserRole(int id);
 }

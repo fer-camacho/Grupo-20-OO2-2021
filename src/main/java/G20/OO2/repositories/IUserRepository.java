@@ -1,6 +1,7 @@
 package G20.OO2.repositories;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +19,8 @@ public interface IUserRepository extends JpaRepository<User, Serializable> {
 	public User save(org.springframework.security.core.userdetails.User user);
 
 	public abstract User findByUsername(User user);	
+	
+	@Query(nativeQuery=true,value="Select * from user u where u.user_role_id=(:id)")
+	public abstract List<User> findByUserRole(int id);
 	
 }

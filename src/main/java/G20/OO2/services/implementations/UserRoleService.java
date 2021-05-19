@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import G20.OO2.converters.UserRoleConverter;
 import G20.OO2.entities.UserRole;
+import G20.OO2.models.UserModel;
 import G20.OO2.models.UserRoleModel;
 import G20.OO2.repositories.IUserRoleRepository;
 import G20.OO2.services.IUserRoleService;
+import G20.OO2.services.IUserService;
 
 @Service("userRoleService")
 public class UserRoleService implements  IUserRoleService{
@@ -34,6 +36,22 @@ public class UserRoleService implements  IUserRoleService{
 		return userRoleConverter.entityToModel(role);
 	}
 	
+	public UserRoleModel update(UserRoleModel userRoleModel) {
+		UserRole role = userRoleConverter.modelToEntity(listarId(userRoleModel.getId()));
+		//UserRole role = userRoleRepository.findById(userRoleModel.getId());
+		role.setRole(userRoleModel.getRole());
+		userRoleRepository.save(role);
+		return userRoleConverter.entityToModel(role);
+	}
+	/*
+	public String delete(int id) {
+		for (UserModel user: userService.findByUserRole(id)) {
+			
+		}
+		userRoleRepository.deleteById(id);
+		return "perfil Eliminado";
+	}
+	*/
 	public List<UserRoleModel> getAll() {
 		List<UserRoleModel> roles = new ArrayList<>();
 		for (G20.OO2.entities.UserRole r: userRoleRepository.findAll()) {
@@ -42,5 +60,9 @@ public class UserRoleService implements  IUserRoleService{
 		return roles;
 	}
 	
+	public UserRoleModel listarId(int id) {
+		UserRole rol = userRoleRepository.findById(id);
+		return userRoleConverter.entityToModel(rol);
+	}
 	
 }

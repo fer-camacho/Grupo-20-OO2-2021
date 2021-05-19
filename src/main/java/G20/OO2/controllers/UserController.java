@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -122,6 +123,8 @@ public class UserController {
 		return "user/test";
 	}
 	
+	//////////////////////////// NUEVO ROL ////////////////////////////
+	
 	@GetMapping("/rolenew")
 	public ModelAndView newRole() {
 		ModelAndView mAV = new ModelAndView("vendor/add_role");
@@ -136,10 +139,79 @@ public class UserController {
 	}
 	
 	@PostMapping("/rolesave")
-	public String saveCategoria(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
+	public String saveRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
 			RedirectAttributes redirect) {
 		UserRoleModel u = new UserRoleModel();
 		u = userRoleService.insertOrUpdate(userRoleModel);
 		return "redirect:/rolenew";
 	}
+	
+	//////////////////////////// EDITAR ROL ////////////////////////////
+	
+	@GetMapping("/role/list") 
+	public ModelAndView roleList() {
+		//controlador para devolver la vista de roles
+		ModelAndView mAV = new ModelAndView("vendor/abm_roles");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if (roleString.equals("[ROLE_ADMIN]")) {
+			admin = true;
+		}
+		mAV.addObject("admin", admin);
+		List<UserRoleModel> roles = userRoleService.getAll();
+		mAV.addObject("roles", roles);
+		return mAV;
+	}
+	
+	/*
+	@GetMapping("/roleedit/{id}")
+	public ModelAndView editRole(@PathVariable("id") int id) {
+		//controlador para editar el rol
+		ModelAndView mAV = new ModelAndView("vendor/edit_role");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if (roleString.equals("[ROLE_ADMIN]")) {
+			admin = true;
+		}
+		mAV.addObject("admin", admin);
+		mAV.addObject("userRole", new UserRoleModel());
+		return mAV;
+	}
+	*/
+	
+	@GetMapping("/roleedit/{id}")
+	public ModelAndView editRole(@PathVariable("id") int id) {
+		//controlador para editar el rol
+		ModelAndView mAV = new ModelAndView("vendor/edit_role");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if (roleString.equals("[ROLE_ADMIN]")) {
+			admin = true;
+		}
+		mAV.addObject("admin", admin);
+		mAV.addObject("userRole", userRoleService.listarId(id));
+		return mAV;
+	}
+	
+	/*
+	@PostMapping("/rolesaveedit")
+	public String editRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
+			RedirectAttributes redirect) {
+		UserRoleModel u = new UserRoleModel();
+		u = userRoleService.insertOrUpdate(userRoleModel);
+		return "redirect:/role/list/";
+	}
+	*/
+	
+	@PostMapping("/rolesaveedit")
+	public String editRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
+			RedirectAttributes redirect) {		
+		//UserRoleModel u = userRoleService.listarId(userRoleModel.getId());
+		//userRoleModel.setRole(u.getRole());
+		userRoleService.insertOrUpdate(userRoleModel);
+		
+		return "redirect:/role/list/";
+	}
+	
+	
 }
