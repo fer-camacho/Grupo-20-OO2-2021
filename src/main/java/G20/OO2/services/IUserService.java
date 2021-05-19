@@ -9,4 +9,6 @@ public interface IUserService {
 	public List<UserModel> getAll();
 	
 	public List<UserModel> findByUserRole(int id);
+	
+	public String delete(int id);
 }

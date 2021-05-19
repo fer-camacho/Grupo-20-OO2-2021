@@ -138,6 +138,21 @@ public class UserController {
 		return mAV;
 	}
 	
+	@GetMapping("/user/list") 
+	public ModelAndView userList() {
+		//controlador para devolver la vista de roles
+		ModelAndView mAV = new ModelAndView("vendor/abm_users");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if (roleString.equals("[ROLE_ADMIN]")) {
+			admin = true;
+		}
+		mAV.addObject("admin", admin);
+		List<UserModel> usuarios = userService.getAll();
+		mAV.addObject("usuarios", usuarios);
+		return mAV;
+	}
+	
 	//////////////////////////// NUEVO ROL ////////////////////////////
 	
 	@GetMapping("/rolenew")
@@ -196,4 +211,12 @@ public class UserController {
 		return "redirect:/role/list/";
 	}
 	
+	////////////////////////////ELIMINAR USER ////////////////////////////
+	
+	@GetMapping("/userdelete/{id}")
+	public String deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
+		//controlador para editar el rol
+		userService.delete(id);
+		return "redirect:/user/list/";
+	}
 }

@@ -85,6 +85,10 @@ public class UserService implements UserDetailsService {
 		}
 		return usuarios;
 	}
-
+	
+	public String delete(int id) {
+		userRepository.deleteById(id);
+		return "usuario Eliminado";
+	}
 }
 	

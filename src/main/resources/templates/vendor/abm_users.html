@@ -1,10 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<title>Table V04</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate-grilla.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util-grilla.css">
+	<link rel="stylesheet" type="text/css" href="/css/main-grilla.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<!--===============================================================================================-->
 </head>
 <body>
+	
+	 <nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_admin :: div"></nav>
+			
+		<nav th:if="${admin==false}" class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_audit :: div"></nav>
+
+
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Id</th>
+									<th class="cell100 column2">Nombre</th>
+									<th class="cell100 column3">Apellido</th>
+									<th class="cell100 column4">Documento</th>
+									<th class="cell100 column5">Email</th>
+									<th class="cell100 column5">Usuario</th>
+									<th class="cell100 column5">Perfil asignado</th>
+									<th class="cell100 column5">Eliminar</th>
+									
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr th:each="usuario : ${usuarios}" class="row100 body">
+									<td th:text="${usuario.id}" class="cell100 column1"></td>
+									<td th:text="${usuario.persona.nombre}" class="cell100 column2"></td>
+									<td th:text="${usuario.persona.apellido}" class="cell100 column3"></td>
+									<td th:text="${usuario.persona.nroDocumento}" class="cell100 column4"></td>
+									<td th:text="${usuario.email}" class="cell100 column5"></td>
+									<td th:text="${usuario.username}" class="cell100 column5"></td>
+									<td th:text="${usuario.userRole.role}" class="cell100 column5"></td>
+									
+									<!-- 
+									<td class="cell100 column6">
+										<form th:action="@{/roleedit/{id}(id=${rol.id})}" method="get" role="form">
+											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
+										</form>
+									</td>
+									-->
+									<td class="cell100 column7">
+										<form th:action="@{/userdelete/{id}(id=${usuario.id})}" method="get" role="form">
+											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
+										</form>
+									</td>
+									 
+								</tr>
+
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	
+	
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">El Deporte On-Line &copy; 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src="/js/main-grilla.js"></script>
 
 </body>
-</html>
+</html></html>
