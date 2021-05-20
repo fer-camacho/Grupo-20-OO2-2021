@@ -64,13 +64,13 @@
 									<td th:text="${usuario.username}" class="cell100 column5"></td>
 									<td th:text="${usuario.userRole.role}" class="cell100 column5"></td>
 									
-									<!-- 
+									 
 									<td class="cell100 column6">
-										<form th:action="@{/roleedit/{id}(id=${rol.id})}" method="get" role="form">
+										<form th:action="@{/useredit/{id}(id=${usuario.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
 										</form>
 									</td>
-									-->
+									
 									<td class="cell100 column7">
 										<form th:action="@{/userdelete/{id}(id=${usuario.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
