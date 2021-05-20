@@ -54,15 +54,8 @@ public class ListUsersPDF extends AbstractPdfView {
 		tablaTitulo.addCell(titulo);
 		tablaTitulo.setSpacingAfter(20);
 		
-		PdfPTable tablaUsuarios = new PdfPTable(7);
-		tablaUsuarios.setWidths(new float[] {1f, 2f, 2f, 3f, 3f, 2f, 2f});
-		
-		celda = new PdfPCell(new Phrase("ID", fuenteTituloCol));
-		celda.setBackgroundColor(Color.LIGHT_GRAY);
-		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-		celda.setVerticalAlignment(Element.ALIGN_CENTER);
-		celda.setPadding(10);
-		tablaUsuarios.addCell(celda);
+		PdfPTable tablaUsuarios = new PdfPTable(6);
+		tablaUsuarios.setWidths(new float[] {2f, 2f, 3f, 3f, 2f, 2f});
 		
 		celda = new PdfPCell(new Phrase("NOMBRE", fuenteTituloCol));
 		celda.setBackgroundColor(Color.LIGHT_GRAY);
@@ -108,11 +101,6 @@ public class ListUsersPDF extends AbstractPdfView {
 		
 		
 		for (UserModel u: listUsuarios) {
-			celda = new PdfPCell(new Phrase(Integer.toString(u.getId()), fuenteCeldas));
-			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-			celda.setVerticalAlignment(Element.ALIGN_CENTER);
-			celda.setPadding(5);
-			tablaUsuarios.addCell(celda);
 			
 			celda = new PdfPCell(new Phrase(u.getPersona().getNombre(), fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);

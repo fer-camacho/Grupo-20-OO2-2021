@@ -55,15 +55,8 @@ public class ListUserRolesPDF extends AbstractPdfView {
 		tablaTitulo.addCell(titulo);
 		tablaTitulo.setSpacingAfter(20);
 		
-		PdfPTable tablaRoles = new PdfPTable(2);
-		tablaRoles.setWidths(new float[] {1f, 2f});
-		
-		celda = new PdfPCell(new Phrase("ID", fuenteTituloCol));
-		celda.setBackgroundColor(Color.LIGHT_GRAY);
-		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-		celda.setVerticalAlignment(Element.ALIGN_CENTER);
-		celda.setPadding(10);
-		tablaRoles.addCell(celda);
+		PdfPTable tablaRoles = new PdfPTable(1);
+		tablaRoles.setWidths(new float[] {1f});
 		
 		celda = new PdfPCell(new Phrase("PERFIL", fuenteTituloCol));
 		celda.setBackgroundColor(Color.LIGHT_GRAY);
@@ -73,11 +66,6 @@ public class ListUserRolesPDF extends AbstractPdfView {
 		tablaRoles.addCell(celda);
 		
 		for(UserRoleModel rol: listRoles) {
-			celda = new PdfPCell(new Phrase(Integer.toString(rol.getId()), fuenteCeldas));
-			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
-			celda.setVerticalAlignment(Element.ALIGN_CENTER);
-			celda.setPadding(5);
-			tablaRoles.addCell(celda);
 			
 			celda = new PdfPCell(new Phrase(rol.getRole(), fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);

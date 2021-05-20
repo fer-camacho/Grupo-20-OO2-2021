@@ -54,7 +54,6 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">Id</th>
 									<th class="cell100 column2">Nombre</th>
 									<th class="cell100 column3">Apellido</th>
 									<th class="cell100 column4">Documento</th>
@@ -70,7 +69,8 @@
 						<table>
 							<tbody>
 								<tr th:each="usuario : ${usuarios}" class="row100 body">
-									<td th:text="${usuario.id}" class="cell100 column1"></td>
+									<!-- <td th:text="${usuario.id}" class="cell100 column1"></td> -->
+									<p style= "display: none" th:text="${usuario.id}" class="cell100 column1"></p>
 									<td th:text="${usuario.persona.nombre}" class="cell100 column2"></td>
 									<td th:text="${usuario.persona.apellido}" class="cell100 column3"></td>
 									<td th:text="${usuario.persona.nroDocumento}" class="cell100 column4"></td>
