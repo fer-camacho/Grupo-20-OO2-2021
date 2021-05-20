@@ -23,4 +23,7 @@ public interface IUserRepository extends JpaRepository<User, Serializable> {
 	@Query(nativeQuery=true,value="Select * from user u where u.user_role_id=(:id)")
 	public abstract List<User> findByUserRole(int id);
 	
+	@Query(nativeQuery=true,value="Select * from user u where u.id=(:id)")
+	public abstract User findById_(int id);
+	
 }

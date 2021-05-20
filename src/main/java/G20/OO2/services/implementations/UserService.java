@@ -94,5 +94,10 @@ public class UserService implements UserDetailsService {
 		G20.OO2.entities.User user = userRepository.save(userConverter.modelToEntity(userModel));
 		return userConverter.entityToModel(user);
 	}
+	
+	public UserModel listarId(int id) {
+		G20.OO2.entities.User user = userRepository.findById_(id);
+		return userConverter.entityToModel(user);
+	}
 }
 	

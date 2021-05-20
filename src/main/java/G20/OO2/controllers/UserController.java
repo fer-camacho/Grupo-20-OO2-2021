@@ -94,8 +94,6 @@ public class UserController {
 	@GetMapping("/reporte/usuarios")
 	public ModelAndView usuarios() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LIST_USERS);		
-
-		//compruebo si se logueo el admin y en tal caso muestro el menu correspondiente, el resto de la pagina permanece igual
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
         System.out.println(roleString);
 
@@ -110,9 +108,7 @@ public class UserController {
 	
 	@GetMapping("/reporte/roles")
 	public ModelAndView roles() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LIST_ROLES);		
-
-		//compruebo si se logueo el admin y en tal caso muestro el menu correspondiente, el resto de la pagina permanece igual
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LIST_ROLES);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
         System.out.println(roleString);
 
@@ -132,7 +128,6 @@ public class UserController {
 	
 	@GetMapping("/role/list") 
 	public ModelAndView roleList() {
-		//controlador para devolver la vista de roles
 		ModelAndView mAV = new ModelAndView("vendor/abm_roles");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		boolean admin = false;
@@ -147,7 +142,6 @@ public class UserController {
 	
 	@GetMapping("/user/list") 
 	public ModelAndView userList() {
-		//controlador para devolver la vista de roles
 		ModelAndView mAV = new ModelAndView("vendor/abm_users");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		boolean admin = false;
@@ -187,7 +181,6 @@ public class UserController {
 	
 	@GetMapping("/roleedit/{id}")
 	public ModelAndView editRole(@PathVariable("id") int id) {
-		//controlador para editar el rol
 		ModelAndView mAV = new ModelAndView("vendor/edit_role");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		boolean admin = false;
@@ -211,7 +204,6 @@ public class UserController {
 	
 	@GetMapping("/roledelete/{id}")
 	public String deleteRole(@PathVariable("id") int id, RedirectAttributes redirect) {
-		//controlador para editar el rol
 		userRoleService.delete(id);
 		return "redirect:/role/list/";
 	}
@@ -246,11 +238,38 @@ public class UserController {
 		return "redirect:/user/list";
 	}
 	
+	//////////////////////////// EDITAR USER ////////////////////////////
+	
+	@GetMapping("/useredit/{id}")
+	public ModelAndView editUser(@PathVariable("id") int id) {
+		ModelAndView mAV = new ModelAndView("vendor/edit_user");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if (roleString.equals("[ROLE_ADMIN]")) {
+			admin = true;
+		}
+		
+		List<UserRoleModel> roles = userRoleService.getAll();
+		List<PersonaModel> personas = personaService.getAll();
+		mAV.addObject("admin", admin);
+		mAV.addObject("roles", roles);
+		mAV.addObject("personas", personas);
+		mAV.addObject("user", userService.listarId(id));
+		return mAV;
+	}
+	
+	@PostMapping("/usersaveedit")
+	public String editUser(@ModelAttribute("user") UserModel userModel, BindingResult result, RedirectAttributes redirect) {
+		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
+		userModel.setPassword(p.encode(userModel.getPassword()));
+		userService.insertOrUpdate(userModel);	
+		return "redirect:/user/list";
+	}
+	
 	////////////////////////////ELIMINAR USER ////////////////////////////
 	
 	@GetMapping("/userdelete/{id}")
 	public String deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
-		//controlador para editar el rol
 		userService.delete(id);
 		return "redirect:/user/list/";
 	}

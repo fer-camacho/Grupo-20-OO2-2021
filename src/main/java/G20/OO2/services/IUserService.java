@@ -15,4 +15,6 @@ public interface IUserService {
 	public String delete(int id);
 	
 	public UserModel insertOrUpdate(UserModel userModel);
+	
+	public UserModel listarId(int id);
 }
