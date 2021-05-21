@@ -122,8 +122,14 @@ public class UserController {
 	}
 	
 	@GetMapping("/logueo")
-	public String test2() {
-		return "user/test";
+	public ModelAndView test2() {
+		ModelAndView mAV = new ModelAndView("home/index_2");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		boolean admin = false;
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		mAV.addObject("admin", admin);
+
+		return mAV;
 	}
 	
 	@GetMapping("/role/list") 
