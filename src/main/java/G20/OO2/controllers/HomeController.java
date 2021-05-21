@@ -30,9 +30,29 @@ public class HomeController {
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
         System.out.println(roleString);
 
-		boolean admin = false;
-		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+        boolean admin = false;
+		boolean audit = false;
+		boolean anonimo = false;
+		
+		switch(roleString){ 				  
+			case "[ROLE_ADMIN]":				      
+				System.out.println("cosas de admin");
+				admin = true;
+				break;
+			case "[ROLE_AUDIT]":				      
+				System.out.println("cosas de audit");
+				audit = true;
+				break;
+			default:
+				System.out.println("usuario anonimo");
+				anonimo = true;
+				break;
+		}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
+		mAV.addObject("anonimo", anonimo);
+	
 		return mAV;
 	}
 	/*

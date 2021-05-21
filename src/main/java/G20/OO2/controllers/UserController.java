@@ -76,18 +76,30 @@ public class UserController {
 		
 		//compruebo si se logueo el admin y en tal caso muestro el menu correspondiente, el resto de la pagina permanece igual
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-        System.out.println(roleString);
 
 		boolean admin = false;
+		boolean audit = false;
+		boolean anonimo = false;
+		
 		switch(roleString){ 				  
 			case "[ROLE_ADMIN]":				      
 				System.out.println("cosas de admin");
 				admin = true;
 				break;
+			case "[ROLE_AUDIT]":				      
+				System.out.println("cosas de audit");
+				audit = true;
+				break;
+			default:
+				System.out.println("usuario anonimo");
+				anonimo = true;
+				break;
 		}
-
+		
 		mAV.addObject("admin", admin);
-
+		mAV.addObject("audit", audit);
+		mAV.addObject("anonimo", anonimo);
+		
 		return mAV;
 	}
 	
@@ -95,11 +107,15 @@ public class UserController {
 	public ModelAndView usuarios() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LIST_USERS);		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-        System.out.println(roleString);
 
         boolean admin = false;
+        boolean audit = false;
+        
 		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
 		
 		List<UserModel> usuarios = userService.getAll();
 		mAV.addObject("usuarios", usuarios);
@@ -110,11 +126,15 @@ public class UserController {
 	public ModelAndView roles() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LIST_ROLES);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-        System.out.println(roleString);
-
-        boolean admin = false;
+		
+		boolean admin = false;
+        boolean audit = false;
+        
 		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
 		
 		List<UserRoleModel> roles = userRoleService.getAll();
 		mAV.addObject("roles", roles);
@@ -125,9 +145,18 @@ public class UserController {
 	public ModelAndView test2() {
 		ModelAndView mAV = new ModelAndView("home/index_2");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		
 		boolean admin = false;
+        boolean audit = false;
+        
 		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
+			
+		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
 
 		return mAV;
 	}
@@ -136,11 +165,16 @@ public class UserController {
 	public ModelAndView roleList() {
 		ModelAndView mAV = new ModelAndView("vendor/abm_roles");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+
 		boolean admin = false;
-		if (roleString.equals("[ROLE_ADMIN]")) {
-			admin = true;
-		}
+        boolean audit = false;
+        
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
+		
 		List<UserRoleModel> roles = userRoleService.getAll();
 		mAV.addObject("roles", roles);
 		return mAV;
@@ -150,11 +184,16 @@ public class UserController {
 	public ModelAndView userList() {
 		ModelAndView mAV = new ModelAndView("vendor/abm_users");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		
 		boolean admin = false;
-		if (roleString.equals("[ROLE_ADMIN]")) {
-			admin = true;
-		}
+        boolean audit = false;
+        
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
+		
 		List<UserModel> usuarios = userService.getAll();
 		mAV.addObject("usuarios", usuarios);
 		return mAV;
@@ -166,11 +205,16 @@ public class UserController {
 	public ModelAndView newRole() {
 		ModelAndView mAV = new ModelAndView("vendor/add_role");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		
 		boolean admin = false;
-		if (roleString.equals("[ROLE_ADMIN]")) {
-			admin = true;
-		}
+        boolean audit = false;
+        
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
+		
 		mAV.addObject("userRole", new UserRoleModel());
 		return mAV;
 	}
@@ -189,11 +233,16 @@ public class UserController {
 	public ModelAndView editRole(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView("vendor/edit_role");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+
 		boolean admin = false;
-		if (roleString.equals("[ROLE_ADMIN]")) {
-			admin = true;
-		}
+        boolean audit = false;
+        
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
+		
 		mAV.addObject("userRole", userRoleService.listarId(id));
 		return mAV;
 	}
@@ -220,14 +269,18 @@ public class UserController {
 	public ModelAndView newUser() {
 		ModelAndView mAV = new ModelAndView("vendor/add_user");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+
 		boolean admin = false;
-		if (roleString.equals("[ROLE_ADMIN]")) {
-			admin = true;
-		}
+        boolean audit = false;
+        
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
+		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
 		
 		List<UserRoleModel> roles = userRoleService.getAll();
 		List<PersonaModel> personas = personaService.getAll();
-		mAV.addObject("admin", admin);
 		mAV.addObject("roles", roles);
 		mAV.addObject("personas", personas);
 		mAV.addObject("user", new UserModel());
@@ -250,14 +303,18 @@ public class UserController {
 	public ModelAndView editUser(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView("vendor/edit_user");
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+
 		boolean admin = false;
-		if (roleString.equals("[ROLE_ADMIN]")) {
-			admin = true;
-		}
+        boolean audit = false;
+        
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
+		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
 		
 		List<UserRoleModel> roles = userRoleService.getAll();
 		List<PersonaModel> personas = personaService.getAll();
-		mAV.addObject("admin", admin);
 		mAV.addObject("roles", roles);
 		mAV.addObject("personas", personas);
 		mAV.addObject("user", userService.listarId(id));

@@ -24,9 +24,16 @@
         <nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top"
 	th:include="nav_admin :: div"></nav>
 
-		<nav th:if="${admin==false}" class="navbar navbar-expand-md navbar-dark fixed-top"
+		<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top"
 	th:include="nav_audit :: div"></nav>
-
+	
+		<nav th:if="${anonimo==true}" class="navbar navbar-expand-lg navbar-dark fixed-top"
+	th:include="nav_anonimo :: div"></nav>
+		
+		<!--
+		<nav th:if="${admin==false} and ${audit==false}" class="navbar navbar-expand-lg navbar-dark fixed-top"		
+	th:include="nav_anonimo :: div"></nav>
+		-->
 
         <!-- Masthead-->
 
