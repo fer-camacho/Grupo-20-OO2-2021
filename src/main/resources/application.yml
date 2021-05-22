@@ -18,6 +18,21 @@ spring:
       contentnegotiation:
         favor-parameter: true
         media-types.pdf: application/pdf
-        
-      
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: "oo2.grupo20@gmail.com" #email para enviar 
+        password: "2021objetos2" #contraseña de aplicación / del correo unlagrupo6
+        properties:
+            mail:
+                smtp:
+                
+                    starttls:
+                        enable: true
+                        required: true
+                    auth: true
+                    connectiontimeout: 5000
+                    timeout: 5000
+                    writetimeout: 5000    
+          
                 

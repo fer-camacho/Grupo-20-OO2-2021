@@ -1,11 +1,18 @@
 package G20.OO2.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +29,7 @@ import G20.OO2.helpers.ViewRouteHelper;
 import G20.OO2.models.PersonaModel;
 import G20.OO2.models.UserModel;
 import G20.OO2.models.UserRoleModel;
+import G20.OO2.services.implementations.MailService;
 import G20.OO2.services.implementations.PersonaService;
 import G20.OO2.services.implementations.UserRoleService;
 import G20.OO2.services.implementations.UserService;
@@ -41,6 +49,10 @@ public class UserController {
 	@Autowired
 	@Qualifier("personaService")
 	private PersonaService personaService;
+	
+	@Autowired
+	@Qualifier("mailService")
+	private MailService mailService;
 	
 	@GetMapping("/lista")
 	public ModelAndView usuarios() {
@@ -107,11 +119,13 @@ public class UserController {
 	
 	@PostMapping("/save")
 	public String saveuser(@ModelAttribute("user") UserModel userModel, BindingResult result,
-			RedirectAttributes redirect) {
+			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {
 		UserModel u = new UserModel();
 		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
 		userModel.setPassword(p.encode(userModel.getPassword()));
 		u = userService.insertOrUpdate(userModel);
+		
+		mandarMailAltaUser(userModel);
 		return "redirect:/usuario/abm";
 	}
 	
@@ -161,6 +175,35 @@ public class UserController {
 		UserModel userModel = userService.listarId(id);
 		userModel.setEnabled(false);
 		userService.insertOrUpdate(userModel);
+		mandarMailBajaUser(userModel);
 		return "redirect:/usuario/abm/";
+	}
+	
+	private void mandarMailAltaUser(UserModel userModel) {
+		String email = userModel.getEmail();
+		String username = userModel.getUsername();
+		String enabled;
+		
+		if (userModel.isEnabled()) enabled = "desbloqueado";
+		else enabled = "bloqueado";
+		
+        String mailSubject = "Alta de usuario";
+        String mailContent = "Le informamos que ha sido dado de alta en nuestra plataforma \n\n";
+        
+        mailContent += "Email: " + email + "\n";
+        mailContent += "Username: " + username + "\n";
+        mailContent += "Estado: " + enabled + "\n\n";
+        
+        mailService.sendMail(email, mailSubject, mailContent);
+	}
+	
+	private void mandarMailBajaUser(UserModel userModel) {
+		String email = userModel.getEmail();
+		String username = userModel.getUsername();
+		
+		String mailSubject = "Baja de usuario";
+		String mailContent = "Le informamos que su usuario " + username + " ha sido bloqueado.\n\n";
+		
+		mailService.sendMail(email, mailSubject, mailContent);
 	}
 }
