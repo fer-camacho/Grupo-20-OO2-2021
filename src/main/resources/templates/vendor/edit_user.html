@@ -1,54 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<title>Contact V5</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-	<form action="#" th:action="@{/usersaveedit}" th:object="${user}" method="post">
-  
-  	
-  	 
-  	 
-  	<div class="form-group col-md-6">
-      <label for="inputState">Persona</label>
-      
-      <select class="selectpicker input--style-1" th:field="*{persona.id}" name="Persona" placeholder="Seleccione Persona"  required="required">
-         <option th:each="p : ${personas}"  th:value="${(p.id)}" th:text="${p.nroDocumento}"></option>
-    </div>
- 
- 	<p style="display: none"> Id: <input type="text" th:field="*{id}"/></p>
-  
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email" th:field="*{email}">
-    </div>
-    
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Username</label>
-      <input type="text" class="form-control" id="inputPassword4" placeholder="Username" th:field="*{username}">
-    </div>
-    
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password" th:field="*{password}">
-    </div>
-    
-    <div class="col-sm d-flex align-items-center">
-        <label class="custom-control-label" for="defaultChecked2">Desbloqueado</label>
-        <input class="check"th:field="*{enabled}" type="checkbox" checked>
-    </div>
-    
-    <div class="form-group col-md-6">
-      <label for="inputState">Perfil</label> 
-      <select class="selectpicker input--style-1" th:field="*{userRole.id}" name="Perfil" placeholder="Seleccione Perfil"  required="required">
-         <option th:each="r : ${roles}"  th:value="${(r.id)}" th:text="${r.role}"></option>
-   
-   
-    </div>
-    <input type="submit"/>
 
-  
-</form>
+	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_admin :: div"></nav>
+			
+	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_audit :: div"></nav>
+	
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form action="#" th:action="@{usersaveedit}" th:object="${user}" method="post" class="contact100-form validate-form">
+				<span class="contact100-form-title">
+					Información del usuario
+				</span>
+				<p style="display: none"> Id: <input type="text" th:field="*{id}"/></p>
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Persona *</span>
+					<div>
+						<select class="selectpicker" name="Persona" th:field="*{persona.id}">
+							<option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "El email debe contener @">
+					<span class="label-input100">Email *</span>
+					<input class="input100" type="email" name="email" placeholder="Enter Your Email" th:field="*{email}" required="required">
+				</div>
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Usuario *</span>
+					<input class="input100" type="text" name="Username" placeholder="Ingrese el usuario" th:field="*{username}" required="required">
+				</div>
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Contraseña *</span>
+					<input class="input100" type="password" name="phone" placeholder="Ingrese la password" th:field="*{password}" required="required">
+				</div>
+				
+				<div class="col-sm d-flex align-items-center">
+        			<label class="custom-control-label" for="defaultChecked2">Desbloqueado</label>
+       				<input class="check"th:field="*{enabled}" type="checkbox" checked>
+    			</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Perfil *</span>
+					<div>
+						<select class="selectpicker" name="Perfil" th:field="*{userRole.id}">
+							<option th:each="r : ${roles}"  th:value="${(r.id)}" th:text="${r.role}"></option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							Submit
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/noui/nouislider.min.js"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
 </body>
 </html>
+>
