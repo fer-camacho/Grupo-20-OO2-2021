@@ -95,6 +95,16 @@
 			<version>1.0.1</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/com.tngtech.jgiven/jgiven-html5-report -->
+		<dependency>
+   			<groupId>com.tngtech.jgiven</groupId>
+    		<artifactId>jgiven-html5-report</artifactId>
+    		<version>1.0.0</version>
+		</dependency>
+			
+			
+		
+			
 	</dependencies>
 
 	<build>

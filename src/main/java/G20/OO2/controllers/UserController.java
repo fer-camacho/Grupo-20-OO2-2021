@@ -103,6 +103,32 @@ public class UserController {
 		return mAV;
 	}
 	
+	@GetMapping("/logueo")
+	public ModelAndView test2() {
+		ModelAndView mAV = new ModelAndView("vendor/index__");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		
+		boolean admin = false;
+        boolean audit = false;
+        boolean anonimo = false;
+        
+		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
+		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		if(roleString.equals("[ROLE_ANONYMOUS]")) {anonimo=true;}
+		
+		mAV.addObject("admin", admin);
+		mAV.addObject("audit", audit);
+		mAV.addObject("anonimo", anonimo);
+		
+		List<UserRoleModel> roles = userRoleService.getAll();
+		List<PersonaModel> personas = personaService.getAll();
+		
+		mAV.addObject("roles", roles);
+		mAV.addObject("personas", personas);
+		mAV.addObject("user", new UserModel());
+		return mAV;
+	}
+	
 	@GetMapping("/reporte/usuarios")
 	public ModelAndView usuarios() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LIST_USERS);		
@@ -110,6 +136,7 @@ public class UserController {
 
         boolean admin = false;
         boolean audit = false;
+        
         
 		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
 		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
@@ -141,26 +168,6 @@ public class UserController {
 		return mAV;
 	}
 	
-	@GetMapping("/logueo")
-	public ModelAndView test2() {
-		ModelAndView mAV = new ModelAndView("home/index_2");
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		
-		boolean admin = false;
-        boolean audit = false;
-        
-		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
-		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
-		
-		mAV.addObject("admin", admin);
-		mAV.addObject("audit", audit);
-			
-		mAV.addObject("admin", admin);
-		mAV.addObject("audit", audit);
-
-		return mAV;
-	}
-	
 	@GetMapping("/role/list") 
 	public ModelAndView roleList() {
 		ModelAndView mAV = new ModelAndView("vendor/abm_roles");
@@ -171,6 +178,7 @@ public class UserController {
         
 		if(roleString.equals("[ROLE_ADMIN]")) {admin=true;}
 		if(roleString.equals("[ROLE_AUDIT]")) {audit=true;}
+		
 		
 		mAV.addObject("admin", admin);
 		mAV.addObject("audit", audit);

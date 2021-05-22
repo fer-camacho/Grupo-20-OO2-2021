@@ -62,4 +62,15 @@ public class UserRoleService implements  IUserRoleService{
 		return userRoleConverter.entityToModel(rol);
 	}
 	
+	public List<UserRoleModel> findByRole(String role) {
+		List<UserRole> roles = userRoleRepository.findByRole(role);
+		List<UserRoleModel> rolesModel = new ArrayList<>();
+		for (UserRole r: roles) {
+			rolesModel.add(userRoleConverter.entityToModel(r));
+		}
+		return rolesModel;
+	}
+	
+	
+	
 }
