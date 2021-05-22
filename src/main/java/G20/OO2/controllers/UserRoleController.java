@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import G20.OO2.helpers.ViewRouteHelper;
 import G20.OO2.models.UserRoleModel;
 import G20.OO2.services.implementations.UserRoleService;
 
@@ -27,7 +28,7 @@ public class UserRoleController {
 
 	@GetMapping("/lista")
 	public ModelAndView roles() {
-		ModelAndView mAV = new ModelAndView("role/list_roles");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_LIST);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 
 		boolean admin = false;
@@ -50,7 +51,7 @@ public class UserRoleController {
 
 	@GetMapping("/abm")
 	public ModelAndView roleList() {
-		ModelAndView mAV = new ModelAndView("role/abm_roles");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_ABM);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 
 		boolean admin = false;
@@ -75,7 +76,7 @@ public class UserRoleController {
 
 	@GetMapping("/new")
 	public ModelAndView newRole() {
-		ModelAndView mAV = new ModelAndView("role/add_role");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_ADD);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 
 		boolean admin = false;
@@ -100,7 +101,6 @@ public class UserRoleController {
 			RedirectAttributes redirect) {
 		UserRoleModel u = new UserRoleModel();
 		u = userRoleService.insertOrUpdate(userRoleModel);
-		//return "redirect:/role/list";
 		return "redirect:/perfil/abm";
 	}
 
@@ -108,7 +108,7 @@ public class UserRoleController {
 
 	@GetMapping("/edit/{id}")
 	public ModelAndView editRole(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView("role/edit_role");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_EDIT);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 
 		boolean admin = false;
@@ -132,8 +132,6 @@ public class UserRoleController {
 	public String editRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
 			RedirectAttributes redirect) {
 		userRoleService.insertOrUpdate(userRoleModel);
-
-		//return "redirect:/role/list/";
 		return "redirect:/perfil/abm";
 	}
 
@@ -142,7 +140,6 @@ public class UserRoleController {
 	@GetMapping("/delete/{id}")
 	public String deleteRole(@PathVariable("id") int id, RedirectAttributes redirect) {
 		userRoleService.delete(id);
-		//return "redirect:/role/list/";
 		return "redirect:/perfil/abm";
 	}
 }

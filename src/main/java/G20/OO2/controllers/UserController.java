@@ -44,7 +44,7 @@ public class UserController {
 	
 	@GetMapping("/lista")
 	public ModelAndView usuarios() {
-		ModelAndView mAV = new ModelAndView("user/list_users");		
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_LIST);		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 
         boolean admin = false;
@@ -64,7 +64,7 @@ public class UserController {
 	
 	@GetMapping("/abm")
 	public ModelAndView userList() {
-		ModelAndView mAV = new ModelAndView("user/abm_users");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ABM);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		
 		boolean admin = false;
@@ -85,7 +85,7 @@ public class UserController {
 	
 	@GetMapping("/new")
 	public ModelAndView newUser() {
-		ModelAndView mAV = new ModelAndView("user/add_user");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ADD);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 
 		boolean admin = false;
@@ -112,7 +112,6 @@ public class UserController {
 		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
 		userModel.setPassword(p.encode(userModel.getPassword()));
 		u = userService.insertOrUpdate(userModel);
-		//return "redirect:/user/list";
 		return "redirect:/usuario/abm";
 	}
 	
@@ -120,7 +119,7 @@ public class UserController {
 	
 	@GetMapping("/edit/{id}")
 	public ModelAndView editUser(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView("user/edit_user");
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_EDIT);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 
 		boolean admin = false;
@@ -144,8 +143,7 @@ public class UserController {
 	public String editUser(@ModelAttribute("user") UserModel userModel, BindingResult result, RedirectAttributes redirect) {
 		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
 		userModel.setPassword(p.encode(userModel.getPassword()));
-		userService.insertOrUpdate(userModel);	
-		//return "redirect:/user/list";
+		userService.insertOrUpdate(userModel);
 		return "redirect:/usuario/abm";
 	}
 	
@@ -163,7 +161,6 @@ public class UserController {
 		UserModel userModel = userService.listarId(id);
 		userModel.setEnabled(false);
 		userService.insertOrUpdate(userModel);
-		//return "redirect:/user/list/";
 		return "redirect:/usuario/abm/";
 	}
 }
