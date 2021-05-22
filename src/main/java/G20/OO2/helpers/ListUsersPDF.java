@@ -22,7 +22,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import G20.OO2.models.UserModel;
 
-@Component("vendor/list_users")
+@Component("user/list_users")
 public class ListUsersPDF extends AbstractPdfView {
 	
 	@Override

@@ -22,7 +22,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import G20.OO2.models.UserRoleModel;
 
-@Component("vendor/list_roles")
+@Component("role/list_roles")
 public class ListUserRolesPDF extends AbstractPdfView {
 	
 	

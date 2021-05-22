@@ -28,7 +28,7 @@
 			
 	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
 	th:include="nav_audit :: div"></nav>
-
+	
 	<div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
@@ -37,10 +37,16 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th style= "display: none" class="cell100 column1 text-center">Id</th>
-									<th class="cell100 column2 text-center">Perfil</th>
-									<th class="cell100 column3 text-left">Editar</th>
-									<th class="cell100 column4 text-left">Eliminar</th>
+									<th class="cell100 column2">Nombre</th>
+									<th class="cell100 column3">Apellido</th>
+									<th class="cell100 column4">Documento</th>
+									<th class="cell100 column5">Email</th>
+									<th class="cell100 column5">Usuario</th>
+									<th class="cell100 column5">Perfil asignado</th>
+									<th class="cell100 column5">Estado</th>
+									<th class="cell100 column5 text-left">Editar</th>
+									<th class="cell100 column5 text-left">Eliminar</th>
+									
 									
 								</tr>
 							</thead>
@@ -50,22 +56,34 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-								<tr th:each="rol : ${roles}" class="row100 body">
-									<p style= "display: none" th:text="${rol.id}" class="cell100 column1"></p>
-									<td th:text="${rol.role}" class="cell100 column2 text-center"></td>
+								<tr th:each="usuario : ${usuarios}" class="row100 body">
+									<td style= "display: none" th:text="${usuario.id}" class="cell100 column1"></td>
+									<td th:text="${usuario.persona.nombre}" class="cell100 column2"></td>
+									<td th:text="${usuario.persona.apellido}" class="cell100 column3"></td>
+									<td th:text="${usuario.persona.nroDocumento}" class="cell100 column4"></td>
+									<td th:text="${usuario.email}" class="cell100 column5"></td>
+									<td th:text="${usuario.username}" class="cell100 column5"></td>
+									<td th:text="${usuario.userRole.role}" class="cell100 column5"></td>
 									
-									<td class="cell100 column3 text-center">
-										<form th:action="@{/roleedit/{id}(id=${rol.id})}" method="get" role="form">
+									<td >
+										<span th:if="${usuario.enabled==true}" th:text= "Desbloqueado" class="cell100 column5"></span>
+										<span th:if="${usuario.enabled==false}" th:text= "Bloqueado" class="cell100 column5"></span>
+									</td>
+									
+									<td class="cell100 column6 text-right">
+										<form th:action="@{/usuario/edit/{id}(id=${usuario.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
 										</form>
 									</td>
 									
-									<td class="cell100 column4 text-center">
-										<form th:action="@{/roledelete/{id}(id=${rol.id})}" method="get" role="form">
+									<td class="cell100 column7 text-right">
+										<form th:action="@{/usuario/delete/{id}(id=${usuario.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
 										</form>
 									</td>
 									
+									
+									 
 								</tr>
 
 								

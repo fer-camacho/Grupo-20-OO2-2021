@@ -40,11 +40,11 @@
 	
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form action="#" th:action="@{usersaveedit}" th:object="${user}" method="post" class="contact100-form validate-form">
+			<form action="#" th:action="@{/usuario/save}" th:object="${user}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
 					Información del usuario
 				</span>
-				<p style="display: none"> Id: <input type="text" th:field="*{id}"/></p>
+				
 				<div class="wrap-input100 input100-select bg1">
 					<span class="label-input100">Persona *</span>
 					<div>
@@ -54,7 +54,7 @@
 					</div>
 				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "El email debe contener @">
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "El email debe cumplir con xxx@.x.xx">
 					<span class="label-input100">Email *</span>
 					<input class="input100" type="email" name="email" placeholder="Enter Your Email" th:field="*{email}" required="required">
 				</div>
@@ -172,4 +172,3 @@
 
 </body>
 </html>
->

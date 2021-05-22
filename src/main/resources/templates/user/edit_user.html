@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V6</title>
+	<title>Contact V5</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -11,7 +12,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->
@@ -23,54 +24,65 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
 <body>
-	
-	<!-- Navegacion-->
-        <nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top"
+
+	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
 	th:include="nav_admin :: div"></nav>
-
-		<nav th:if="${admin==false}" class="navbar navbar-expand-md navbar-dark fixed-top"
+			
+	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
 	th:include="nav_audit :: div"></nav>
-
+	
 	<div class="container-contact100">
-		<div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
-
-		<button class="contact100-btn-show">
-			<i class="fa fa-envelope-o" aria-hidden="true"></i>
-		</button>
-
 		<div class="wrap-contact100">
-			<button class="contact100-btn-hide">
-				<i class="fa fa-close" aria-hidden="true"></i>
-			</button>
-
-			<form class="contact100-form validate-form">
+			<form action="#" th:action="@{/usuario/save/edit}" th:object="${user}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Contact Us
+					Información del usuario
 				</span>
-
-				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Name is required">
-					<span class="label-input100">Your Name</span>
-					<input class="input100" type="text" name="name" placeholder="Enter your name">
-					<span class="focus-input100"></span>
+				<p style="display: none"> Id: <input type="text" th:field="*{id}"/></p>
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Persona *</span>
+					<div>
+						<select class="selectpicker" name="Persona" th:field="*{persona.id}">
+							<option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
+						</select>
+					</div>
 				</div>
 
-				<div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<span class="label-input100">Email</span>
-					<input class="input100" type="text" name="email" placeholder="Enter your email addess">
-					<span class="focus-input100"></span>
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "El email debe cumplir con xxx@.x.xx">
+					<span class="label-input100">Email *</span>
+					<input class="input100" type="email" name="email" placeholder="Enter Your Email" th:field="*{email}" required="required">
 				</div>
-
-				<div class="wrap-input100 validate-input" data-validate = "Message is required">
-					<span class="label-input100">Message</span>
-					<textarea class="input100" name="message" placeholder="Your message here..."></textarea>
-					<span class="focus-input100"></span>
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Usuario *</span>
+					<input class="input100" type="text" name="Username" placeholder="Ingrese el usuario" th:field="*{username}" required="required">
 				</div>
-
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Contraseña *</span>
+					<input class="input100" type="password" name="phone" placeholder="Ingrese la password" th:field="*{password}" required="required">
+				</div>
+				
+				<div class="col-sm d-flex align-items-center">
+        			<label class="custom-control-label" for="defaultChecked2">Desbloqueado</label>
+       				<input class="check"th:field="*{enabled}" type="checkbox" checked>
+    			</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Perfil *</span>
+					<div>
+						<select class="selectpicker" name="Perfil" th:field="*{userRole.id}">
+							<option th:each="r : ${roles}"  th:value="${(r.id)}" th:text="${r.role}"></option>
+						</select>
+					</div>
+				</div>
+				
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
@@ -80,16 +92,10 @@
 					</button>
 				</div>
 			</form>
-
-			<span class="contact100-more">
-				For any question contact our 24/7 call center: <span class="contact100-more-highlight">+001 345 6889</span>
-			</span>
 		</div>
 	</div>
 
 
-
-	<div id="dropDownSelect1"></div>
 
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -100,17 +106,59 @@
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
 <!--===============================================================================================-->
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
-	<script src="js/map-custom.js"></script>
+	<script src="vendor/noui/nouislider.min.js"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
@@ -124,3 +172,4 @@
 
 </body>
 </html>
+>

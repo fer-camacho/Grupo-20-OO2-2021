@@ -4,6 +4,7 @@
 	<title>Contact V5</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -30,57 +31,24 @@
 <!--===============================================================================================-->
 </head>
 <body>
-
 	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
 	th:include="nav_admin :: div"></nav>
 			
 	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
 	th:include="nav_audit :: div"></nav>
-	
+
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form action="#" th:action="@{usersave}" th:object="${user}" method="post" class="contact100-form validate-form">
+			<form th:action="@{/perfil/save}"th:object="${userRole}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Información del usuario
+					Información del perfil
 				</span>
-				
-				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Persona *</span>
-					<div>
-						<select class="selectpicker" name="Persona" th:field="*{persona.id}">
-							<option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
-						</select>
-					</div>
-				</div>
 
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "El email debe contener @">
-					<span class="label-input100">Email *</span>
-					<input class="input100" type="email" name="email" placeholder="Enter Your Email" th:field="*{email}" required="required">
+				<div class="wrap-input100 validate-input bg1" data-validate="Escriba el nombre del perfil">
+					<span class="label-input100">Nombre perfil *</span>
+					<input class="input100" type="text" th:field="*{role}" name="role" placeholder="Nombre del perfil" required="required">
 				</div>
 				
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100" >Usuario *</span>
-					<input class="input100" type="text" name="Username" placeholder="Ingrese el usuario" th:field="*{username}" required="required">
-				</div>
-				
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100">Contraseña *</span>
-					<input class="input100" type="password" name="phone" placeholder="Ingrese la password" th:field="*{password}" required="required">
-				</div>
-				
-				<div class="col-sm d-flex align-items-center">
-        			<label class="custom-control-label" for="defaultChecked2">Desbloqueado</label>
-       				<input class="check"th:field="*{enabled}" type="checkbox" checked>
-    			</div>
-				
-				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Perfil *</span>
-					<div>
-						<select class="selectpicker" name="Perfil" th:field="*{userRole.id}">
-							<option th:each="r : ${roles}"  th:value="${(r.id)}" th:text="${r.role}"></option>
-						</select>
-					</div>
-				</div>
 				
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
