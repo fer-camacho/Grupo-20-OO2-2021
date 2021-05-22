@@ -39,6 +39,7 @@ public class ListUserRolesPDF extends AbstractPdfView {
 		Font fuenteCeldas = FontFactory.getFont("Arial", 10, Color.BLACK);
 		
 		document.setPageSize(PageSize.A4.rotate());
+		document.setMargins(-20, -20, 40, 20);
 		document.open();
 		PdfPCell celda = null;
 		

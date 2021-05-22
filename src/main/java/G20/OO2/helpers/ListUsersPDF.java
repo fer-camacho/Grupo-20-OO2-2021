@@ -29,6 +29,8 @@ public class ListUsersPDF extends AbstractPdfView {
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		String estado;
+		
 		@SuppressWarnings("unchecked")
 		List<UserModel> listUsuarios = (List<UserModel>) model.get("usuarios");
 		
@@ -37,6 +39,7 @@ public class ListUsersPDF extends AbstractPdfView {
 		Font fuenteCeldas = FontFactory.getFont("Arial", 10, Color.BLACK);
 		
 		document.setPageSize(PageSize.A4.rotate());
+		document.setMargins(-20, -20, 40, 20);
 		document.open();
 		PdfPCell celda = null;
 		
@@ -54,8 +57,8 @@ public class ListUsersPDF extends AbstractPdfView {
 		tablaTitulo.addCell(titulo);
 		tablaTitulo.setSpacingAfter(20);
 		
-		PdfPTable tablaUsuarios = new PdfPTable(6);
-		tablaUsuarios.setWidths(new float[] {2f, 2f, 3f, 3f, 2f, 2f});
+		PdfPTable tablaUsuarios = new PdfPTable(7);
+		tablaUsuarios.setWidths(new float[] {2f, 2f, 3f, 3.5f, 2f, 2f, 3f});
 		
 		celda = new PdfPCell(new Phrase("NOMBRE", fuenteTituloCol));
 		celda.setBackgroundColor(Color.LIGHT_GRAY);
@@ -99,6 +102,13 @@ public class ListUsersPDF extends AbstractPdfView {
 		celda.setPadding(10);
 		tablaUsuarios.addCell(celda);
 		
+		celda = new PdfPCell(new Phrase("ESTADO", fuenteTituloCol));
+		celda.setBackgroundColor(Color.LIGHT_GRAY);
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setVerticalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(10);
+		tablaUsuarios.addCell(celda);
+		
 		
 		for (UserModel u: listUsuarios) {
 			
@@ -133,6 +143,15 @@ public class ListUsersPDF extends AbstractPdfView {
 			tablaUsuarios.addCell(celda);
 			
 			celda = new PdfPCell(new Phrase(u.getUserRole().getRole(), fuenteCeldas));
+			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda.setVerticalAlignment(Element.ALIGN_CENTER);
+			celda.setPadding(5);
+			tablaUsuarios.addCell(celda);
+			
+			if(u.isEnabled()) estado = "DESBLOQUEADO";
+			else estado = "BLOQUEADO";
+			
+			celda = new PdfPCell(new Phrase(estado, fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 			celda.setVerticalAlignment(Element.ALIGN_CENTER);
 			celda.setPadding(5);

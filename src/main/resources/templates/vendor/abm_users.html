@@ -43,8 +43,10 @@
 									<th class="cell100 column5">Email</th>
 									<th class="cell100 column5">Usuario</th>
 									<th class="cell100 column5">Perfil asignado</th>
+									<th class="cell100 column5">Estado</th>
 									<th class="cell100 column5">Editar</th>
 									<th class="cell100 column5">Eliminar</th>
+									
 									
 								</tr>
 							</thead>
@@ -55,7 +57,7 @@
 						<table>
 							<tbody>
 								<tr th:each="usuario : ${usuarios}" class="row100 body">
-									<p style= "display: none" th:text="${usuario.id}" class="cell100 column1"></p>
+									<td style= "display: none" th:text="${usuario.id}" class="cell100 column1"></td>
 									<td th:text="${usuario.persona.nombre}" class="cell100 column2"></td>
 									<td th:text="${usuario.persona.apellido}" class="cell100 column3"></td>
 									<td th:text="${usuario.persona.nroDocumento}" class="cell100 column4"></td>
@@ -63,7 +65,11 @@
 									<td th:text="${usuario.username}" class="cell100 column5"></td>
 									<td th:text="${usuario.userRole.role}" class="cell100 column5"></td>
 									
-									 
+									<td >
+										<span th:if="${usuario.enabled==true}" th:text= "Desbloqueado" class="cell100 column5"></span>
+										<span th:if="${usuario.enabled==false}" th:text= "Bloqueado" class="cell100 column5"></span>
+									</td>
+									
 									<td class="cell100 column6">
 										<form th:action="@{/useredit/{id}(id=${usuario.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
@@ -75,6 +81,8 @@
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
 										</form>
 									</td>
+									
+									
 									 
 								</tr>
 

@@ -338,10 +338,19 @@ public class UserController {
 	}
 	
 	////////////////////////////ELIMINAR USER ////////////////////////////
-	
+	/*
 	@GetMapping("/userdelete/{id}")
 	public String deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
 		userService.delete(id);
+		return "redirect:/user/list/";
+	}
+	*/
+	@GetMapping("/userdelete/{id}")
+	public String deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
+		//bloquea al usuario seleccionado
+		UserModel userModel = userService.listarId(id);
+		userModel.setEnabled(false);
+		userService.insertOrUpdate(userModel);
 		return "redirect:/user/list/";
 	}
 }

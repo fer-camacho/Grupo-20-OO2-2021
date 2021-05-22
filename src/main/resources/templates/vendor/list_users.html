@@ -59,6 +59,8 @@
 									<th class="cell100 column5">Email</th>
 									<th class="cell100 column5">Usuario</th>
 									<th class="cell100 column5">Perfil asignado</th>
+									<th class="cell100 column5">Estado</th>
+									
 								</tr>
 							</thead>
 						</table>
@@ -76,6 +78,10 @@
 									<td th:text="${usuario.email}" class="cell100 column5"></td>
 									<td th:text="${usuario.username}" class="cell100 column5"></td>
 									<td th:text="${usuario.userRole.role}" class="cell100 column5"></td>
+									<td >
+										<span th:if="${usuario.enabled==true}" th:text= "Desbloqueado" class="cell100 column5"></span>
+										<span th:if="${usuario.enabled==false}" th:text= "Bloqueado" class="cell100 column5"></span>
+									</td>
 								</tr>
 							</tbody>
 						</table>
