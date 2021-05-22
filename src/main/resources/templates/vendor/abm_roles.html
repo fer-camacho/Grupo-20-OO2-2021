@@ -37,10 +37,10 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">Id</th>
-									<th class="cell100 column2">Perfil</th>
-									<th class="cell100 column3">Editar</th>
-									<th class="cell100 column4">Eliminar</th>
+									<th style= "display: none" class="cell100 column1 text-center">Id</th>
+									<th class="cell100 column2 text-center">Perfil</th>
+									<th class="cell100 column3 text-left">Editar</th>
+									<th class="cell100 column4 text-left">Eliminar</th>
 									
 								</tr>
 							</thead>
@@ -51,16 +51,16 @@
 						<table>
 							<tbody>
 								<tr th:each="rol : ${roles}" class="row100 body">
-									<td th:text="${rol.id}" class="cell100 column1"></td>
-									<td th:text="${rol.role}" class="cell100 column2"></td>
+									<p style= "display: none" th:text="${rol.id}" class="cell100 column1"></p>
+									<td th:text="${rol.role}" class="cell100 column2 text-center"></td>
 									
-									<td class="cell100 column6">
+									<td class="cell100 column3 text-center">
 										<form th:action="@{/roleedit/{id}(id=${rol.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
 										</form>
 									</td>
 									
-									<td class="cell100 column7">
+									<td class="cell100 column4 text-center">
 										<form th:action="@{/roledelete/{id}(id=${rol.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
 										</form>

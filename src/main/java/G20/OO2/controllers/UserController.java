@@ -50,11 +50,22 @@ public class UserController {
 		return "/user/login";
     }
     
+	/*
     @GetMapping("/logout")
 	public String logout(Model model) {
 		SecurityContextHolder.clearContext();
-		return "/user/logout";
+		return "/user/logout";	
     }
+    */
+	
+	@GetMapping("/logout")
+	public ModelAndView logout(Model model) {
+		SecurityContextHolder.clearContext();
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.INDEX);
+		mAV.addObject("anonimo", true);
+		return mAV;	
+    }
+    
 	
 	@PostMapping("/loginsuccess")
 	public ModelAndView loginCheckPost()  {

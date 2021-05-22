@@ -44,8 +44,8 @@
 									<th class="cell100 column5">Usuario</th>
 									<th class="cell100 column5">Perfil asignado</th>
 									<th class="cell100 column5">Estado</th>
-									<th class="cell100 column5">Editar</th>
-									<th class="cell100 column5">Eliminar</th>
+									<th class="cell100 column5 text-left">Editar</th>
+									<th class="cell100 column5 text-left">Eliminar</th>
 									
 									
 								</tr>
@@ -70,13 +70,13 @@
 										<span th:if="${usuario.enabled==false}" th:text= "Bloqueado" class="cell100 column5"></span>
 									</td>
 									
-									<td class="cell100 column6">
+									<td class="cell100 column6 text-right">
 										<form th:action="@{/useredit/{id}(id=${usuario.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
 										</form>
 									</td>
 									
-									<td class="cell100 column7">
+									<td class="cell100 column7 text-right">
 										<form th:action="@{/userdelete/{id}(id=${usuario.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
 										</form>

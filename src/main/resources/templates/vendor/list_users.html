@@ -53,13 +53,13 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column2">Nombre</th>
-									<th class="cell100 column3">Apellido</th>
-									<th class="cell100 column4">Documento</th>
-									<th class="cell100 column5">Email</th>
-									<th class="cell100 column5">Usuario</th>
-									<th class="cell100 column5">Perfil asignado</th>
-									<th class="cell100 column5">Estado</th>
+									<th class="cell100 column2 text-center">Nombre</th>
+									<th class="cell100 column3 text-center">Apellido</th>
+									<th class="cell100 column4 text-center">Documento</th>
+									<th class="cell100 column5 text-left">Email</th>
+									<th class="cell100 column5 text-left">Usuario</th>
+									<th class="cell100 column5 text-left">Perfil asignado</th>
+									<th class="cell100 column5 text-left">Estado</th>
 									
 								</tr>
 							</thead>
@@ -71,16 +71,16 @@
 							<tbody>
 								<tr th:each="usuario : ${usuarios}" class="row100 body">
 									<!-- <td th:text="${usuario.id}" class="cell100 column1"></td> -->
-									<p style= "display: none" th:text="${usuario.id}" class="cell100 column1"></p>
-									<td th:text="${usuario.persona.nombre}" class="cell100 column2"></td>
-									<td th:text="${usuario.persona.apellido}" class="cell100 column3"></td>
-									<td th:text="${usuario.persona.nroDocumento}" class="cell100 column4"></td>
-									<td th:text="${usuario.email}" class="cell100 column5"></td>
-									<td th:text="${usuario.username}" class="cell100 column5"></td>
-									<td th:text="${usuario.userRole.role}" class="cell100 column5"></td>
+									<p style= "display: none" th:text="${usuario.id}" class="cell100 column1 text-left"></p>
+									<td th:text="${usuario.persona.nombre}" class="cell100 column2 text-center"></td>
+									<td th:text="${usuario.persona.apellido}" class="cell100 column3 text-center"></td>
+									<td th:text="${usuario.persona.nroDocumento}" class="cell100 column4 text-right"></td>
+									<td th:text="${usuario.email}" class="cell100 column5 text-center"></td>
+									<td th:text="${usuario.username}" class="cell100 column5 text-center"></td>
+									<td th:text="${usuario.userRole.role}" class="cell100 column5 text-right"></td>
 									<td >
-										<span th:if="${usuario.enabled==true}" th:text= "Desbloqueado" class="cell100 column5"></span>
-										<span th:if="${usuario.enabled==false}" th:text= "Bloqueado" class="cell100 column5"></span>
+										<span th:if="${usuario.enabled==true}" th:text= "Desbloqueado" class="cell100 column5 text-right"></span>
+										<span th:if="${usuario.enabled==false}" th:text= "Bloqueado" class="cell100 column5 text-right"></span>
 									</td>
 								</tr>
 							</tbody>
