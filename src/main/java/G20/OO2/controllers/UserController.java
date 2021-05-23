@@ -139,7 +139,7 @@ public class UserController {
 		userModel.setPassword(p.encode(userModel.getPassword()));
 		u = userService.insertOrUpdate(userModel);
 		
-		mandarMailAltaUser(userModel);
+		//(userModel);
 		return "redirect:/usuario/abm";
 	}
 	*/
