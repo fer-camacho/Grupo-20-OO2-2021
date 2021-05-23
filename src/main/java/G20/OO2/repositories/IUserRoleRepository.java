@@ -19,5 +19,8 @@ public interface IUserRoleRepository extends JpaRepository<UserRole, Serializabl
 	
 	@Query(nativeQuery=true,value="Select * from user_role r where r.role=(:role)")
 	public abstract List<UserRole> findByRole(String role);
+	
+	@Query(nativeQuery=true,value="Select count(*) from user_role r where r.role=(:role)")
+	public int repetido(String role);
 
 }

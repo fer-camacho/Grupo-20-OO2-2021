@@ -18,4 +18,6 @@ public interface IUserRoleService {
 	
 	public String delete(int id);
 
+	public int cantidad(String role);
+
 }

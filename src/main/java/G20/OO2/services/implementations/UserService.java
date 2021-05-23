@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import G20.OO2.entities.UserRole;
 import G20.OO2.models.UserModel;
+import G20.OO2.models.UserRoleModel;
 import G20.OO2.repositories.IUserRepository;
 import G20.OO2.converters.UserConverter;
 
@@ -98,6 +99,10 @@ public class UserService implements UserDetailsService {
 	public UserModel listarId(int id) {
 		G20.OO2.entities.User user = userRepository.findById_(id);
 		return userConverter.entityToModel(user);
+	}
+	
+	public int cantidad(String username) {
+		return userRepository.repetido(username);
 	}
 }
 	

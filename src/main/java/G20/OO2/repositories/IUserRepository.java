@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import G20.OO2.entities.User;
+import G20.OO2.models.UserRoleModel;
 
 @Repository("userRepository")
 public interface IUserRepository extends JpaRepository<User, Serializable> {
@@ -25,5 +26,11 @@ public interface IUserRepository extends JpaRepository<User, Serializable> {
 	
 	@Query(nativeQuery=true,value="Select * from user u where u.id=(:id)")
 	public abstract User findById_(int id);
+	
+	@Query(nativeQuery=true,value="Select count(*) from user u where u.username=(:username)")
+	public User findByUsername(String username);
+	
+	@Query(nativeQuery=true,value="Select count(*) from user u where u.username=(:username)")
+	public int repetido(String username);
 	
 }

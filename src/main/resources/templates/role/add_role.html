@@ -17,7 +17,8 @@
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
+<!--================================
+===============================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
@@ -29,6 +30,7 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
 	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
@@ -38,6 +40,8 @@
 	th:include="nav_audit :: div"></nav>
 
 	<div class="container-contact100">
+		<a th:if="${repetido}" id="alert-target"></a>
+		<a th:if="${agregado}" id="alert-success"></a>
 		<div class="wrap-contact100">
 			<form th:action="@{/perfil/save}"th:object="${userRole}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
@@ -129,12 +133,22 @@
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+</script>
+<script>
+		$("#alert-target").show(function () {
+        toastr.error("El nombre del perfil ya existe")
+        });
+        
+        $("#alert-success").show(function () {
+			toastr.success("Perfil agregado correctamente")
+		});
 </script>
 
 </body>

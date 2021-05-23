@@ -26,6 +26,14 @@ public class UserRoleService implements  IUserRoleService{
 	@Qualifier("userRoleRepository")
 	private IUserRoleRepository userRoleRepository;	
 	
+	public List<UserRoleModel> getAll() {
+		List<UserRoleModel> roles = new ArrayList<>();
+		for (G20.OO2.entities.UserRole r: userRoleRepository.findAll()) {
+			roles.add(userRoleConverter.entityToModel(r));
+		}
+		return roles;
+	}
+	
 	public UserRole insertOrUpdate(UserRole role) {		
 		UserRole roleAux = userRoleRepository.save(role);
 		return roleAux;
@@ -35,6 +43,12 @@ public class UserRoleService implements  IUserRoleService{
 		UserRole role = userRoleRepository.save(userRoleConverter.modelToEntity(userRoleModel));
 		return userRoleConverter.entityToModel(role);
 	}
+	
+	public UserRoleModel listarId(int id) {
+		UserRole rol = userRoleRepository.findById(id);
+		return userRoleConverter.entityToModel(rol);
+	}
+	
 	
 	public UserRoleModel update(UserRoleModel userRoleModel) {
 		UserRole role = userRoleConverter.modelToEntity(listarId(userRoleModel.getId()));
@@ -49,26 +63,8 @@ public class UserRoleService implements  IUserRoleService{
 		return "perfil Eliminado";
 	}
 	
-	public List<UserRoleModel> getAll() {
-		List<UserRoleModel> roles = new ArrayList<>();
-		for (G20.OO2.entities.UserRole r: userRoleRepository.findAll()) {
-			roles.add(userRoleConverter.entityToModel(r));
-		}
-		return roles;
-	}
-	
-	public UserRoleModel listarId(int id) {
-		UserRole rol = userRoleRepository.findById(id);
-		return userRoleConverter.entityToModel(rol);
-	}
-	
-	public List<UserRoleModel> findByRole(String role) {
-		List<UserRole> roles = userRoleRepository.findByRole(role);
-		List<UserRoleModel> rolesModel = new ArrayList<>();
-		for (UserRole r: roles) {
-			rolesModel.add(userRoleConverter.entityToModel(r));
-		}
-		return rolesModel;
+	public int cantidad(String role) {
+		return userRoleRepository.repetido(role);
 	}
 	
 	

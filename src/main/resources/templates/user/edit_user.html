@@ -29,6 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
 
@@ -39,6 +40,8 @@
 	th:include="nav_audit :: div"></nav>
 	
 	<div class="container-contact100">
+		<a th:if="${repetido}" id="alert-target"></a>
+		<a th:if="${modificado}" id="alert-success"></a>
 		<div class="wrap-contact100">
 			<form action="#" th:action="@{/usuario/save/edit}" th:object="${user}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
@@ -162,12 +165,22 @@
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+</script>
+<script>
+		$("#alert-target").show(function () {
+        toastr.error("El nombre del usuario ya existe")
+        });
+        
+        $("#alert-success").show(function () {
+			toastr.success("Usuario modificado correctamente")
+		});
 </script>
 
 </body>

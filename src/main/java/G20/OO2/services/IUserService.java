@@ -20,4 +20,6 @@ public interface IUserService {
 	public UserModel listarId(int id);
 	
 	public List<UserRoleModel> findByRole(String role);
+	
+	public UserModel findByUsername(String username);
 }
