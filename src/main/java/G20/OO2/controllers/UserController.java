@@ -125,7 +125,7 @@ public class UserController {
 		userModel.setPassword(p.encode(userModel.getPassword()));
 		u = userService.insertOrUpdate(userModel);
 		
-		mandarMailAltaUser(userModel);
+		//(userModel);
 		return "redirect:/usuario/abm";
 	}
 	
@@ -175,7 +175,7 @@ public class UserController {
 		UserModel userModel = userService.listarId(id);
 		userModel.setEnabled(false);
 		userService.insertOrUpdate(userModel);
-		mandarMailBajaUser(userModel);
+		//mandarMailBajaUser(userModel);
 		return "redirect:/usuario/abm/";
 	}
 	
