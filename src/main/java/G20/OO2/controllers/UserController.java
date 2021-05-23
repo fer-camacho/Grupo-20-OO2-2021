@@ -115,20 +115,20 @@ public class UserController {
 		String username = userModel.getUsername();
 		
 		if (userService.cantidad(username)==0) { //si puedo insertar
-			UserModel u = new UserModel();
-			BCryptPasswordEncoder p = new BCryptPasswordEncoder();
-			userModel.setPassword(p.encode(userModel.getPassword()));
-			u = userService.insertOrUpdate(userModel);
-			//mandarMailAltaUser(userModel);
-			mAV.addObject("user", new UserModel()); //limpia el formulario
-			mAV.addObject("agregado", true);
-		} else {
-			//mAV.addObject("user", new UserModel());
-			mAV.addObject("repetido", true);
-		}
+			if (userModel.getPassword().length() >= 5) {
+				UserModel u = new UserModel();
+				BCryptPasswordEncoder p = new BCryptPasswordEncoder();
+				userModel.setPassword(p.encode(userModel.getPassword()));
+				u = userService.insertOrUpdate(userModel);
+				//mandarMailAltaUser(userModel);
+				mAV.addObject("user", new UserModel()); //limpia el formulario
+				mAV.addObject("agregado", true);
+			} else {
+				mAV.addObject("formatoIncorrecto", true);
+			}	
+		} else mAV.addObject("repetido", true);
 		return mAV;
 	}
-	
 	
 	/*
 	@PostMapping("/save")
@@ -139,7 +139,7 @@ public class UserController {
 		userModel.setPassword(p.encode(userModel.getPassword()));
 		u = userService.insertOrUpdate(userModel);
 		
-		//(userModel);
+		//mandarMailAltaUser(userModel);
 		return "redirect:/usuario/abm";
 	}
 	*/
@@ -173,11 +173,16 @@ public class UserController {
 
 		String username = userModel.getUsername();
 		if ((userService.cantidad(username)==0) || (username.equals(userService.listarId(userModel.getId()).getUsername()))){
-			//si no coincide el nombre en la lista de usuario o si dejo el mismo
-			BCryptPasswordEncoder p = new BCryptPasswordEncoder();
-			userModel.setPassword(p.encode(userModel.getPassword()));
-			userService.insertOrUpdate(userModel);
-			mAV.addObject("modificado", true);
+			if (userModel.getPassword().length() >= 5) {
+				//si no coincide el nombre en la lista de usuario o si dejo el mismo
+				BCryptPasswordEncoder p = new BCryptPasswordEncoder();
+				userModel.setPassword(p.encode(userModel.getPassword()));
+				userService.insertOrUpdate(userModel);
+				mAV.addObject("modificado", true);
+			} else {
+				mAV.addObject("formatoIncorrecto", true);
+			}
+			
 		} else mAV.addObject("repetido", true);
 		return mAV;
 	}

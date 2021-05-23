@@ -41,6 +41,7 @@
 	
 	<div class="container-contact100">
 		<a th:if="${repetido}" id="alert-target"></a>
+		<a th:if="${formatoIncorrecto}" id="alert-password"></a>
 		<a th:if="${modificado}" id="alert-success"></a>
 		<div class="wrap-contact100">
 			<form action="#" th:action="@{/usuario/save/edit}" th:object="${user}" method="post" class="contact100-form validate-form">
@@ -177,7 +178,9 @@
 		$("#alert-target").show(function () {
         toastr.error("El nombre del usuario ya existe")
         });
-        
+        $("#alert-password").show(function () {
+			toastr.error("La password debe tener más de 5 dígitos")
+		});
         $("#alert-success").show(function () {
 			toastr.success("Usuario modificado correctamente")
 		});
