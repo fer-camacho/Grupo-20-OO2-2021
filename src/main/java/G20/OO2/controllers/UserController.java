@@ -62,7 +62,7 @@ public class UserController {
 		mAV.addObject("admin", admin);
 		mAV.addObject("audit", audit);
 	}
-	
+	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@GetMapping("/lista")
 	public ModelAndView usuarios() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_LIST);		

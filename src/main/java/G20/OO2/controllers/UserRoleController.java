@@ -36,6 +36,7 @@ public class UserRoleController {
 		mAV.addObject("audit", audit);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@GetMapping("/lista")
 	public ModelAndView roles() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_LIST);
@@ -97,7 +98,8 @@ public class UserRoleController {
 	}
 	*/
 	//////////////////////////// EDITAR ROL ////////////////////////////
-
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/edit/{id}")
 	public ModelAndView editRole(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_EDIT);
@@ -133,7 +135,7 @@ public class UserRoleController {
 	*/
 	
 	//////////////////////////// ELIMINAR ROL ////////////////////////////
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteRole(@PathVariable("id") int id, RedirectAttributes redirect) {
 		userRoleService.delete(id);
