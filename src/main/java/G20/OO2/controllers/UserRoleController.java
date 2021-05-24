@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -58,7 +59,8 @@ public class UserRoleController {
 		return mAV;
 	}
 
-////////////////////////////NUEVO ROL ////////////////////////////
+	////////////////////////////NUEVO ROL ////////////////////////////
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/new")
 	public ModelAndView newRole() {

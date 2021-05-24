@@ -62,6 +62,7 @@ public class UserController {
 		mAV.addObject("admin", admin);
 		mAV.addObject("audit", audit);
 	}
+	
 	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@GetMapping("/lista")
 	public ModelAndView usuarios() {
@@ -149,6 +150,7 @@ public class UserController {
 	
 	//////////////////////////// EDITAR USER ////////////////////////////
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/edit/{id}")
 	public ModelAndView editUser(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_EDIT);
@@ -209,6 +211,7 @@ public class UserController {
 	}
 	*/
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
 		//bloquea al usuario seleccionado

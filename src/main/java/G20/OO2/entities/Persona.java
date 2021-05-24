@@ -20,16 +20,16 @@ public class Persona {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="nombre")
+	@Column(name="nombre", nullable = false, length = 50)
 	private String nombre;
 	
-	@Column(name="apellido")
+	@Column(name="apellido", nullable = false, length = 50)
 	private String apellido;
 	
-	@Column(name="tipo")
+	@Column(name="tipo", nullable = false)
 	private String tipo;
 	
-	@Column(name="nroDocumento")
+	@Column(name="nroDocumento", nullable = false)
 	private long nroDocumento;
 	
 	@OneToMany(cascade= CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="persona")

@@ -20,7 +20,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="email")
+	@Column(name="email", nullable=false, length=90)
 	private String email;
 	
 	@Column(name="username", unique=true, nullable=false, length=45)
@@ -29,7 +29,7 @@ public class User {
 	@Column(name="password", nullable=false, length=60)
 	private String password;
 	
-	@Column(name="enabled")
+	@Column(name="enabled", nullable=false)
 	private boolean enabled;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
