@@ -7,6 +7,7 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -73,6 +74,7 @@ public class UserController {
 		return mAV;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/abm")
 	public ModelAndView userList() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ABM);
@@ -86,6 +88,7 @@ public class UserController {
 	
 	//////////////////////////// NUEVO USER ////////////////////////////
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/new")
 	public ModelAndView newUser() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ADD);
