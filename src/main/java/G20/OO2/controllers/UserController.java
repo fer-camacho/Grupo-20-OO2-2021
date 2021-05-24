@@ -124,7 +124,7 @@ public class UserController {
 				BCryptPasswordEncoder p = new BCryptPasswordEncoder();
 				userModel.setPassword(p.encode(userModel.getPassword()));
 				u = userService.insertOrUpdate(userModel);
-				//mandarMailAltaUser(userModel);
+				mandarMailAltaUser(userModel);
 				mAV.addObject("user", new UserModel()); //limpia el formulario
 				mAV.addObject("agregado", true);
 			} else {
@@ -221,12 +221,11 @@ public class UserController {
 		UserModel userModel = userService.listarId(id);
 		userModel.setEnabled(false);
 		userService.insertOrUpdate(userModel);
-		//mandarMailBajaUser(userModel);
+		mandarMailBajaUser(userModel);
 		List<UserModel> usuarios = userService.getAll();
 		asignarPerfil(mAV, roleString);
 		mAV.addObject("usuarios", usuarios);
 		mAV.addObject("eliminado", true);
-		//mandarMailBajaUser(userModel);
 		return mAV;
 	}
 	
