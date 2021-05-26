@@ -1,7 +1,5 @@
 package G20.OO2.converters;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import G20.OO2.entities.UserRole;

@@ -31,5 +31,13 @@ public class PersonaService implements IPersonaService {
 		}
 		return personas;
 	}
- 
+	
+	public PersonaModel insertOrUpdate(PersonaModel personaModel) {
+		Persona persona = personaRepository.save(personaConverter.modelToEntity(personaModel));
+		return personaConverter.entityToModel(persona);
+	}
+	
+	public int cantidad (long dni) {
+		return personaRepository.repetido(dni);
+	}
 }

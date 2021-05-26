@@ -20,6 +20,12 @@ public class ViewRouteHelper {
 	public final static String USER_LOGIN = "user/login";
 	public final static String USER_LOGOUT = "user/logout";
 	
+	//PËRSONA
+	public final static String PERSONA_ADD = "persona/add_persona";
+	
+	//RODADO
+	public final static String RODADO_ADD = "rodado/add_rodado";
+	
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
 	public final static String DEGREE_ROOT = "/degrees/";

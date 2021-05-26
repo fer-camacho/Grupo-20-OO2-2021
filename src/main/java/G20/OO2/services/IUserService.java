@@ -22,4 +22,6 @@ public interface IUserService {
 	public List<UserRoleModel> findByRole(String role);
 	
 	public UserModel findByUsername(String username);
+	
+	public int cantidad(String username);
 }

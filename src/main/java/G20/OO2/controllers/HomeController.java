@@ -148,4 +148,12 @@ public class HomeController {
 		return new RedirectView(ViewRouteHelper.ROUTE);
 	}
 	*/
+	
+	@GetMapping("/testeo")
+	public ModelAndView testeo() {
+		ModelAndView modelAndView = new ModelAndView("home/testeo");
+		//modelAndView.addObject("username", user.getUsername());
+		//modelAndView.addObject("persons", personService.getAll());
+		return modelAndView;
+	}
 }
