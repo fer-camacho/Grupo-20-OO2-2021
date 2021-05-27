@@ -40,4 +40,9 @@ public class PersonaService implements IPersonaService {
 	public int cantidad (long dni) {
 		return personaRepository.repetido(dni);
 	}
+	
+	public PersonaModel listarId(int id) {
+		Persona p = personaRepository.findById_(id);
+		return personaConverter.entityToModel(p);
+	}
 }

@@ -5,12 +5,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="permisoDiario")
 @PrimaryKeyJoinColumn(referencedColumnName ="idPermiso")
+@Table(name="permisoDiario")
 public class PermisoDiario extends Permiso {
 	
 	@Column(name="motivo", nullable = false)
@@ -37,5 +38,7 @@ public class PermisoDiario extends Permiso {
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
+	
+	
 	
 }

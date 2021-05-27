@@ -16,11 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
-@Table(name="permiso")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="permiso")
 public abstract class Permiso {
 	
 	@Id
@@ -28,11 +31,11 @@ public abstract class Permiso {
 	protected int idPermiso;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name="permiso_id", nullable=false)
 	@JoinColumn(name="pedido_id", nullable=false)
 	protected Persona pedido;
 	
-	@Column(name="fecha", nullable = false)
+	
+	@Column(name="fecha")
 	protected LocalDate fecha;
 	
 	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)

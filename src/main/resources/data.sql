@@ -16,6 +16,10 @@ INSERT INTO `user` VALUES(1, 'oo2.grupo20@gmail.com', true, '$2a$10$fsULUPafGxUE
 INSERT INTO `user` VALUES(2, 'oo2@gmail.com', true, '$2a$10$7VcFzaibGjvfy4VtHYF8J.MjfBwByNlUO6AlbStQ1pDf.JlVaTTT6', 'audit', 1, 2);
 UNLOCK TABLES;
 
-
-
-
+LOCK TABLES `lugar` WRITE;
+INSERT INTO `lugar` VALUES (1, '1852', 'Burzaco');
+INSERT INTO `lugar` VALUES (2, '1836', 'Adrogue');
+INSERT INTO `lugar` VALUES (3, '1828', 'Adrogue');
+INSERT INTO `lugar` VALUES (4, '1886', 'Lomas');
+INSERT INTO `lugar` VALUES (5, '1825', 'Banfield');
+UNLOCK TABLES;

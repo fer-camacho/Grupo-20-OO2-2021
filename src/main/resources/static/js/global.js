@@ -1,70 +1,75 @@
 (function ($) {
     'use strict';
-    /*==================================================================
-        [ Daterangepicker ]*/
-    try {
-        $('.js-datepicker').daterangepicker({
-            "singleDatePicker": true,
-            "showDropdowns": true,
-            "autoUpdateInput": false,
-            locale: {
-                format: 'DD/MM/YYYY'
-            },
-        });
-    
-        var myCalendar = $('.js-datepicker');
-        var isClick = 0;
-    
-        $(window).on('click',function(){
-            isClick = 0;
-        });
-    
-        $(myCalendar).on('apply.daterangepicker',function(ev, picker){
-            isClick = 0;
-            $(this).val(picker.startDate.format('DD/MM/YYYY'));
-    
-        });
-    
-        $('.js-btn-calendar').on('click',function(e){
-            e.stopPropagation();
-    
-            if(isClick === 1) isClick = 0;
-            else if(isClick === 0) isClick = 1;
-    
-            if (isClick === 1) {
-                myCalendar.focus();
-            }
-        });
-    
-        $(myCalendar).on('click',function(e){
-            e.stopPropagation();
-            isClick = 1;
-        });
-    
-        $('.daterangepicker').on('click',function(e){
-            e.stopPropagation();
-        });
-    
-    
-    } catch(er) {console.log(er);}
-    /*[ Select 2 Config ]
+
+    /*[ Wizard Config ]
         ===========================================================*/
     
     try {
-        var selectSimple = $('.js-select-simple');
+        var $validator = $("#js-wizard-form").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 3
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    minlength: 3
+                },
+                password: {
+                    required: true,
+                    minlength: 8
+                },
+                re_password: {
+                    required: true,
+                    minlength: 8,
+                    equalTo: '#password'
+                }
+            },
+            messages: {
+                username: {
+                    required: "Enter username"
+                },
     
-        selectSimple.each(function () {
-            var that = $(this);
-            var selectBox = that.find('select');
-            var selectDropdown = that.find('.select-dropdown');
-            selectBox.select2({
-                dropdownParent: selectDropdown
-            });
+                email: {
+                    required: "Enter your email",
+    
+                },
+                password: {
+                    required: "Enter password",
+                    minlength: "Password must be >= 8 character"
+                },
+                re_password: {
+                    required: "Please confirm your password",
+                    minlength: "Password must has >= 8 character",
+                    equalTo: "Password doesn't equal to the previous one"
+                }
+            }
         });
     
-    } catch (err) {
-        console.log(err);
-    }
+        $("#js-wizard-form").bootstrapWizard({
+            'tabClass': 'nav nav-pills',
+            'nextSelector': '.btn--next',
+            'onNext': function(tab, navigation, index) {
+                var $valid = $("#js-wizard-form").valid();
+                if(!$valid) {
+                    $validator.focusInvalid();
+                    return false;
+                }
+            },
+            'onTabClick': function (tab, navigation, index) {
+                var $valid = $("#js-wizard-form").valid();
+                if(!$valid) {
+                    $validator.focusInvalid();
+                    return false;
+                }
+            }
     
+        });
+    
+    }
+    catch (e) {
+        console.log(e)
+    }
 
 })(jQuery);

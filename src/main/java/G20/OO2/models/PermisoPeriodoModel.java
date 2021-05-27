@@ -1,6 +1,7 @@
 package G20.OO2.models;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 public class PermisoPeriodoModel extends PermisoModel {

@@ -20,4 +20,7 @@ public interface IPersonaRepository extends JpaRepository<Persona, Serializable>
 	
 	@Query(nativeQuery=true,value="Select count(*) from persona p where p.nro_documento=(:nro_documento)")
 	public int repetido(long nro_documento);
+	
+	@Query(nativeQuery=true,value="Select * from persona p where p.id=(:id)")
+	public Persona findById_(int id);
 }
