@@ -32,7 +32,8 @@ public abstract class Permiso {
 	@JoinColumn(name="pedido_id", nullable=false)
 	protected Persona pedido;
 	
-	@Column(name="fecha", nullable = false)
+	//@Column(name="fecha", nullable = false)
+	@Column(name="fecha")
 	protected LocalDate fecha;
 	
 	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
