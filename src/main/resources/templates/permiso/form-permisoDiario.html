@@ -1,0 +1,63 @@
+<div class="page-wrapper bg-img-1 p-t-275 p-b-100">
+        <div class="wrapper wrapper--w820">
+            <div class="card card-1">
+                <div class="card-heading">
+                    <h2 class="title">Permiso Diario</h2>
+                </div>
+                <div class="card-body">
+                     <form class="wizard-container" method="POST" th:object="${permisoDiario}" th:action="@{/permiso/diario/save}" id="js-wizard-form">
+                        <ul class="tab-list">
+                            <li class="tab-list__item active">
+                                <a class="tab-list__link" href="#tab1" data-toggle="tab">
+                                    <span class="step">1</span>
+                                    <span class="desc">Pedido</span>
+                                </a>
+                            </li>
+                            <li class="tab-list__item">
+                                <a class="tab-list__link" href="#tab2" data-toggle="tab">
+                                    <span class="step">2</span>
+                                    <span class="desc">Datos</span>
+                                </a>
+                            </li>
+                            <li class="tab-list__item">
+                                <a class="tab-list__link" href="#tab3" data-toggle="tab">
+                                    <span class="step">3</span>
+                                    <span class="desc">Lugares</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div class="form">
+                                    <div class="input-group">
+                                    	<select class="selectpicker input--style-1"style="height: 52px;padding-right: 100px;" data-width="auto" th:field="*{pedido.id}" 
+                                            name="Persona" placeholder="Seleccione Persona"  required="required">	
+
+                                            <option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
+                                        </select>
+                                        
+                                        <div class="row">
+
+                                        	<div class="col">
+                                            	<input th:field="*{fecha}" class="input--style-1" type="date" name="fecha" placeholder="Fecha"  required="required">
+                                        	</div>
+    
+                                        	<div class="col">
+                                            	<input th:field="*{motivo}" class="input--style-1" type="text" name="motivo" placeholder="Motivo"  required="required">
+                                       		</div>
+                                   		</div>
+                                        
+                                        <div >
+                                        <span class="btn--next">
+                                            <input type="submit" name="action" value="Agregar" />
+                                        </span>
+                                    	</div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

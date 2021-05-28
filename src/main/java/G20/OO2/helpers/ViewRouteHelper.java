@@ -26,6 +26,9 @@ public class ViewRouteHelper {
 	//RODADO
 	public final static String RODADO_ADD = "rodado/add_rodado";
 	
+	//PERMISO
+	public final static String PERMISO_ADD= "permiso/add_permiso";
+		
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
 	public final static String DEGREE_ROOT = "/degrees/";

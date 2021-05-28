@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- con esto no tira advertencias de th: -->
+<th:block xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  -->
+    <!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <!-- <meta name="description" content="AuThemes Templates">
+    <meta name="author" content="AuCreative">
+    <meta name="keywords" content="AuThemes Templates"> -->
+	<base href="/">
+	
+	<!-- Bootstrap core CSS -->
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Title Page-->
+    <title></title>
+    
+	
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <!-- Main CSS-->
+    <link href="css/add_permiso.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div th:if="${step == 1}" class="page-wrapper bg-img-1 p-t-275 p-b-100" th:include="/permiso/form-permisoDiario :: div"></div>
+	<div th:if="${step == 2}" class="page-wrapper bg-img-1 p-t-275 p-b-100" th:include="/permiso/form-lugar :: div"></div>
+
+	<div id="dropDownSelect1"></div>
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/jquery-validate/jquery.validate.min.js"></script>
+    <script src="vendor/bootstrap-wizard/bootstrap.min.js"></script>
+    <script src="vendor/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+
+
+    <!-- Main JS-->
+    <script src="js/add_permiso.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

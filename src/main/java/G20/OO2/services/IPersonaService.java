@@ -11,4 +11,6 @@ public interface IPersonaService {
 	public PersonaModel insertOrUpdate(PersonaModel personaModel);
 	
 	public int cantidad (long dni);
+	
+	public PersonaModel listarId(int id);
 }
