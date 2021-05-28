@@ -3,9 +3,12 @@ package G20.OO2.models;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public abstract class PermisoModel {
 	protected int idPermiso;
 	protected PersonaModel pedido;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate fecha;
 	protected Set<LugarModel> desdeHasta;
 	

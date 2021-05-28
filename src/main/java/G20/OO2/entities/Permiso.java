@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="permiso")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -34,6 +36,7 @@ public abstract class Permiso {
 	
 	//@Column(name="fecha", nullable = false)
 	@Column(name="fecha")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate fecha;
 	
 	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
