@@ -32,8 +32,16 @@ public class PermisoService implements IPermisoService {
 		return permisoConverter.entityToModel(permiso);
 	}
 	
-	public PermisoDiarioModel listarId(int id) {
-		PermisoDiario p = permisoRepository.findById_(id);
-		return permisoConverter.entityToModel(p);
+	public PermisoModel listarId(int id) {
+		PermisoModel pM;
+		Permiso p = permisoRepository.findById_(id);
+		if (p instanceof PermisoDiario) {
+			PermisoDiario pD = (PermisoDiario) p;
+			pM = permisoConverter.entityToModel(pD);
+		} else {
+			PermisoPeriodo pP = (PermisoPeriodo) p;
+			pM = permisoConverter.entityToModel(pP);
+		}
+		return pM;
 	}
 }

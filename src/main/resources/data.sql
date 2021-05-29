@@ -43,3 +43,10 @@ insert into `permiso_periodo` VALUES(10, 1, 6, 1);
 insert into `permiso_periodo` VALUES(15, 1, 7, 1);
 UNLOCK TABLES;
 
+LOCK TABLES `lugar` WRITE;
+insert into `lugar` (id_lugar, codigo_postal, lugar) VALUES (1, '1852', 'Burzaco');
+insert into `lugar` (id_lugar, codigo_postal, lugar) VALUES(2, '1846', 'Adrogue');
+insert into `lugar` (id_lugar, codigo_postal, lugar) VALUES(3, '1883', 'Temperley');
+insert into `lugar` (id_lugar, codigo_postal, lugar) VALUES(4, '1832', 'Lomas');
+UNLOCK TABLES;
+

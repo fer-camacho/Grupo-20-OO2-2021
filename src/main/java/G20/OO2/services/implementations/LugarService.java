@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import G20.OO2.converters.LugarConverter;
 import G20.OO2.entities.Lugar;
@@ -36,5 +37,9 @@ public class LugarService implements ILugarService{
 	public LugarModel insertOrUpdate(LugarModel lugarModel) {
 		Lugar lugar = lugarReopository.save(lugarConverter.modelToEntity(lugarModel));
 		return lugarConverter.entityToModel(lugar);
+	}
+	
+	public LugarModel findById(int id) {
+		return lugarConverter.entityToModel(lugarReopository.findById_(id));
 	}
 }

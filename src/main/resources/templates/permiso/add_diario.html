@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sistema integrador</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+</head>
+<body>
+
+	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_admin :: div"></nav>
+			
+	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_audit :: div"></nav>
+	
+	<nav th:if="${anonimo==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_anonimo :: div"></nav>
+		
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form action="#" th:action="@{/permiso/diario/save}" th:object="${permisoDiario}" method="post" class="contact100-form validate-form">
+				<span class="contact100-form-title">
+					Información del permiso diario
+				</span>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Persona *</span>
+					<select class="selectpicker input--style-1"th:field="*{pedido.id}"  name="Persona" placeholder="Seleccione Persona"  required="required">	
+                         <!-- style="height: 52px;padding-right: 100px;" data-width="auto"  -->
+						<option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
+                	</select>
+				</div>                     
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Fecha *</span>
+					<input th:field="*{fecha}" type="date" value="2011-08-19" class="form-control text-center" placeholder="Fecha" required="required">
+				</div>
+					
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+						<span class="label-input100" >Motivo *</span>
+						<input class="input100" type="text" name="Motivo" placeholder="Ingrese el motivo" th:field="*{motivo}" required="required">
+				</div>
+				
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn">
+						<span>
+							Agregar Lugares
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+
+	<footer class="bg-dark py-5">
+    <div class="container">
+        <div class="small text-center text-muted">
+            Copyright &copy;
+            <!-- This script automatically adds the current year to your website footer-->
+            <!-- (credit: https://updateyourfooter.com/)-->
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            - Universidad Nacional de Lanus
+        </div>
+    </div>
+	</footer>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/noui/nouislider.min.js"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+</body>
+</html>
+
+
+
+			<div class="card-body">
+                     <form class="wizard-container" method="POST" th:object="${permisoDiario}" th:action="@{/permiso/save}" id="js-wizard-form">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div class="form">
+                                    <div class="input-group">
+                                    	
+                                    
+                                    	<select class="selectpicker input--style-1"style="height: 52px;padding-right: 100px;" data-width="auto" th:field="*{pedido.id}" 
+                                            name="Persona" placeholder="Seleccione Persona"  required="required">	
+
+                                            <option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
+                                        </select>
+                                        
+                                        <div class="row">
+
+                                        	<div class="col">
+												<input th:field="*{fecha}" type="date" value="2011-08-19" class="form-control" placeholder="Fecha">
+											</div>
+    
+                                        	<div class="col">
+                                            	<input th:field="*{motivo}" class="input--style-1" type="text" name="motivo" placeholder="Motivo"  required="required">
+                                       		</div>
+                                   		</div>
+                                        
+                                        <div >
+                                        <span class="btn--next">
+                                            <input type="submit" name="action" value="Agregar" />
+                                        </span>
+                                    	</div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>

@@ -8,5 +8,5 @@ import G20.OO2.models.PermisoModel;
 public interface IPermisoService {
 	public PermisoDiarioModel insertOrUpdate(PermisoDiarioModel permisoDiarioModel);
 	
-	public PermisoDiarioModel listarId(int id);
+	public PermisoModel listarId(int id);
 }
