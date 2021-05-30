@@ -27,11 +27,6 @@ public class PermisoService implements IPermisoService {
 	@Qualifier("permisoConverter")
 	private PermisoConverter permisoConverter;
 	
-	public PermisoDiarioModel insertOrUpdate(PermisoDiarioModel permisoDiarioModel) {
-		PermisoDiario permiso = permisoRepository.save(permisoConverter.modelToEntity(permisoDiarioModel));
-		return permisoConverter.entityToModel(permiso);
-	}
-	
 	public PermisoModel listarId(int id) {
 		PermisoModel pM;
 		Permiso p = permisoRepository.findById_(id);

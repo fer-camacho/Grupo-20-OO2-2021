@@ -11,10 +11,15 @@ import G20.OO2.converters.PermisoConverter;
 import G20.OO2.entities.PermisoDiario;
 import G20.OO2.models.PermisoDiarioModel;
 import G20.OO2.repositories.IPermisoDiarioRepository;
+import G20.OO2.repositories.IPermisoRepository;
 import G20.OO2.services.IPermisoDiarioService;
 
 @Service("permisoDiarioService")
 public class PermisoDiarioService implements IPermisoDiarioService {
+	
+	@Autowired
+	@Qualifier("permisoRepository")
+	private IPermisoRepository permisoRepository;
 	
 	@Autowired
 	@Qualifier("permisoDiarioRepository")
@@ -24,13 +29,16 @@ public class PermisoDiarioService implements IPermisoDiarioService {
 	@Qualifier("permisoConverter")
 	private PermisoConverter permisoConverter;
 			
-			
-			
 	public List<PermisoDiarioModel> traerPorPersona(int id) {
 		List<PermisoDiarioModel> permisos = new ArrayList<>();
 		for (PermisoDiario p: permisoDiarioRepository.traerPorPersona(id)) {
 			permisos.add(permisoConverter.entityToModel(p));
 		}
 		return permisos;
+	}
+	
+	public PermisoDiarioModel insertOrUpdate(PermisoDiarioModel permisoDiarioModel) {
+		PermisoDiario permiso = permisoRepository.save(permisoConverter.modelToEntity(permisoDiarioModel));
+		return permisoConverter.entityToModel(permiso);
 	}
 }

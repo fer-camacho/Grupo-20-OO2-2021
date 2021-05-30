@@ -11,11 +11,17 @@ import G20.OO2.converters.PermisoConverter;
 import G20.OO2.models.PermisoPeriodoModel;
 import G20.OO2.repositories.IPermisoDiarioRepository;
 import G20.OO2.repositories.IPermisoPeriodoRepository;
+import G20.OO2.repositories.IPermisoRepository;
 import G20.OO2.services.IPermisoPeriodoService;
+import G20.OO2.entities.PermisoDiario;
 import G20.OO2.entities.PermisoPeriodo;
 
 @Service("permisoPeriodoService")
 public class PermisoPeriodoService implements IPermisoPeriodoService {
+	
+	@Autowired
+	@Qualifier("permisoRepository")
+	private IPermisoRepository permisoRepository;
 	
 	@Autowired
 	@Qualifier("permisoPeriodoRepository")
@@ -41,5 +47,8 @@ public class PermisoPeriodoService implements IPermisoPeriodoService {
 		return permisos;
 	}
 	
-	
+	public PermisoPeriodoModel insertOrUpdate(PermisoPeriodoModel permisoPeriodoModel) {
+		PermisoPeriodo permiso = permisoRepository.save(permisoConverter.modelToEntity(permisoPeriodoModel));
+		return permisoConverter.entityToModel(permiso);
+	}
 }

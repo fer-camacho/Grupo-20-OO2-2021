@@ -6,7 +6,6 @@ import G20.OO2.models.PermisoDiarioModel;
 import G20.OO2.models.PermisoModel;
 
 public interface IPermisoService {
-	public PermisoDiarioModel insertOrUpdate(PermisoDiarioModel permisoDiarioModel);
 	
 	public PermisoModel listarId(int id);
 }

@@ -7,4 +7,6 @@ import G20.OO2.models.PermisoDiarioModel;
 public interface IPermisoDiarioService {
 	
 	public List<PermisoDiarioModel> traerPorPersona(int id);
+	
+	public PermisoDiarioModel insertOrUpdate(PermisoDiarioModel permisoDiarioModel);
 }

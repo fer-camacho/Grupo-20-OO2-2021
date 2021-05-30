@@ -90,7 +90,7 @@ public class PermisoController {
 	@PostMapping("/diario/save")
 	public String saveTest(@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiario, BindingResult result,
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
-		PermisoDiarioModel pD = permisoService.insertOrUpdate(permisoDiario);
+		PermisoDiarioModel pD = permisoDiarioService.insertOrUpdate(permisoDiario);
 		//retorno a la vista para agregar lugares
 		return "redirect:/permiso/newLugar/" + pD.getIdPermiso();
 	}
@@ -137,8 +137,6 @@ public class PermisoController {
 		
 		lugarService.insertOrUpdate(lugar);
 		
-		
-		
 		List<LugarModel> lugares = lugarService.getAll();
 		
 		asignarPerfil(mAV, roleString);
@@ -158,84 +156,36 @@ public class PermisoController {
 		return "redirect:/permiso/newLugar/";
 	}
 	*/
+	
 	/**********************************************************************************************************/
-	/*
-	@GetMapping("/diario/new")
-	public ModelAndView newPermisoDiario() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_ADD);		
+	
+	@GetMapping("/periodo/new")
+	public ModelAndView newPeriodo() {
+		ModelAndView mAV = new ModelAndView("permiso/add_periodo");		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		
 		boolean anonimo = false;
 		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
 		
 		List<PersonaModel> personas = personaService.getAll();
-	
+		List<RodadoModel> rodados = rodadoService.getAll();
+		
 		asignarPerfil(mAV, roleString);
 		mAV.addObject("anonimo", anonimo);
-		mAV.addObject("step", 1);
 		mAV.addObject("personas", personas);
-		mAV.addObject("permisoDiario", new PermisoDiarioModel());
+		mAV.addObject("rodados", rodados);
+		mAV.addObject("permisoPeriodo", new PermisoPeriodoModel());
 		return mAV;
 	}
 	
-	/*
-	@GetMapping("/diario/new")
-	public ModelAndView newPermisoDiario() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_ADD);		
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		
-		boolean anonimo = false;
-		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
-		
-		List<PersonaModel> personas = personaService.getAll();
-	
-		asignarPerfil(mAV, roleString);
-		mAV.addObject("anonimo", anonimo);
-		mAV.addObject("step", 1);
-		mAV.addObject("personas", personas);
-		mAV.addObject("permisoDiario", new PermisoDiarioModel());
-		return mAV;
+	@PostMapping("/periodo/save")
+	public String saveTest(@ModelAttribute("permisoPeriodo") PermisoPeriodoModel permisoPeriodo, BindingResult result,
+			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
+		PermisoPeriodoModel pP = permisoPeriodoService.insertOrUpdate(permisoPeriodo);
+		//retorno a la vista para agregar lugares
+		return "redirect:/permiso/newLugar/" + pP.getIdPermiso();
 	}
 	
-	@PostMapping("/diario/save")
-	public String savePermisoDiario(@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiarioModel, BindingResult result,
-			RedirectAttributes redirect) {
-		PermisoDiarioModel pD = permisoDiarioModel;
-		pD = permisoService.insertOrUpdate(permisoDiarioModel);
-		return "redirect:/permiso/diario/newLugar/" + pD.getIdPermiso();
-	}
-	
-	@GetMapping("/diario/newLugar/{id}")
-	public ModelAndView newLugar(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_ADD);		
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		
-		boolean anonimo = false;
-		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
-		
-		List<LugarModel> lugares = lugarService.getAll();
-		LugarModel lugar = new LugarModel();
-		Set<PermisoModel> permisos = lugar.getPermisos();
-		permisos.add(permisoService.listarId(id));
-		lugar.setPermisos(permisos);
-		
-		asignarPerfil(mAV, roleString);
-		mAV.addObject("anonimo", anonimo);
-		mAV.addObject("step", 2);
-		mAV.addObject("lugares", lugares);
-		mAV.addObject("lugar", lugar);
-		return mAV;
-	}
-	
-	@PostMapping("/lugar/save")
-	public String saveLugar(@ModelAttribute("lugar") LugarModel lugarModel, BindingResult result,
-			RedirectAttributes redirect) {
-		lugarService.insertOrUpdate(lugarModel);
-		List<PermisoModel> permisos = (List<PermisoModel>) lugarModel.getPermisos();
-		PermisoModel pM = permisos.get(permisos.size()-1);
-		return "redirect:/permiso/newLugar/" + pM.getIdPermiso();
-	}
-	*/
 	
 	/**********************************************************************************************************/
 	
