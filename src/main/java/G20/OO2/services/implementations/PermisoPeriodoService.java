@@ -1,5 +1,6 @@
 package G20.OO2.services.implementations;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,5 +51,19 @@ public class PermisoPeriodoService implements IPermisoPeriodoService {
 	public PermisoPeriodoModel insertOrUpdate(PermisoPeriodoModel permisoPeriodoModel) {
 		PermisoPeriodo permiso = permisoRepository.save(permisoConverter.modelToEntity(permisoPeriodoModel));
 		return permisoConverter.entityToModel(permiso);
+	}
+	
+	public List<PermisoPeriodoModel> traerPorFecha(LocalDate fechaInicio, LocalDate fechaFin) {
+		List<PermisoPeriodoModel> permisos = new ArrayList<>();
+		LocalDate fechaI, fechaF;
+		for (PermisoPeriodo p: permisoPeriodoRepository.findAll()) {
+			fechaI = p.getFecha();
+			fechaF = fechaI.plusDays(p.getCantDias());
+			
+			if ((!fechaInicio.isAfter(fechaI)) && (!fechaF.isAfter(fechaFin))) {
+				permisos.add(permisoConverter.entityToModel(p));
+			}
+		}
+		return permisos;
 	}
 }

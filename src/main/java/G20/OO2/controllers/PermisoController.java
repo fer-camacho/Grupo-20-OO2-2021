@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ import G20.OO2.models.PermisoDiarioModel;
 import G20.OO2.models.PermisoModel;
 import G20.OO2.models.PermisoPeriodoModel;
 import G20.OO2.models.PersonaModel;
+import G20.OO2.models.RangoFechasModel;
 import G20.OO2.models.RodadoModel;
 import G20.OO2.services.implementations.LugarService;
 import G20.OO2.services.implementations.PermisoDiarioService;
@@ -227,6 +229,8 @@ public class PermisoController {
 		return mAV;
 	}
 	
+	/**********************************************************************************************************/
+	
 	@GetMapping("/rodado")
 	public ModelAndView permisosPorRodado() {
 		ModelAndView mAV = new ModelAndView("permiso/rodados");
@@ -258,6 +262,35 @@ public class PermisoController {
 		mAV.addObject("periodo", periodo);
 		mAV.addObject("hayDiario", false);
 		mAV.addObject("hayPeriodo", hayPeriodo);
+		return mAV;
+	}
+	
+	/**********************************************************************************************************/
+	
+	@PreAuthorize("hasRole('ROLE_AUDIT')")
+	@GetMapping("/fechas")
+	public ModelAndView permisosEntreFechas() {
+		ModelAndView mAV = new ModelAndView("permiso/fechas");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		
+		asignarPerfil(mAV, roleString);
+		mAV.addObject("rangoFechas", new RangoFechasModel());
+		return mAV;
+	}
+	
+	
+	@PostMapping("/fechas/grilla")
+	public ModelAndView saveTest(@ModelAttribute("rangoFechas") RangoFechasModel rangoFechas, BindingResult result,
+			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {
+		ModelAndView mAV = new ModelAndView("permiso/permisos");
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+	
+		List<PermisoDiarioModel> diario = permisoDiarioService.traerPorFecha(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin().plusDays(1));
+		List<PermisoPeriodoModel> periodo = permisoPeriodoService.traerPorFecha(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin());
+		
+		asignarPerfil(mAV, roleString);
+		mAV.addObject("diario", diario);
+		mAV.addObject("periodo", periodo);
 		return mAV;
 	}
 

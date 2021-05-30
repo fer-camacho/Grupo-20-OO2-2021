@@ -1,5 +1,6 @@
 package G20.OO2.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import G20.OO2.entities.PermisoPeriodo;
@@ -13,5 +14,7 @@ public interface IPermisoPeriodoService {
 	public List<PermisoPeriodoModel> traerPorRodado(int id);
 	
 	public PermisoPeriodoModel insertOrUpdate(PermisoPeriodoModel permisoPeriodoModel);
+	
+	public List<PermisoPeriodoModel> traerPorFecha(LocalDate fechaInicio, LocalDate fechaFin);
 	
 }
