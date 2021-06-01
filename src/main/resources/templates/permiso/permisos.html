@@ -117,7 +117,8 @@
 									<td th:text="${pe.lugarSalida.lugar} + ' - ' + ${pe.lugarSalida.codigoPostal}" class="cell100 column5 text-center"></td>
 									<td th:text="${pe.lugarLlegada.lugar} + ' - '+ ${pe.lugarLlegada.codigoPostal}" class="cell100 column5 text-center"></td>
 									<td th:text="${pe.cantDias}" class="cell100 column5 text-center"></td>
-									<td th:text="${pe.vacaciones}" class="cell100 column5 text-center"></td>
+									<td th:if="${pe.vacaciones==true}" th:text="Si" class="cell100 column5 text-center"></td>
+									<td th:if="${pe.vacaciones==false}" th:text="No" class="cell100 column5 text-center"></td>
 									<td th:text="${pe.rodado.dominio} + ' - ' + ${pe.rodado.vehiculo}" class="cell100 column5 text-center"></td>
 								</tr>
 							</tbody>
