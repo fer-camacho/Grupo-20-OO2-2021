@@ -81,4 +81,9 @@ public class PersonaModel {
 	public void setUsers(Set<UserModel> users) {
 		this.users = users;
 	}
+	
+	@Override
+	public String toString() {
+		return "idPersona=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + nroDocumento + "";
+	}
 }

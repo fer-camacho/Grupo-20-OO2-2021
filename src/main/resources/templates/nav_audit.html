@@ -18,6 +18,12 @@
 						<a class="dropdown-item" th:href="@{/perfil/lista/?format=pdf}">Generar PDF</a>
 					</div>
 				</li>
+				<li class="nav-item dropdown">
+                	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Permisos</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/permiso/by_Rodado}">Permiso por Rodado</a>
+					</div>
+				</li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>

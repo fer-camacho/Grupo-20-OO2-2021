@@ -2,7 +2,7 @@ spring:
     datasource:
         url: jdbc:mysql://localhost:3306/Grupo-20-BDD-OO2-2021?serverTimezone=UTC
         username: root
-        password: root
+        password: toor
         driver-class-name: com.mysql.cj.jdbc.Driver
         initialization-mode: always
     jpa:  

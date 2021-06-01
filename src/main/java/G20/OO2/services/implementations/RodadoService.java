@@ -40,4 +40,9 @@ public class RodadoService implements IRodadoService {
 	public int cantidad(String dominio) {
 		return  rodadoRepository.repetido(dominio);
 	}
+	
+	@Override
+	public List<Rodado> getAll2() {
+		return rodadoRepository.findAll();
+	}
 }
