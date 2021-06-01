@@ -40,6 +40,11 @@
 					<input class="input100" type="text" th:field="*{role}" name="role" placeholder="Nombre del perfil" required="required">
 				</div>
 				
+				<div class="col-sm d-flex align-items-center">
+        			<label class="custom-control-label" for="defaultChecked2">Desbloqueado</label>
+       				<input class="check"th:field="*{enabled}" type="checkbox" checked>
+    			</div>
+				
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>

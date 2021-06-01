@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import G20.OO2.helpers.Asignar;
 import G20.OO2.helpers.ViewRouteHelper;
+import G20.OO2.models.UserModel;
 import G20.OO2.models.UserRoleModel;
 import G20.OO2.services.implementations.UserRoleService;
 
@@ -108,7 +109,9 @@ public class UserRoleController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteRole(@PathVariable("id") int id, RedirectAttributes redirect) {
-		userRoleService.delete(id);
+		UserRoleModel userRoleModel = userRoleService.listarId(id);
+		userRoleModel.setEnabled(false);
+		userRoleService.insertOrUpdate(userRoleModel);
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_ABM);
 		Asignar.asignarPerfil(mAV);
 		List<UserRoleModel> roles = userRoleService.getAll();

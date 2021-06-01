@@ -1,8 +1,8 @@
 USE `Grupo-20-BDD-OO2-2021`;
 
 LOCK TABLES `user_role` WRITE;
-insert into user_role VALUES (1,'ROLE_ADMIN');
-insert into user_role VALUES (2,'ROLE_AUDIT');
+insert into user_role VALUES (1, 1, 'ROLE_ADMIN');
+insert into user_role VALUES (2, 1, 'ROLE_AUDIT');
 UNLOCK TABLES;
 
 LOCK TABLES `persona` WRITE;

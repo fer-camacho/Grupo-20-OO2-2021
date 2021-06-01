@@ -31,6 +31,8 @@ public class ListUserRolesPDF extends AbstractPdfView {
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		String estado;
+		
 		@SuppressWarnings("unchecked")
 		List<UserRoleModel> listRoles = (List<UserRoleModel>) model.get("roles");
 		
@@ -56,10 +58,17 @@ public class ListUserRolesPDF extends AbstractPdfView {
 		tablaTitulo.addCell(titulo);
 		tablaTitulo.setSpacingAfter(20);
 		
-		PdfPTable tablaRoles = new PdfPTable(1);
-		tablaRoles.setWidths(new float[] {1f});
+		PdfPTable tablaRoles = new PdfPTable(2);
+		tablaRoles.setWidths(new float[] {1f, 1f});
 		
 		celda = new PdfPCell(new Phrase("PERFIL", fuenteTituloCol));
+		celda.setBackgroundColor(Color.LIGHT_GRAY);
+		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+		celda.setVerticalAlignment(Element.ALIGN_CENTER);
+		celda.setPadding(10);
+		tablaRoles.addCell(celda);
+		
+		celda = new PdfPCell(new Phrase("ESTADO", fuenteTituloCol));
 		celda.setBackgroundColor(Color.LIGHT_GRAY);
 		celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 		celda.setVerticalAlignment(Element.ALIGN_CENTER);
@@ -69,6 +78,15 @@ public class ListUserRolesPDF extends AbstractPdfView {
 		for(UserRoleModel rol: listRoles) {
 			
 			celda = new PdfPCell(new Phrase(rol.getRole(), fuenteCeldas));
+			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+			celda.setVerticalAlignment(Element.ALIGN_CENTER);
+			celda.setPadding(5);
+			tablaRoles.addCell(celda);
+			
+			if(rol.isEnabled()) estado = "DESBLOQUEADO";
+			else estado = "BLOQUEADO";
+			
+			celda = new PdfPCell(new Phrase(estado, fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 			celda.setVerticalAlignment(Element.ALIGN_CENTER);
 			celda.setPadding(5);

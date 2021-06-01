@@ -25,17 +25,21 @@ public class UserRole {
 	
 	@Column(name="role", nullable=false, length=100)
 	private String role;
-
+	
+	@Column(name="enabled", nullable=false)
+	private boolean enabled;
+	
 	@JsonBackReference
 	@OneToMany(cascade= CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="userRole")
 	private Set<User> users = new HashSet<User>();
 	
 	public UserRole() {}
 
-	public UserRole(int id, String role) {
+	public UserRole(int id, String role, boolean enabled) {
 		super();
 		this.id = id;
 		this.role = role;
+		this.enabled = enabled;
 	}
 
 	public int getId() {
@@ -52,6 +56,14 @@ public class UserRole {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public Set<User> getUsers() {

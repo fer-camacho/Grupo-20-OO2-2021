@@ -34,7 +34,11 @@
 						<table >
 							<thead >
 								<tr  class="row100 head" >
-									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Perfil</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-left">Perfil</th>
+									<th style="background-color: #f4623a;" class="cell100 column5 text-left">Estado</th>
+									<th style="background-color: #f4623a;" class="cell100 column3 text-left"></th>
+									<th style="background-color: #f4623a;" class="cell100 column3 text-left"></th>
+									<th style="background-color: #f4623a;" class="cell100 column3 text-left"></th>
 									<th style="background-color: #f4623a;" class="cell100 column3 text-left">Editar</th>
 									<th style="background-color: #f4623a;" class="cell100 column4 text-left">Eliminar</th>
 								</tr>
@@ -47,15 +51,19 @@
 							<tbody>
 								<tr th:each="rol : ${roles}" class="row100 body">
 									<p style= "display: none" th:text="${rol.id}" class="cell100 column1"></p>
-									<td th:text="${rol.role}" class="cell100 column2 text-center"></td>
+									<td th:text="${rol.role}" class="cell100 column2 text-left"></td>
 									
-									<td class="cell100 column3 text-center">
+									<td >
+										<span th:if="${rol.enabled==true}" th:text= "Desbloqueado" class="cell100 column5 text-right"></span>
+										<span th:if="${rol.enabled==false}" th:text= "Bloqueado" class="cell100 column5 text-right"></span>
+									</td>
+									<td class="cell100 column3 text-left">
 										<form th:action="@{/perfil/edit/{id}(id=${rol.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/edit.png"  title="Editar" />
 										</form>
 									</td>
 									
-									<td class="cell100 column4 text-center">
+									<td class="cell100 column4 text-right">
 										<form th:action="@{/perfil/delete/{id}(id=${rol.id})}" method="get" role="form">
 											<input class="icon-borrar" type="image" src="../../img/borrar.svg"  title="Eliminar" />
 										</form>
@@ -109,7 +117,7 @@
 	</script>
 	<script>
         $("#alert-success").show(function () {
-			toastr.success("Perfil eliminado correctamente")
+			toastr.success("Perfil bloqueado correctamente")
 		});
 	</script>
 <!--===============================================================================================-->

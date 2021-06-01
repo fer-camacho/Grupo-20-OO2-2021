@@ -47,8 +47,11 @@
 					<div class="table100-head">
 						<table>
 							<thead>
-							
+								
 								<th class="cell100 column2 text-center" style="background-color: #f4623a;">Perfil</th>
+								<th style="background-color: #f4623a;" class="cell100 column3 text-center"></th>
+								<th style="background-color: #f4623a;" class="cell100 column3 text-center"></th>
+								<th style="background-color: #f4623a;" class="cell100 column5 text-left">Estado</th>
 								
 							</thead>
 						</table>
@@ -59,7 +62,16 @@
 							<tbody>
 								<tr th:each="rol : ${roles}" class="row100 body">
 									<!-- <td th:text="${rol.id}" class="cell100 column1"></td> -->
-									<td th:text="${rol.role}" class="cell100 column2 text-center"></td>
+									<td th:text="${rol.role}" class="cell100 column2 text-right"></td>
+									<td class="cell100 column2 text-left"></td>
+									<td class="cell100 column2 text-left"></td>
+									<td class="cell100 column2 text-left"></td>
+									<td class="cell100 column2 text-left"></td>
+									<td class="cell100 column2 text-left"></td>
+									<td >
+										<span th:if="${rol.enabled==true}" th:text= "Desbloqueado" class="cell100 column5 text-left"></span>
+										<span th:if="${rol.enabled==false}" th:text= "Bloqueado" class="cell100 column5 text-left"></span>
+									</td>
 								</tr>
 							</tbody>
 						</table>

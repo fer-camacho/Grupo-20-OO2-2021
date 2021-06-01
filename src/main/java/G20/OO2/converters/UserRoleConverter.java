@@ -9,10 +9,10 @@ import G20.OO2.models.UserRoleModel;
 public class UserRoleConverter {
 	
 	public UserRoleModel entityToModel(UserRole entity) {
-		return new UserRoleModel(entity.getId(), entity.getRole());
+		return new UserRoleModel(entity.getId(), entity.getRole(), entity.isEnabled());
 	}
 	
 	public UserRole modelToEntity(UserRoleModel model) {
-		return new UserRole(model.getId(), model.getRole());
+		return new UserRole(model.getId(), model.getRole(), model.isEnabled());
 	}
 }
