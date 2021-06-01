@@ -8,7 +8,6 @@ import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,7 +79,7 @@ public class PermisoController {
 	@PostMapping("/diario/save")
 	public ModelAndView saveDiario(@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiario, BindingResult result,
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
-		
+		PermisoDiarioModel pD = permisoDiarioService.insertOrUpdate(permisoDiario);
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_DIARIO);
 		Asignar.asignarPerfil(mAV);
 		
@@ -113,7 +112,7 @@ public class PermisoController {
 	public ModelAndView savePeriodo(@ModelAttribute("permisoPeriodo") PermisoPeriodoModel permisoPeriodo, BindingResult result,
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
 		
-		
+		PermisoPeriodoModel pP = permisoPeriodoService.insertOrUpdate(permisoPeriodo);
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_PERIODO);		
 		Asignar.asignarPerfil(mAV);
 		
