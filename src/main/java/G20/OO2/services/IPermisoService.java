@@ -1,10 +1,12 @@
 package G20.OO2.services;
 
-import G20.OO2.models.PermisoModel;
+import java.util.List;
+
+import G20.OO2.models.PermisoPeriodoModel;
 
 public interface IPermisoService {
 	
-	public PermisoModel findPermisoByRodado(int idRodado);
+	public List<PermisoPeriodoModel> findPermisoByRodado(int idRodado);
 	
 
 }

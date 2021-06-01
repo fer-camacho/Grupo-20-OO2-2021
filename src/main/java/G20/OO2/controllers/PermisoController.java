@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import G20.OO2.converters.PermisoConverter;
 import G20.OO2.converters.RodadoConverter;
+import G20.OO2.entities.PermisoPeriodo;
 import G20.OO2.entities.Rodado;
 import G20.OO2.helpers.ViewRouteHelper;
 import G20.OO2.models.LugarModel;
@@ -78,9 +79,12 @@ public class PermisoController {
 		
 		List<Rodado> rodados = rodadoService.getAll2();
 		mAV.addObject("rodados", rodados);
+		
+		/*
+		List<PermisoPeriodoModel> permisos = null ;
+		mAV.addObject("permisos", permisos);
+		*/
 		mAV.addObject("permiso", new PermisoPeriodoModel());
-		
-		
 		//mAV.addObject("permiso", permisoService.findPermisoByRodado(rodado.getIdRodado()));
 		//return mAV;
 		return mAV;
@@ -98,9 +102,11 @@ public class PermisoController {
 		List<Rodado> rodados = rodadoService.getAll2();
 		mAV.addObject("rodados", rodados);
 		
+		mAV.addObject("permiso", new PermisoPeriodoModel());
+
 		//RodadoModel rodado = new RodadoModel();
 		
-		mAV.addObject("permiso", permisoService.findPermisoByRodado(rodado));
+		mAV.addObject("permisos", permisoService.findPermisoByRodado(rodado));
 		return mAV;
 	}
 	
