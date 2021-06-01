@@ -1,8 +1,10 @@
 package G20.OO2.controllers;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.mail.MessagingException;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import G20.OO2.converters.LugarConverter;
 import G20.OO2.converters.PermisoConverter;
 import G20.OO2.converters.RodadoConverter;
+import G20.OO2.entities.Lugar;
 import G20.OO2.entities.PermisoPeriodo;
 import G20.OO2.entities.Rodado;
 import G20.OO2.helpers.ViewRouteHelper;
@@ -37,6 +43,7 @@ import G20.OO2.models.RodadoModel;
 import G20.OO2.models.UserModel;
 import G20.OO2.services.implementations.PersonaService;
 import G20.OO2.services.implementations.RodadoService;
+import G20.OO2.services.implementations.LugarService;
 import G20.OO2.services.implementations.PermisoService;
 
 @Controller
@@ -59,6 +66,14 @@ public class PermisoController {
 	@Qualifier("permisoConverter")
 	private PermisoConverter permisoConverter;
 	
+	@Autowired
+	@Qualifier("lugarService")
+	private LugarService lugarService;
+	
+	@Autowired
+	@Qualifier("lugarConverter")
+	private LugarConverter lugarConverter;
+	
 	public void asignarPerfil(ModelAndView mAV, String roleString) {
 		boolean admin = false;
         boolean audit = false;
@@ -68,7 +83,7 @@ public class PermisoController {
 		mAV.addObject("audit", audit);
 	}
 	
-	
+	//CONTROLLER PARA CASO DE USO 5 : TRAER PERMISO POR RODADO
 	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@GetMapping("/by_Rodado")
 	public ModelAndView traerPermisoPorRodado() {
@@ -80,19 +95,13 @@ public class PermisoController {
 		List<Rodado> rodados = rodadoService.getAll2();
 		mAV.addObject("rodados", rodados);
 		
-		/*
-		List<PermisoPeriodoModel> permisos = null ;
-		mAV.addObject("permisos", permisos);
-		*/
 		mAV.addObject("permiso", new PermisoPeriodoModel());
-		//mAV.addObject("permiso", permisoService.findPermisoByRodado(rodado.getIdRodado()));
-		//return mAV;
 		return mAV;
 	}
 	
+	//CONTROLLER PARA CASO DE USO 5 : TRAER PERMISO POR RODADO
 	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@PostMapping("/by_Rodado")
-	//public ModelAndView traerPermisoPorRodado(@PathVariable("Rodado") RodadoModel rodado) {
 	public ModelAndView traerPermisoPorRodado(@RequestParam(name="rodado.idRodado") int rodado) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_BY_RODADO);
 		
@@ -103,11 +112,49 @@ public class PermisoController {
 		mAV.addObject("rodados", rodados);
 		
 		mAV.addObject("permiso", new PermisoPeriodoModel());
-
-		//RodadoModel rodado = new RodadoModel();
 		
 		mAV.addObject("permisos", permisoService.findPermisoByRodado(rodado));
 		return mAV;
 	}
 	
+	//CONTROLLER PARA CASO DE USO 7 : TRAER PERMISO ENTRE FECHAS Y LUGAR
+	@PreAuthorize("hasRole('ROLE_AUDIT')")
+	@GetMapping("/by_Lugar_Fechas")
+	public ModelAndView traerPermisoPorLugaryFechas() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_BY_LUGARYFECHAS);
+		
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		asignarPerfil(mAV, roleString);
+		
+		//List<Lugar> lugares = lugarService.getAll2();
+		//mAV.addObject("lugares", lugares);
+		
+		//mAV.addObject("permiso", new PermisoPeriodoModel());
+
+		return mAV;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_AUDIT')")
+	@PostMapping("/by_Lugar_Fechas")
+	//public ModelAndView traerPermisoPorLugaryFechas(@RequestParam(name="lugar") int lugar, @RequestParam(name="fechaDesde") @DateTimeFormat(iso=ISO.DATE) LocalDate fechaDesde, @RequestParam(name="fechaHasta") @DateTimeFormat(iso=ISO.DATE) LocalDate fechaHasta) {
+	public ModelAndView traerPermisoPorLugaryFechas(@RequestParam(name="lugar") int lugar, 
+			@RequestParam("fechaDesde") @DateTimeFormat(pattern= "yyyy-MM-dd") LocalDate fechaDesde, 
+			@RequestParam("fechaHasta") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaHasta) {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_BY_LUGARYFECHAS);
+				
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		asignarPerfil(mAV, roleString);
+		
+		//List<Lugar> lugares = lugarService.getAll2();
+		//mAV.addObject("lugares", lugares);
+		
+		//LocalDate desde = LocalDate.parse(fechaDesde);
+		//LocalDate hasta = LocalDate.parse(fechaHasta);
+
+		
+		//mAV.addObject("permiso", new PermisoPeriodoModel());
+		
+		mAV.addObject("permisos", permisoService.findPermisoByLugaryFechas(lugar, fechaDesde, fechaHasta));
+		return mAV;
+	}
 }

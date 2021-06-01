@@ -12,7 +12,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">	
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->
@@ -30,6 +30,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
 </head>
 
 	<style>
@@ -53,24 +54,38 @@
 	
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form action="#" th:action="@{/permiso/by_Rodado}" th:object="${permiso}" method="post" class="contact100-form validate-form">
+			<form action="#" th:action="@{/permiso/by_Lugar_Fechas}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Traer permiso por rodado
+					Traer permiso por lugar entre fechas
 				</span>
-
-				<div class="col-12">
-					<label for="Rodado" class="form-label">Seleccione Rodado:</label>
-					<div class="input-group mb-3">
-						<select class="form-select" name="Rodado" th:field="*{rodado.idRodado}">
-							<option th:each="r : ${rodados}"  th:value="${(r.idRodado)}" th:text=" 'Dominio:' + ${r.dominio} + ' - Vehículo: ' + ${r.vehiculo}"></option>
+						<!-- 
+						<label for="Lugar" class="form-label">Seleccione Lugar:</label>
+						<div class="input-group mb-3">
+						<select class="form-select" name="Lugar" th:field="*{lugar.idLugar}">
+							<option th:each="l : ${lugares}"  th:value="${(l.idLugar)}" th:text="${l.codigoPostal}"></option>
 						</select>
-  						<button type="submit" class="btn btn-success" id="button"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
-					</div>
-				</div>
+						 -->
+						
+					<div class="col-3">
+        				<label class="form-label" for="lugar">Lugar</span>
+       					<input class="form-control" type="number" name="lugar" placeholder="Ingrese idLugar">
+    				</div>
+					<div class="col-3">
+  							<label for="fechaDesde" class="form-label">Fecha desde</label>
+    							<input class="form-control" type="date" id="fechaDesde" name="fechaDesde">
+						</div>
+					
+						<div class="col-3">
+  							<label for="fechaHasta" class="form-label">Fecha hasta</label>
+    						<input class="form-control" type="date" id="fechaHasta" name="fechaHasta">
+						</div>
+						<div class="col-3">
+							<button type="submit" class="btn btn-success" id="button"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>					
+						</div>
 			</form> 
 			<div class="table-responsive">
 				<table id="tabla" class="table table-striped table-bordered border-primary">
-					<caption>Permisos por rodado </caption>
+					<caption>Permisos entre Fechas y lugar determinado </caption>
 					<thead>								
 						<tr>
 							<th scope="col">Id</th>
@@ -112,16 +127,32 @@
 
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	
 <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+	
+	
 <!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
 	
 <!--===============================================================================================-->
 	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	
+	  
+	
+	
 	
 	<script>
 		$('.js-pscroll').each(function(){

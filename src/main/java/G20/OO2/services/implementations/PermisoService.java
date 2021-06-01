@@ -1,5 +1,6 @@
 package G20.OO2.services.implementations;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import G20.OO2.services.IPermisoService;
 import G20.OO2.converters.PermisoConverter;
+import G20.OO2.entities.Permiso;
 import G20.OO2.entities.PermisoPeriodo;
+import G20.OO2.models.PermisoModel;
 import G20.OO2.models.PermisoPeriodoModel;
 import G20.OO2.repositories.IPermisoRepository;
 
@@ -31,5 +34,13 @@ public class PermisoService implements IPermisoService{
 		}
 		return models;
 	}
-
+	
+	public List<PermisoPeriodoModel> findPermisoByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<PermisoPeriodoModel> models = new ArrayList<PermisoPeriodoModel>();
+		for (PermisoPeriodo permiso : permisoRepository.findByLugaryFechas(idLugar, fechaDesde, fechaHasta)) {
+				models.add(permisoConverter.entityToModel(permiso));
+		}
+		return models;
+	}
+	
 }

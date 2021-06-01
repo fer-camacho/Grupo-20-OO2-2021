@@ -28,6 +28,8 @@ public class ViewRouteHelper {
 	
 	//PEDIDO
 	public final static String PERMISO_BY_RODADO = "permiso/permisoByRodado";
+	public final static String PERMISO_BY_LUGARYFECHAS = "permiso/permisoLugarEntreFechas";
+
 	
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";

@@ -9,10 +9,10 @@ import G20.OO2.models.LugarModel;
 public class LugarConverter {
 	
 	public LugarModel entityToModel(Lugar entity) {
-		return new LugarModel(entity.getIdLugar(), entity.getCodigoPostal(), entity.getLugar());
+		return new LugarModel(entity.getIdLugar(), entity.getLugar(), entity.getCodigoPostal());
 	}
 	
 	public Lugar modelToEntity(LugarModel model) {
-		return new Lugar(model.getIdLugar(), model.getCodigoPostal(), model.getLugar());
+		return new Lugar(model.getIdLugar(), model.getLugar(), model.getCodigoPostal());
 	}
 }
