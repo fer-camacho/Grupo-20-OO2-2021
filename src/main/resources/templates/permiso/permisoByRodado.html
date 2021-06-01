@@ -52,6 +52,7 @@
 				<span class="contact100-form-title">
 					Traer permiso por rodado
 				</span>
+				<!-- 
 				<div class="wrap-input100 input100-select bg1">
 					<span class="label-input100">Rodado *</span>
 					<div>
@@ -70,26 +71,42 @@
 					</button>
 				</div>
 				
+				 -->
+				<div class="col-12">
+					<label for="Rodado" class="form-label">Seleccione Rodado:</label>
+					<div class="input-group mb-3">
+						<select class="form-select" name="Rodado" th:field="*{rodado.idRodado}">
+							<option th:each="r : ${rodados}"  th:value="${(r.idRodado)}" th:text=" 'Dominio:' + ${r.dominio} + ' - Vehículo: ' + ${r.vehiculo}"></option>
+						</select>
+  						<button type="submit" class="btn btn-success" id="button"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+					</div>
+				</div>
 			</form>
 			
-			<p>
-				Permiso Id: <span th:text="${permiso.idPermiso}" />
-			</p>
-			<p>
-				Pedido: <span th:text="${permiso.pedido}" />
-			</p>
-			<p>
-				fecha: <span th:text="${permiso.fecha}" />
-			</p>
-			<p>
-				Cant. Dias: <span th:text="${permiso.cantDias}" />
-			</p>
-			<p>
-				Vacaciones: <span th:text="${permiso.vacaciones}" />
-			</p>
-			<p>
-				Rodado: <span th:text="${permiso.rodado}" />
-			</p>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered border-primary">
+					<thead>								
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Pedido</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Cant. días</th>
+							<th scope="col">Vacaciones</th>
+							<th scope="col">Rodado</th>
+						</tr>	 
+					</thead>
+					<tbody>
+						<tr>
+							<td scope="row" th:text="${permiso.idPermiso}"></td>
+							<td th:text="${permiso.pedido}"></td>
+							<td th:text="${permiso.fecha}"></td>
+							<td th:text="${permiso.cantDias}"></td>
+							<td th:text="${permiso.vacaciones}"></td>
+							<td th:text="${permiso.rodado}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
