@@ -92,7 +92,6 @@ public class PermisoController {
 	@PostMapping("/diario/save")
 	public ModelAndView saveDiario(@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiario, BindingResult result,
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
-		PermisoDiarioModel pD = permisoDiarioService.insertOrUpdate(permisoDiario);
 		
 		ModelAndView mAV = new ModelAndView("permiso/add_diario");		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
@@ -134,7 +133,7 @@ public class PermisoController {
 	@PostMapping("/periodo/save")
 	public ModelAndView savePeriodo(@ModelAttribute("permisoPeriodo") PermisoPeriodoModel permisoPeriodo, BindingResult result,
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
-		PermisoPeriodoModel pP = permisoPeriodoService.insertOrUpdate(permisoPeriodo);
+		
 		
 		ModelAndView mAV = new ModelAndView("permiso/add_periodo");		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
