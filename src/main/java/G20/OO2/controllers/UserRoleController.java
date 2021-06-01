@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import G20.OO2.helpers.Asignar;
 import G20.OO2.helpers.ViewRouteHelper;
 import G20.OO2.models.UserRoleModel;
 import G20.OO2.services.implementations.UserRoleService;
@@ -23,25 +24,16 @@ import G20.OO2.services.implementations.UserRoleService;
 @Controller
 @RequestMapping("/perfil")
 public class UserRoleController {
+	
 	@Autowired
 	@Qualifier("userRoleService")
 	private UserRoleService userRoleService;
-
-	public void asignarPerfil(ModelAndView mAV, String roleString) {
-		boolean admin = false;
-        boolean audit = false;
-		if(roleString.equals("[ROLE_ADMIN]")) admin=true;
-		if(roleString.equals("[ROLE_AUDIT]")) audit=true;
-		mAV.addObject("admin", admin);
-		mAV.addObject("audit", audit);
-	}
 	
 	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@GetMapping("/lista")
 	public ModelAndView roles() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_LIST);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		List<UserRoleModel> roles = userRoleService.getAll();
 		mAV.addObject("roles", roles);
 		return mAV;
@@ -51,8 +43,7 @@ public class UserRoleController {
 	@GetMapping("/abm")
 	public ModelAndView roleList() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_ABM);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		List<UserRoleModel> roles = userRoleService.getAll();
 		mAV.addObject("roles", roles);
 		return mAV;
@@ -64,8 +55,7 @@ public class UserRoleController {
 	@GetMapping("/new")
 	public ModelAndView newRole() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_ADD);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		mAV.addObject("userRole", new UserRoleModel());
 		return mAV;
 	}
@@ -73,9 +63,8 @@ public class UserRoleController {
 	@PostMapping("/save")
 	public ModelAndView saveRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
 			RedirectAttributes redirect) {
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_ADD);
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		
 		String nombreRol = userRoleModel.getRole();
 		
@@ -95,8 +84,7 @@ public class UserRoleController {
 	@GetMapping("/edit/{id}")
 	public ModelAndView editRole(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_EDIT);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		mAV.addObject("userRole", userRoleService.listarId(id));
 		return mAV;
 	}
@@ -104,9 +92,8 @@ public class UserRoleController {
 	@PostMapping("/save/edit")
 	public ModelAndView editRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
 			RedirectAttributes redirect) {
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_EDIT);
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		
 		String nombreRol = userRoleModel.getRole();
 		
@@ -123,10 +110,8 @@ public class UserRoleController {
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteRole(@PathVariable("id") int id, RedirectAttributes redirect) {
 		userRoleService.delete(id);
-		
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ROLE_ABM);
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		List<UserRoleModel> roles = userRoleService.getAll();
 		mAV.addObject("roles", roles);
 		mAV.addObject("eliminado", true);

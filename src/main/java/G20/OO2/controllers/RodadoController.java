@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import G20.OO2.converters.RodadoConverter;
+import G20.OO2.helpers.Asignar;
 import G20.OO2.helpers.ViewRouteHelper;
 import G20.OO2.models.RodadoModel;
 import G20.OO2.services.implementations.RodadoService;
@@ -29,25 +30,10 @@ public class RodadoController {
 	@Qualifier("rodadoConverter")
 	private RodadoConverter rodadoConverter;
 	
-	public void asignarPerfil(ModelAndView mAV, String roleString) {
-		boolean admin = false;
-        boolean audit = false;
-		if(roleString.equals("[ROLE_ADMIN]")) admin=true;
-		if(roleString.equals("[ROLE_AUDIT]")) audit=true;
-		mAV.addObject("admin", admin);
-		mAV.addObject("audit", audit);
-	}
-	
 	@GetMapping("/new")
 	public ModelAndView newRodado() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.RODADO_ADD);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		
-		boolean anonimo = false;
-		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
-		
-		asignarPerfil(mAV, roleString);
-		mAV.addObject("anonimo", anonimo);
+		Asignar.asignarPerfil(mAV);
 		mAV.addObject("rodado", new RodadoModel());
 		return mAV;
 	}
@@ -55,13 +41,9 @@ public class RodadoController {
 	@PostMapping("/save")
 	public ModelAndView saveRodado(@ModelAttribute("rodado") RodadoModel rodadoModel, BindingResult result,
 			RedirectAttributes redirect) {
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.RODADO_ADD);
 		
-		boolean anonimo = false;
-		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
-		asignarPerfil(mAV, roleString);
-		mAV.addObject("anonimo", anonimo);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.RODADO_ADD);
+		Asignar.asignarPerfil(mAV);
 		
 		if (rodadoService.cantidad(rodadoModel.getDominio()) == 0) {
 			RodadoModel r = new RodadoModel();

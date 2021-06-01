@@ -68,16 +68,6 @@ public class PermisoPeriodoService implements IPermisoPeriodoService {
 		return permisos;
 	}
 	
-	public List<PermisoPeriodoModel> traerPorFechaYSalida(LocalDate fechaInicio, LocalDate fechaFin, String salida) {
-		List<PermisoPeriodoModel> permisos = new ArrayList<>();
-		for (PermisoPeriodoModel p: traerPorFecha(fechaInicio, fechaFin)) {
-			if (p.getLugarSalida().getLugar().equals(salida)) {
-				permisos.add(p);
-			}
-		}
-		return permisos;
-	}
-	
 	public List<PermisoPeriodoModel> traerPorFechaYLugar(LocalDate fechaInicio, LocalDate fechaFin, String lugar) {
 		List<PermisoPeriodoModel> permisos = new ArrayList<>();
 		for (PermisoPeriodoModel p: traerPorFecha(fechaInicio, fechaFin)) {
@@ -87,25 +77,4 @@ public class PermisoPeriodoService implements IPermisoPeriodoService {
 		}
 		return permisos;
 	}
-	/*
-	public List<PermisoPeriodoModel> traerPorFechaYLlegada(LocalDate fechaInicio, LocalDate fechaFin, String llegada) {
-		List<PermisoPeriodoModel> permisos = new ArrayList<>();
-		for (PermisoPeriodoModel p: traerPorFecha(fechaInicio, fechaFin)) {
-			if (p.getLugarLlegada().getLugar().equals(llegada)) {
-				permisos.add(p);
-			}
-		}
-		return permisos;
-	}
-	
-	public List<PermisoPeriodoModel> traerPorFechaSalidaYLlegada(LocalDate fechaInicio, LocalDate fechaFin, String salida, String llegada) {
-		List<PermisoPeriodoModel> permisos = new ArrayList<>();
-		for (PermisoPeriodoModel p: traerPorFecha(fechaInicio, fechaFin)) {
-			if ((p.getLugarSalida().getLugar().equals(salida)) && (p.getLugarLlegada().getLugar().equals(llegada))) {
-				permisos.add(p);
-			}
-		}
-		return permisos;
-	}
-	*/
 }

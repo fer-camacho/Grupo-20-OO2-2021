@@ -13,7 +13,5 @@ public interface IPermisoDiarioService {
 	
 	public List<PermisoDiarioModel> traerPorFecha(LocalDate fechaInicio, LocalDate fechaFin);
 	
-	public List<PermisoDiarioModel> traerPorFechaYSalida(LocalDate fechaInicio, LocalDate fechaFin, String salida);
-	
 	public List<PermisoDiarioModel> traerPorFechaYLugar(LocalDate fechaInicio, LocalDate fechaFin, String lugar);
 }

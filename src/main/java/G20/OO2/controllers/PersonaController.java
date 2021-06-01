@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import G20.OO2.converters.PersonaConverter;
+import G20.OO2.helpers.Asignar;
 import G20.OO2.helpers.ViewRouteHelper;
 import G20.OO2.models.PersonaModel;
 import G20.OO2.services.implementations.PersonaService;
@@ -29,25 +30,10 @@ public class PersonaController {
 	@Qualifier("personaConverter")
 	private PersonaConverter personaConverter;
 	
-	public void asignarPerfil(ModelAndView mAV, String roleString) {
-		boolean admin = false;
-        boolean audit = false;
-		if(roleString.equals("[ROLE_ADMIN]")) admin=true;
-		if(roleString.equals("[ROLE_AUDIT]")) audit=true;
-		mAV.addObject("admin", admin);
-		mAV.addObject("audit", audit);
-	}
-	
 	@GetMapping("/new")
 	public ModelAndView newPersona() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_ADD);		
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		
-		boolean anonimo = false;
-		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
-		
-		asignarPerfil(mAV, roleString);
-		mAV.addObject("anonimo", anonimo);
+		Asignar.asignarPerfil(mAV);
 		mAV.addObject("persona", new PersonaModel());
 		return mAV;
 	}
@@ -55,13 +41,9 @@ public class PersonaController {
 	@PostMapping("/save")
 	public ModelAndView savePersona(@ModelAttribute("persona") PersonaModel personaModel, BindingResult result,
 			RedirectAttributes redirect) {
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_ADD);
 		
-		boolean anonimo = false;
-		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
-		asignarPerfil(mAV, roleString);
-		mAV.addObject("anonimo", anonimo);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_ADD);
+		Asignar.asignarPerfil(mAV);
 		
 		if (personaService.cantidad(personaModel.getNroDocumento()) == 0) {
 			PersonaModel p = new PersonaModel();

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import G20.OO2.converters.UserConverter;
+import G20.OO2.helpers.Asignar;
 import G20.OO2.helpers.ViewRouteHelper;
 import G20.OO2.models.PersonaModel;
 import G20.OO2.models.UserModel;
@@ -54,21 +55,11 @@ public class UserController {
 	@Qualifier("mailService")
 	private MailService mailService;
 	
-	public void asignarPerfil(ModelAndView mAV, String roleString) {
-		boolean admin = false;
-        boolean audit = false;
-		if(roleString.equals("[ROLE_ADMIN]")) admin=true;
-		if(roleString.equals("[ROLE_AUDIT]")) audit=true;
-		mAV.addObject("admin", admin);
-		mAV.addObject("audit", audit);
-	}
-	
 	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@GetMapping("/lista")
 	public ModelAndView usuarios() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_LIST);		
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		
 		List<UserModel> usuarios = userService.getAll();
 		mAV.addObject("usuarios", usuarios);
@@ -79,8 +70,7 @@ public class UserController {
 	@GetMapping("/abm")
 	public ModelAndView userList() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ABM);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		
 		List<UserModel> usuarios = userService.getAll();
 		mAV.addObject("usuarios", usuarios);
@@ -93,8 +83,7 @@ public class UserController {
 	@GetMapping("/new")
 	public ModelAndView newUser() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ADD);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		
 		List<UserRoleModel> roles = userRoleService.getAll();
 		List<PersonaModel> personas = personaService.getAll();
@@ -107,12 +96,12 @@ public class UserController {
 	@PostMapping("/save")
 	public ModelAndView saveUser(@ModelAttribute("user") UserModel userModel, BindingResult result,
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ADD);
+		Asignar.asignarPerfil(mAV);
+		
 		List<UserRoleModel> roles = userRoleService.getAll();
 		List<PersonaModel> personas = personaService.getAll();
 		
-		asignarPerfil(mAV, roleString);
 		mAV.addObject("roles", roles);
 		mAV.addObject("personas", personas);
 		
@@ -140,8 +129,7 @@ public class UserController {
 	@GetMapping("/edit/{id}")
 	public ModelAndView editUser(@PathVariable("id") int id) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_EDIT);
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		asignarPerfil(mAV, roleString);
+		Asignar.asignarPerfil(mAV);
 		
 		List<UserRoleModel> roles = userRoleService.getAll();
 		List<PersonaModel> personas = personaService.getAll();
@@ -153,12 +141,10 @@ public class UserController {
 	
 	@PostMapping("/save/edit")
 	public ModelAndView editUser(@ModelAttribute("user") UserModel userModel, BindingResult result, RedirectAttributes redirect) {
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_EDIT);
-		
+		Asignar.asignarPerfil(mAV);
 		List<UserRoleModel> roles = userRoleService.getAll();
 		List<PersonaModel> personas = personaService.getAll();
-		asignarPerfil(mAV, roleString);
 		mAV.addObject("roles", roles);
 		mAV.addObject("personas", personas);
 
@@ -184,15 +170,14 @@ public class UserController {
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
 		//bloquea al usuario seleccionado
-		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ABM);
+		Asignar.asignarPerfil(mAV);
 		
 		UserModel userModel = userService.listarId(id);
 		userModel.setEnabled(false);
 		userService.insertOrUpdate(userModel);
 		mandarMailBajaUser(userModel);
 		List<UserModel> usuarios = userService.getAll();
-		asignarPerfil(mAV, roleString);
 		mAV.addObject("usuarios", usuarios);
 		mAV.addObject("eliminado", true);
 		return mAV;
