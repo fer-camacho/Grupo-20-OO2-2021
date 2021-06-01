@@ -25,20 +25,18 @@
 	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_audit :: div"></nav>
 
-	<div class="limiter">
-		<a th:if="${eliminado}" id="alert-success"></a>
-		<div class="container-table100">
+	<div  class="limiter">
+		<a  th:if="${eliminado}" id="alert-success"></a>
+		<div  class="container-table100">
 			<div class="wrap-table100">
-				<div class="table100 ver1 m-b-110">
-					<div class="table100-head">
-						<table>
-							<thead>
-								<tr class="row100 head">
-									<th style= "display: none" class="cell100 column1 text-center">Id</th>
-									<th class="cell100 column2 text-center">Perfil</th>
-									<th class="cell100 column3 text-left">Editar</th>
-									<th class="cell100 column4 text-left">Eliminar</th>
-									
+				<div  class="table100 ver1 m-b-110">
+					<div  class="table100-head" >
+						<table >
+							<thead >
+								<tr  class="row100 head" >
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Perfil</th>
+									<th style="background-color: #f4623a;" class="cell100 column3 text-left">Editar</th>
+									<th style="background-color: #f4623a;" class="cell100 column4 text-left">Eliminar</th>
 								</tr>
 							</thead>
 						</table>

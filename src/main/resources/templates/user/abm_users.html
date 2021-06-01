@@ -6,28 +6,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate-grilla.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/css/util-grilla.css">
 	<link rel="stylesheet" type="text/css" href="/css/main-grilla.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-<!--===============================================================================================-->
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
 	
-	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_admin :: div"></nav>
 			
-	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_audit :: div"></nav>
 	
 	<div class="limiter">
@@ -39,15 +32,15 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column2">Nombre</th>
-									<th class="cell100 column3">Apellido</th>
-									<th class="cell100 column4">Documento</th>
-									<th class="cell100 column5">Email</th>
-									<th class="cell100 column5">Usuario</th>
-									<th class="cell100 column5">Perfil asignado</th>
-									<th class="cell100 column5">Estado</th>
-									<th class="cell100 column5 text-left">Editar</th>
-									<th class="cell100 column5 text-left">Eliminar</th>
+									<th style="background-color: #f4623a;" class="cell100 column2">Nombre</th>
+									<th style="background-color: #f4623a;" class="cell100 column3">Apellido</th>
+									<th style="background-color: #f4623a;" class="cell100 column4">Documento</th>
+									<th style="background-color: #f4623a;" class="cell100 column5">Email</th>
+									<th style="background-color: #f4623a;" class="cell100 column5">Usuario</th>
+									<th style="background-color: #f4623a;" class="cell100 column5">Perfil asignado</th>
+									<th style="background-color: #f4623a;" class="cell100 column5">Estado</th>
+									<th style="background-color: #f4623a;" class="cell100 column5 text-left">Editar</th>
+									<th style="background-color: #f4623a;" class="cell100 column5 text-left">Eliminar</th>
 									
 									
 								</tr>
@@ -103,9 +96,7 @@
     <div class="container">
         <div class="small text-center text-muted">
             Copyright &copy;
-            <!-- This script automatically adds the current year to your website footer-->
-            <!-- (credit: https://updateyourfooter.com/)-->
-            <script>
+           	<script>
                 document.write(new Date().getFullYear());
             </script>
             - Universidad Nacional de Lanus
@@ -113,14 +104,10 @@
     </div>
 	</footer>
 
-<!--===============================================================================================-->	
 	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="/vendor/bootstrap/js/popper.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
 	<script src="/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
 	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	<script>
