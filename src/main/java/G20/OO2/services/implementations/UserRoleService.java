@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 import G20.OO2.converters.UserRoleConverter;
 import G20.OO2.entities.UserRole;
-import G20.OO2.models.UserModel;
 import G20.OO2.models.UserRoleModel;
 import G20.OO2.repositories.IUserRoleRepository;
 import G20.OO2.services.IUserRoleService;
-import G20.OO2.services.IUserService;
 
 @Service("userRoleService")
 public class UserRoleService implements  IUserRoleService{

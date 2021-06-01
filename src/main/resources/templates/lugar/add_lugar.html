@@ -41,50 +41,25 @@
 	
 	<nav th:if="${anonimo==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
 	th:include="nav_anonimo :: div"></nav>
-		
+	
 	<div class="container-contact100">
+		<a th:if="${repetido}" id="alert-target"></a>
 		<a th:if="${agregado}" id="alert-success"></a>
 		<div class="wrap-contact100">
-			<form action="#" th:action="@{/permiso/diario/save}" th:object="${permisoDiario}" method="post" class="contact100-form validate-form">
+			<form action="#" th:action="@{/lugar/save}" th:object="${lugar}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Información del permiso diario
+					Información del lugar
 				</span>
-				
-				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Persona *</span>
-					<select class="selectpicker input--style-1"th:field="*{pedido.id}"  name="Persona" placeholder="Seleccione Persona"  required="required">	
-                         <!-- style="height: 52px;padding-right: 100px;" data-width="auto"  -->
-						<option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
-                	</select>
-				</div>                     
-				
+
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-					<span class="label-input100" >Fecha *</span>
-					<input th:field="*{fecha}" type="date" value="2011-08-19" class="form-control text-center" placeholder="Fecha" required="required">
-				</div>
-					
-				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
-						<span class="label-input100" >Motivo *</span>
-						<input class="input100" type="text" name="Motivo" placeholder="Ingrese el motivo" th:field="*{motivo}" required="required">
+					<span class="label-input100">Lugar *</span>
+					<input class="input100" type="text" name="lugar" placeholder="Ingrese el lugar" th:field="*{lugar}" required="required">
 				</div>
 				
-				
-				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Desde *</span>
-					<select class="selectpicker input--style-1"th:field="*{lugarSalida.idLugar}"  name="Lugar Salida" placeholder="Seleccione el lugar de salida"  required="required">	
-                         <!-- style="height: 52px;padding-right: 100px;" data-width="auto"  -->
-						<option th:each="l : ${lugares}"  th:value="${(l.idLugar)}" th:text="${l.lugar} + ' - ' + ${l.codigoPostal}"></option>
-                	</select>
-				</div> 
-				
-				
-				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Hasta *</span>
-					<select class="selectpicker input--style-1"th:field="*{lugarLlegada.idLugar}"  name="Lugar Llegada" placeholder="Seleccione el lugar de llegada"  required="required">	
-                         <!-- style="height: 52px;padding-right: 100px;" data-width="auto"  -->
-						<option th:each="l : ${lugares}"  th:value="${(l.idLugar)}" th:text="${l.lugar} + ' - ' + ${l.codigoPostal}"></option>
-                	</select>
-				</div> 
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Codigo Postal *</span>
+					<input class="input100" type="text" name="Codigo postal" placeholder="Ingrese el codigo postal" th:field="*{codigoPostal}" required="required">
+				</div>
 				
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
@@ -94,7 +69,6 @@
 						</span>
 					</button>
 				</div>
-				
 			</form>
 		</div>
 	</div>
@@ -187,8 +161,11 @@
   gtag('config', 'UA-23581568-13');
 </script>
 <script>
+        $("#alert-target").show(function () {
+        toastr.error("El lugar ya existe")
+        });
         $("#alert-success").show(function () {
-			toastr.success("Permiso diario creado correctamente")
+			toastr.success("Lugar creado correctamente")
 		});
     </script>
 </body>

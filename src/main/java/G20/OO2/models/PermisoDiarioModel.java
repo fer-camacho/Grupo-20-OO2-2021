@@ -1,7 +1,6 @@
 package G20.OO2.models;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 public class PermisoDiarioModel extends PermisoModel {
 	private String motivo;
@@ -10,14 +9,9 @@ public class PermisoDiarioModel extends PermisoModel {
 		super();
 	}
 
-	public PermisoDiarioModel(int idPermiso, PersonaModel pedido, LocalDate fecha, String motivo) {
-		super(idPermiso, pedido, fecha);
-		this.motivo = motivo;
-	}
-
-	public PermisoDiarioModel(int idPermiso, PersonaModel pedido, LocalDate fecha, Set<LugarModel> desdeHasta,
-			String motivo) {
-		super(idPermiso, pedido, fecha, desdeHasta);
+	public PermisoDiarioModel(int idPermiso, PersonaModel pedido, LocalDate fecha, LugarModel lugarSalida,
+			LugarModel lugarLlegada, String motivo) {
+		super(idPermiso, pedido, fecha, lugarSalida, lugarLlegada);
 		this.motivo = motivo;
 	}
 

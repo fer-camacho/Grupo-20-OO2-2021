@@ -2,8 +2,6 @@ package G20.OO2.services;
 
 import java.util.List;
 
-import org.springframework.security.core.userdetails.User;
-
 import G20.OO2.models.UserModel;
 import G20.OO2.models.UserRoleModel;
 

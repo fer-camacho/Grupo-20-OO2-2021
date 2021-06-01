@@ -1,7 +1,6 @@
 package G20.OO2.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,13 +19,9 @@ public class PermisoDiario extends Permiso {
 		super();
 	}
 
-	public PermisoDiario(int idPermiso, Persona pedido, LocalDate fecha, String motivo) {
-		super(idPermiso, pedido, fecha);
-		this.motivo = motivo;
-	}
-
-	public PermisoDiario(int idPermiso, Persona pedido, LocalDate fecha, Set<Lugar> desdeHasta, String motivo) {
-		super(idPermiso, pedido, fecha, desdeHasta);
+	public PermisoDiario(int idPermiso, Persona pedido, LocalDate fecha, Lugar lugarSalida, Lugar lugarLlegada,
+			String motivo) {
+		super(idPermiso, pedido, fecha, lugarSalida, lugarLlegada);
 		this.motivo = motivo;
 	}
 

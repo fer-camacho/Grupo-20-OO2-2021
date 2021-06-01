@@ -19,10 +19,12 @@
 					</div>
 				</li>
 				<li class="nav-item dropdown">
-                	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Traer Permisos</a>
+                	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Traer Permiso</a>
 					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/permiso/persona}">Persona</a>
+						<a class="dropdown-item" th:href="@{/permiso/rodado}">Rodado</a>
 						<a class="dropdown-item" th:href="@{/permiso/fechas}">Rango fechas</a>
-						<a class="dropdown-item" href="#">Lugares</a>
+						<a class="dropdown-item" th:href="@{/permiso/fechas/lugar}">Rango fechas y lugar</a>
 					</div>
 				</li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" th:href="@{/logout}">Logout</a></li>

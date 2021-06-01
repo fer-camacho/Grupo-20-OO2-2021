@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import G20.OO2.converters.LugarConverter;
 import G20.OO2.entities.Lugar;
@@ -41,5 +40,9 @@ public class LugarService implements ILugarService{
 	
 	public LugarModel findById(int id) {
 		return lugarConverter.entityToModel(lugarReopository.findById_(id));
+	}
+	
+	public int cantidad(String lugar) {
+		return lugarReopository.repetido(lugar);
 	}
 }

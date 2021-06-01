@@ -61,6 +61,8 @@
 									<!-- <th class="cell100 column1">Id</th> -->
 									<th class="cell100 column2 text-center">Persona</th>
 									<th class="cell100 column2 text-center">Fecha</th>
+									<th class="cell100 column2 text-center">Desde</th>
+									<th class="cell100 column2 text-center">Hasta</th>
 									<th class="cell100 column2 text-center">Motivo</th>
 								</tr>
 							</thead>
@@ -75,6 +77,8 @@
 									<p style= "display: none" th:text="${d.idPermiso}" class="cell100 column1"></p>
 									<td th:text="${d.pedido.apellido} + ' ' + ${d.pedido.nombre} + ' - ' + ${d.pedido.tipo} + ' ' + ${d.pedido.nroDocumento}" class="cell100 column5 text-center"></td>
 									<td th:text="${d.fecha}" class="cell100 column5 text-center"></td>
+									<td th:text="${d.lugarSalida.lugar} + ' - ' + ${d.lugarSalida.codigoPostal}" class="cell100 column5 text-center"></td>
+									<td th:text="${d.lugarLlegada.lugar} + ' - '+ ${d.lugarLlegada.codigoPostal}" class="cell100 column5 text-center"></td>
 									<td th:text="${d.motivo}" class="cell100 column5 text-center"></td>
 									
 								</tr>
@@ -92,6 +96,8 @@
 									<!-- <th class="cell100 column1">Id</th> -->
 									<th class="cell100 column2 text-center">Persona</th>
 									<th class="cell100 column2 text-center">Fecha</th>
+									<th class="cell100 column2 text-center">Desde</th>
+									<th class="cell100 column2 text-center">Hasta</th>
 									<th class="cell100 column2 text-center">Cant. días</th>
 									<th class="cell100 column2 text-center">Vacaciones</th>
 									<th class="cell100 column2 text-center">Rodado</th>
@@ -108,6 +114,8 @@
 									<p style= "display: none" th:text="${pe.idPermiso}" class="cell100 column1"></p>
 									<td th:text="${pe.pedido.apellido} + ' ' + ${pe.pedido.nombre} + ' - ' + ${pe.pedido.tipo} + ' ' + ${pe.pedido.nroDocumento}" class="cell100 column5 text-center"></td>
 									<td th:text="${pe.fecha}" class="cell100 column5 text-center"></td>
+									<td th:text="${pe.lugarSalida.lugar} + ' - ' + ${pe.lugarSalida.codigoPostal}" class="cell100 column5 text-center"></td>
+									<td th:text="${pe.lugarLlegada.lugar} + ' - '+ ${pe.lugarLlegada.codigoPostal}" class="cell100 column5 text-center"></td>
 									<td th:text="${pe.cantDias}" class="cell100 column5 text-center"></td>
 									<td th:text="${pe.vacaciones}" class="cell100 column5 text-center"></td>
 									<td th:text="${pe.rodado.dominio} + ' - ' + ${pe.rodado.vehiculo}" class="cell100 column5 text-center"></td>

@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import G20.OO2.converters.PersonaConverter;
+import G20.OO2.converters.LugarConverter;
 import G20.OO2.helpers.ViewRouteHelper;
-import G20.OO2.models.PersonaModel;
-import G20.OO2.services.implementations.PersonaService;
+import G20.OO2.models.LugarModel;
+import G20.OO2.services.implementations.LugarService;
 
 @Controller
-@RequestMapping("/persona")
-public class PersonaController {
+@RequestMapping("/lugar")
+public class LugarController {
 	
 	@Autowired
-	@Qualifier("personaService")
-	private PersonaService personaService;
+	@Qualifier("lugarService")
+	private LugarService lugarService;
 	
 	@Autowired
-	@Qualifier("personaConverter")
-	private PersonaConverter personaConverter;
+	@Qualifier("lugarConverter")
+	private LugarConverter lugarConverter;
 	
 	public void asignarPerfil(ModelAndView mAV, String roleString) {
 		boolean admin = false;
@@ -39,8 +39,8 @@ public class PersonaController {
 	}
 	
 	@GetMapping("/new")
-	public ModelAndView newPersona() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_ADD);		
+	public ModelAndView newLugar() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LUGAR_ADD);
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		
 		boolean anonimo = false;
@@ -48,28 +48,29 @@ public class PersonaController {
 		
 		asignarPerfil(mAV, roleString);
 		mAV.addObject("anonimo", anonimo);
-		mAV.addObject("persona", new PersonaModel());
+		mAV.addObject("lugar", new LugarModel());
 		return mAV;
 	}
 	
 	@PostMapping("/save")
-	public ModelAndView savePersona(@ModelAttribute("persona") PersonaModel personaModel, BindingResult result,
+	public ModelAndView saveLugar(@ModelAttribute("lugar") LugarModel lugarModel, BindingResult result,
 			RedirectAttributes redirect) {
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERSONA_ADD);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.LUGAR_ADD);
 		
 		boolean anonimo = false;
 		if (roleString.equals("[ROLE_ANONYMOUS]")) anonimo=true;
 		asignarPerfil(mAV, roleString);
 		mAV.addObject("anonimo", anonimo);
 		
-		if (personaService.cantidad(personaModel.getNroDocumento()) == 0) {
-			PersonaModel p = new PersonaModel();
-			p = personaService.insertOrUpdate(personaModel);
-			mAV.addObject("persona", new PersonaModel());
+		if (lugarService.cantidad(lugarModel.getLugar()) == 0) {
+			LugarModel l = new LugarModel();
+			l = lugarService.insertOrUpdate(lugarModel);
+			mAV.addObject("lugar", new LugarModel());
 			mAV.addObject("agregado", true);
 		} else mAV.addObject("repetido", true);
-		
 		return mAV;
 	}
+	
+	
 }

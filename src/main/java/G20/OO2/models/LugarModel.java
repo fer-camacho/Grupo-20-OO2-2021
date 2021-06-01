@@ -1,12 +1,9 @@
 package G20.OO2.models;
 
-import java.util.Set;
-
 public class LugarModel {
 	private int idLugar;
 	private String lugar;
 	private String codigoPostal;
-	private Set<PermisoModel> permisos;
 	
 	public LugarModel() {
 		super();
@@ -17,14 +14,6 @@ public class LugarModel {
 		this.idLugar = idLugar;
 		this.lugar = lugar;
 		this.codigoPostal = codigoPostal;
-	}
-	
-	public LugarModel(int idLugar, String lugar, String codigoPostal, Set<PermisoModel> permisos) {
-		super();
-		this.idLugar = idLugar;
-		this.lugar = lugar;
-		this.codigoPostal = codigoPostal;
-		this.permisos = permisos;
 	}
 
 	public int getIdLugar() {
@@ -50,13 +39,4 @@ public class LugarModel {
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
-
-	public Set<PermisoModel> getPermisos() {
-		return permisos;
-	}
-
-	public void setPermisos(Set<PermisoModel> permisos) {
-		this.permisos = permisos;
-	}
-	
 }

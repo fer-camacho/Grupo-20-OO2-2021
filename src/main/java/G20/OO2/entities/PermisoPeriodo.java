@@ -1,7 +1,6 @@
 package G20.OO2.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,18 +28,10 @@ public class PermisoPeriodo extends Permiso {
 	public PermisoPeriodo() {
 		super();
 	}
-
-	public PermisoPeriodo(int idPermiso, Persona pedido, LocalDate fecha, int cantDias, boolean vacaciones,
-			Rodado rodado) {
-		super(idPermiso, pedido, fecha);
-		this.cantDias = cantDias;
-		this.vacaciones = vacaciones;
-		this.rodado = rodado;
-	}
-
-	public PermisoPeriodo(int idPermiso, Persona pedido, LocalDate fecha, Set<Lugar> desdeHasta, int cantDias,
-			boolean vacaciones, Rodado rodado) {
-		super(idPermiso, pedido, fecha, desdeHasta);
+	
+	public PermisoPeriodo(int idPermiso, Persona pedido, LocalDate fecha, Lugar lugarSalida, Lugar lugarLlegada,
+			int cantDias, boolean vacaciones, Rodado rodado) {
+		super(idPermiso, pedido, fecha, lugarSalida, lugarLlegada);
 		this.cantDias = cantDias;
 		this.vacaciones = vacaciones;
 		this.rodado = rodado;

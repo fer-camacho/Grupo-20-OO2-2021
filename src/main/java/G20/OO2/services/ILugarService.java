@@ -11,4 +11,6 @@ public interface ILugarService {
 	public LugarModel insertOrUpdate(LugarModel lugarModel);
 	
 	public LugarModel findById(int id);
+	
+	public int cantidad(String lugar);
 }

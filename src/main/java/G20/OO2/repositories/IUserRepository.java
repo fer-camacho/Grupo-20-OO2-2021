@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import G20.OO2.entities.User;
-import G20.OO2.models.UserRoleModel;
 
 @Repository("userRepository")
 public interface IUserRepository extends JpaRepository<User, Serializable> {

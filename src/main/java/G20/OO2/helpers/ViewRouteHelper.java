@@ -29,6 +29,9 @@ public class ViewRouteHelper {
 	//PERMISO
 	public final static String PERMISO_ADD= "permiso/add_permiso";
 		
+	//LUGAR
+	public final static String LUGAR_ADD = "lugar/add_lugar";
+	
 	/**** Redirects ****/
 	public final static String ROUTE = "/index";
 	public final static String DEGREE_ROOT = "/degrees/";

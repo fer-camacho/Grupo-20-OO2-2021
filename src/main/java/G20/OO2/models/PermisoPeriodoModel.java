@@ -1,7 +1,6 @@
 package G20.OO2.models;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 public class PermisoPeriodoModel extends PermisoModel {
 	private int cantDias;
@@ -12,17 +11,9 @@ public class PermisoPeriodoModel extends PermisoModel {
 		super();
 	}
 
-	public PermisoPeriodoModel(int idPermiso, PersonaModel pedido, LocalDate fecha, int cantDias, boolean vacaciones,
-			RodadoModel rodado) {
-		super(idPermiso, pedido, fecha);
-		this.cantDias = cantDias;
-		this.vacaciones = vacaciones;
-		this.rodado = rodado;
-	}
-
-	public PermisoPeriodoModel(int idPermiso, PersonaModel pedido, LocalDate fecha, Set<LugarModel> desdeHasta,
-			int cantDias, boolean vacaciones, RodadoModel rodado) {
-		super(idPermiso, pedido, fecha, desdeHasta);
+	public PermisoPeriodoModel(int idPermiso, PersonaModel pedido, LocalDate fecha, LugarModel lugarSalida,
+			LugarModel lugarLlegada, int cantDias, boolean vacaciones, RodadoModel rodado) {
+		super(idPermiso, pedido, fecha, lugarSalida, lugarLlegada);
 		this.cantDias = cantDias;
 		this.vacaciones = vacaciones;
 		this.rodado = rodado;
@@ -51,7 +42,4 @@ public class PermisoPeriodoModel extends PermisoModel {
 	public void setRodado(RodadoModel rodado) {
 		this.rodado = rodado;
 	}
-	
-	
-	
 }

@@ -50,4 +50,45 @@ public class PermisoDiarioService implements IPermisoDiarioService {
 		}
 		return permisos;
 	}
+	
+	public List<PermisoDiarioModel> traerPorFechaYSalida(LocalDate fechaInicio, LocalDate fechaFin, String salida) {
+		List<PermisoDiarioModel> permisos = new ArrayList<>();
+		for (PermisoDiarioModel p: traerPorFecha(fechaInicio, fechaFin)) {
+			if (p.getLugarSalida().getLugar().equals(salida)) {
+				permisos.add(p);
+			}
+		}
+		return permisos;
+	}
+	
+	public List<PermisoDiarioModel> traerPorFechaYLugar(LocalDate fechaInicio, LocalDate fechaFin, String lugar) {
+		List<PermisoDiarioModel> permisos = new ArrayList<>();
+		for (PermisoDiarioModel p: traerPorFecha(fechaInicio, fechaFin)) {
+			if ((p.getLugarSalida().getLugar().equals(lugar)) || (p.getLugarLlegada().getLugar().equals(lugar))) {
+				permisos.add(p);
+			}
+		}
+		return permisos;
+	}
+	/*
+	public List<PermisoDiarioModel> traerPorFechaYLlegada(LocalDate fechaInicio, LocalDate fechaFin, String llegada) {
+		List<PermisoDiarioModel> permisos = new ArrayList<>();
+		for (PermisoDiarioModel p: traerPorFecha(fechaInicio, fechaFin)) {
+			if (p.getLugarLlegada().getLugar().equals(llegada)) {
+				permisos.add(p);
+			}
+		}
+		return permisos;
+	}
+	
+	public List<PermisoDiarioModel> traerPorFechaSalidaYLlegada(LocalDate fechaInicio, LocalDate fechaFin, String salida, String llegada) {
+		List<PermisoDiarioModel> permisos = new ArrayList<>();
+		for (PermisoDiarioModel p: traerPorFecha(fechaInicio, fechaFin)) {
+			if ((p.getLugarSalida().getLugar().equals(salida)) && (p.getLugarLlegada().getLugar().equals(llegada))) {
+				permisos.add(p);
+			}
+		}
+		return permisos;
+	}
+	*/
 }

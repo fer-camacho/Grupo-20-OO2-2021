@@ -1,7 +1,6 @@
 package G20.OO2.models;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,25 +9,21 @@ public abstract class PermisoModel {
 	protected PersonaModel pedido;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate fecha;
-	protected Set<LugarModel> desdeHasta;
+	protected LugarModel lugarSalida;
+	protected LugarModel lugarLlegada;
 	
 	public PermisoModel() {
 		super();
 	}
 
-	public PermisoModel(int idPermiso, PersonaModel pedido, LocalDate fecha) {
+	public PermisoModel(int idPermiso, PersonaModel pedido, LocalDate fecha, LugarModel lugarSalida,
+			LugarModel lugarLlegada) {
 		super();
 		this.idPermiso = idPermiso;
 		this.pedido = pedido;
 		this.fecha = fecha;
-	}
-
-	public PermisoModel(int idPermiso, PersonaModel pedido, LocalDate fecha, Set<LugarModel> desdeHasta) {
-		super();
-		this.idPermiso = idPermiso;
-		this.pedido = pedido;
-		this.fecha = fecha;
-		this.desdeHasta = desdeHasta;
+		this.lugarSalida = lugarSalida;
+		this.lugarLlegada = lugarLlegada;
 	}
 
 	public int getIdPermiso() {
@@ -55,13 +50,19 @@ public abstract class PermisoModel {
 		this.fecha = fecha;
 	}
 
-	public Set<LugarModel> getDesdeHasta() {
-		return desdeHasta;
+	public LugarModel getLugarSalida() {
+		return lugarSalida;
 	}
 
-	public void setDesdeHasta(Set<LugarModel> desdeHasta) {
-		this.desdeHasta = desdeHasta;
+	public void setLugarSalida(LugarModel lugarSalida) {
+		this.lugarSalida = lugarSalida;
 	}
-	
-	
+
+	public LugarModel getLugarLlegada() {
+		return lugarLlegada;
+	}
+
+	public void setLugarLlegada(LugarModel lugarLlegada) {
+		this.lugarLlegada = lugarLlegada;
+	}
 }

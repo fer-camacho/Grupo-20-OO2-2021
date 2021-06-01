@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -90,15 +89,6 @@ public class UserRoleController {
 		return mAV;
 	}
 	
-	/*
-	@PostMapping("/save")
-	public String saveRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
-			RedirectAttributes redirect) {
-		UserRoleModel u = new UserRoleModel();
-		u = userRoleService.insertOrUpdate(userRoleModel);
-		return "redirect:/perfil/abm";
-	}
-	*/
 	//////////////////////////// EDITAR ROL ////////////////////////////
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -127,16 +117,8 @@ public class UserRoleController {
 		return mAV;
 	}
 	
-	/*
-	@PostMapping("/save/edit")
-	public String editRole(@ModelAttribute("userRole") UserRoleModel userRoleModel, BindingResult result,
-			RedirectAttributes redirect) {
-		userRoleService.insertOrUpdate(userRoleModel);
-		return "redirect:/perfil/abm";
-	}
-	*/
-	
 	//////////////////////////// ELIMINAR ROL ////////////////////////////
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteRole(@PathVariable("id") int id, RedirectAttributes redirect) {
@@ -150,12 +132,4 @@ public class UserRoleController {
 		mAV.addObject("eliminado", true);
 		return mAV;
 	}
-	
-	/*
-	@GetMapping("/delete/{id}")
-	public String deleteRole(@PathVariable("id") int id, RedirectAttributes redirect) {
-		userRoleService.delete(id);
-		return "redirect:/perfil/abm";
-	}
-	*/
 }

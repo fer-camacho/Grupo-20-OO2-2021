@@ -3,7 +3,6 @@ package G20.OO2.services.implementations;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import G20.OO2.entities.UserRole;
 import G20.OO2.models.UserModel;
-import G20.OO2.models.UserRoleModel;
 import G20.OO2.repositories.IUserRepository;
 import G20.OO2.converters.UserConverter;
 

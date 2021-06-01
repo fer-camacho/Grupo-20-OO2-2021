@@ -1,7 +1,5 @@
 package G20.OO2.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,20 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
-import G20.OO2.entities.User;
 import G20.OO2.helpers.ViewRouteHelper;
 
 @Controller
 @RequestMapping("")
 public class HomeController {
-	
-	/*
-	@Autowired
-	@Qualifier("personService")
-	private IPersonService personService;
-	*/
 	
 	@GetMapping("/login")
 	public String login(Model model,
@@ -36,14 +26,6 @@ public class HomeController {
 		return "/user/login";
     }
     
-	/*
-    @GetMapping("/logout")
-	public String logout(Model model) {
-		SecurityContextHolder.clearContext();
-		return "/user/logout";	
-    }
-    */
-	
 	@GetMapping("/logout")
 	public ModelAndView logout(Model model) {
 		SecurityContextHolder.clearContext();
@@ -132,28 +114,5 @@ public class HomeController {
 		mAV.addObject("anonimo", anonimo);
 	
 		return mAV;
-	}
-	/*
-	@GetMapping("index")
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//modelAndView.addObject("username", user.getUsername());
-		//modelAndView.addObject("persons", personService.getAll());
-		return modelAndView;
-	}
-	
-	@GetMapping("/")
-	public RedirectView redirectToHomeIndex() {
-		return new RedirectView(ViewRouteHelper.ROUTE);
-	}
-	*/
-	
-	@GetMapping("/testeo")
-	public ModelAndView testeo() {
-		ModelAndView modelAndView = new ModelAndView("home/testeo");
-		//modelAndView.addObject("username", user.getUsername());
-		//modelAndView.addObject("persons", personService.getAll());
-		return modelAndView;
 	}
 }

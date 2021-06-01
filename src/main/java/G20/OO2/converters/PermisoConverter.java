@@ -20,19 +20,23 @@ public class PermisoConverter {
 	@Qualifier("rodadoConverter")
 	private RodadoConverter rodadoConverter;
 	
+	@Autowired
+	@Qualifier("lugarConverter")
+	private LugarConverter lugarConverter;
+	
 	public PermisoDiarioModel entityToModel(PermisoDiario entity) {
-		return new PermisoDiarioModel(entity.getIdPermiso(), personaConverter.entityToModel(entity.getPedido()), entity.getFecha(), entity.getMotivo());
+		return new PermisoDiarioModel(entity.getIdPermiso(), personaConverter.entityToModel(entity.getPedido()), entity.getFecha(), lugarConverter.entityToModel(entity.getLugarSalida()), lugarConverter.entityToModel(entity.getLugarLlegada()), entity.getMotivo());
 	}
 	
 	public PermisoDiario modelToEntity(PermisoDiarioModel model) {
-		return new PermisoDiario(model.getIdPermiso(), personaConverter.modelToEntity(model.getPedido()), model.getFecha(), model.getMotivo());
+		return new PermisoDiario(model.getIdPermiso(), personaConverter.modelToEntity(model.getPedido()), model.getFecha(), lugarConverter.modelToEntity(model.getLugarSalida()), lugarConverter.modelToEntity(model.getLugarLlegada()),model.getMotivo());
 	}
 	
 	public PermisoPeriodoModel entityToModel(PermisoPeriodo entity) {
-		return new PermisoPeriodoModel(entity.getIdPermiso(), personaConverter.entityToModel(entity.getPedido()), entity.getFecha(), entity.getCantDias(), entity.isVacaciones(), rodadoConverter.entityToModel(entity.getRodado()));
+		return new PermisoPeriodoModel(entity.getIdPermiso(), personaConverter.entityToModel(entity.getPedido()), entity.getFecha(), lugarConverter.entityToModel(entity.getLugarSalida()), lugarConverter.entityToModel(entity.getLugarLlegada()), entity.getCantDias(), entity.isVacaciones(), rodadoConverter.entityToModel(entity.getRodado()));
 	}
 	
 	public PermisoPeriodo modelToEntity(PermisoPeriodoModel model) {
-		return new PermisoPeriodo(model.getIdPermiso(), personaConverter.modelToEntity(model.getPedido()), model.getFecha(), model.getCantDias(), model.isVacaciones(), rodadoConverter.modelToEntity(model.getRodado()));
+		return new PermisoPeriodo(model.getIdPermiso(), personaConverter.modelToEntity(model.getPedido()), model.getFecha(), lugarConverter.modelToEntity(model.getLugarSalida()), lugarConverter.modelToEntity(model.getLugarLlegada()), model.getCantDias(), model.isVacaciones(), rodadoConverter.modelToEntity(model.getRodado()));
 	}
 }

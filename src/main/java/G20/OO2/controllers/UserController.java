@@ -134,20 +134,6 @@ public class UserController {
 		return mAV;
 	}
 	
-	/*
-	@PostMapping("/save")
-	public String saveuser(@ModelAttribute("user") UserModel userModel, BindingResult result,
-			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {
-		UserModel u = new UserModel();
-		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
-		userModel.setPassword(p.encode(userModel.getPassword()));
-		u = userService.insertOrUpdate(userModel);
-		
-		//mandarMailAltaUser(userModel);
-		return "redirect:/usuario/abm";
-	}
-	*/
-	
 	//////////////////////////// EDITAR USER ////////////////////////////
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -192,24 +178,7 @@ public class UserController {
 		return mAV;
 	}
 	
-	/*
-	@PostMapping("/save/edit")
-	public String editUser(@ModelAttribute("user") UserModel userModel, BindingResult result, RedirectAttributes redirect) {
-		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
-		userModel.setPassword(p.encode(userModel.getPassword()));
-		userService.insertOrUpdate(userModel);
-		return "redirect:/usuario/abm";
-	}
-	*/
-	
 	////////////////////////////ELIMINAR USER ////////////////////////////
-	/*
-	@GetMapping("/userdelete/{id}")
-	public String deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
-		userService.delete(id);
-		return "redirect:/user/list/";
-	}
-	*/
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/delete/{id}")
@@ -228,18 +197,6 @@ public class UserController {
 		mAV.addObject("eliminado", true);
 		return mAV;
 	}
-	
-	/*
-	@GetMapping("/delete/{id}")
-	public String deleteUser(@PathVariable("id") int id, RedirectAttributes redirect) {
-		//bloquea al usuario seleccionado
-		UserModel userModel = userService.listarId(id);
-		userModel.setEnabled(false);
-		userService.insertOrUpdate(userModel);
-		//mandarMailBajaUser(userModel);
-		return "redirect:/usuario/abm/";
-	}
-	*/
 	
 	private void mandarMailAltaUser(UserModel userModel) {
 		String email = userModel.getEmail();

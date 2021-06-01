@@ -1,9 +1,7 @@
 package G20.OO2.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,38 +26,33 @@ public abstract class Permiso {
 	protected int idPermiso;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name="permiso_id", nullable=false)
 	@JoinColumn(name="pedido_id", nullable=false)
 	protected Persona pedido;
 	
-	//@Column(name="fecha", nullable = false)
 	@Column(name="fecha")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate fecha;
 	
-	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable ( name ="permiso_lugar",
-			joinColumns = { @JoinColumn(name= "permiso_id")},
-			inverseJoinColumns = { @JoinColumn (name = "lugar_id")})
-	protected Set<Lugar> desdeHasta;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="lugar_salida_id", nullable=false)
+	protected Lugar lugarSalida;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="lugar_llegada_id", nullable=false)
+	protected Lugar lugarLlegada;
 
 	public Permiso() {
 		super();
 	}
 
-	public Permiso(int idPermiso, Persona pedido, LocalDate fecha) {
+	public Permiso(int idPermiso, Persona pedido, LocalDate fecha, Lugar lugarSalida, Lugar lugarLlegada) {
 		super();
 		this.idPermiso = idPermiso;
 		this.pedido = pedido;
 		this.fecha = fecha;
-	}
-
-	public Permiso(int idPermiso, Persona pedido, LocalDate fecha, Set<Lugar> desdeHasta) {
-		super();
-		this.idPermiso = idPermiso;
-		this.pedido = pedido;
-		this.fecha = fecha;
-		this.desdeHasta = desdeHasta;
+		this.lugarSalida = lugarSalida;
+		this.lugarLlegada = lugarLlegada;
 	}
 
 	public int getIdPermiso() {
@@ -88,12 +79,19 @@ public abstract class Permiso {
 		this.fecha = fecha;
 	}
 
-	public Set<Lugar> getDesdeHasta() {
-		return desdeHasta;
+	public Lugar getLugarSalida() {
+		return lugarSalida;
 	}
 
-	public void setDesdeHasta(Set<Lugar> desdeHasta) {
-		this.desdeHasta = desdeHasta;
+	public void setLugarSalida(Lugar lugarSalida) {
+		this.lugarSalida = lugarSalida;
 	}
-	
+
+	public Lugar getLugarLlegada() {
+		return lugarLlegada;
+	}
+
+	public void setLugarLlegada(Lugar lugarLlegada) {
+		this.lugarLlegada = lugarLlegada;
+	}
 }

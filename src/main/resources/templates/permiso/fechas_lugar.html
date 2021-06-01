@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Contact V5</title>
+	<title>Sistema integrador</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/">
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -28,76 +29,42 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
 
-
+	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_admin :: div"></nav>
+			
+	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_audit :: div"></nav>
+	
+	<nav th:if="${anonimo==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	th:include="nav_anonimo :: div"></nav>
+		
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
+			<form action="#" th:action="@{/permiso/fechas/lugar/grilla}" th:object="${rangoFechas}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
-					Información del permiso
+					Rango de fechas
 				</span>
-
-				<div class="wrap-input100 input100-select bg1">
-					<span class="label-input100">Tipo del permiso *</span>
-					<div>
-						<select class="js-select2" name="service">
-							<option>Período</option>
-							<option>Diario</option>
-						</select>
-						<div class="dropDownSelect2"></div>
-					</div>
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Fecha Inicio*</span>
+					<input th:field="*{fechaInicio}" type="date" value="2011-08-19" class="form-control text-center" placeholder="Fecha Inicio" required="required">
 				</div>
-
-				<div class="w-full dis-none js-show-service">
-					<div class="wrap-contact100-form-radio">
-						<span class="label-input100">Datos del pedido</span>
-
-						<div class="contact100-form-radio m-t-15">
-							<input class="input-radio100" id="radio1" type="radio" name="type-product" value="physical" checked="checked">
-							<label class="label-radio100" for="radio1">
-								Phycical Products
-							</label>
-						</div>
-
-						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio2" type="radio" name="type-product" value="digital">
-							<label class="label-radio100" for="radio2">
-								Digital Products
-							</label>
-						</div>
-
-						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio3" type="radio" name="type-product" value="service">
-							<label class="label-radio100" for="radio3">
-								Services Consulting
-							</label>
-						</div>
-						
-						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio3" type="radio" name="type-product" value="service">
-							<label class="label-radio100" for="radio3">
-								Services Consulting
-							</label>
-						</div>
-						
-						<div class="contact100-form-radio">
-							<input class="input-radio100" id="radio3" type="radio" name="type-product" value="service">
-							<label class="label-radio100" for="radio3">
-								Services Consulting
-							</label>
-						</div>
-					</div>
-
 					
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Fecha Fin*</span>
+					<input th:field="*{fechaFin}" type="date" value="2011-08-19" class="form-control text-center" placeholder="Fecha Fin" required="required">
 				</div>
-
-				<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "Please Type Your Message">
-					<span class="label-input100">Message</span>
-					<textarea class="input100" name="message" placeholder="Your message here..."></textarea>
+				
+				 
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+						<span class="label-input100" >Lugar *</span>
+						<input class="input100" type="text" name="Lugar" placeholder="Ingrese el lugar" th:field="*{lugar}" required="required">
 				</div>
-
+				 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
 						<span>
@@ -106,11 +73,24 @@
 						</span>
 					</button>
 				</div>
+				
 			</form>
 		</div>
 	</div>
 
-
+	<footer class="bg-dark py-5">
+    <div class="container">
+        <div class="small text-center text-muted">
+            Copyright &copy;
+            <!-- This script automatically adds the current year to your website footer-->
+            <!-- (credit: https://updateyourfooter.com/)-->
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            - Universidad Nacional de Lanus
+        </div>
+    </div>
+	</footer>
 
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -177,6 +157,7 @@
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -184,6 +165,5 @@
 
   gtag('config', 'UA-23581568-13');
 </script>
-
 </body>
 </html>
