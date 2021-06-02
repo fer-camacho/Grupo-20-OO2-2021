@@ -58,59 +58,52 @@
 				<span class="contact100-form-title">
 					Traer permiso por lugar entre fechas
 				</span>
-						<!-- 
-						<label for="Lugar" class="form-label">Seleccione Lugar:</label>
-						<div class="input-group mb-3">
-						<select class="form-select" name="Lugar" th:field="*{lugar.idLugar}">
-							<option th:each="l : ${lugares}"  th:value="${(l.idLugar)}" th:text="${l.codigoPostal}"></option>
-						</select>
-						 -->
-						
-					<div class="col-3">
-        				<label class="form-label" for="lugar">Lugar</span>
-       					<input class="form-control" type="number" name="lugar" placeholder="Ingrese idLugar">
-    				</div>
-					<div class="col-3">
-  							<label for="fechaDesde" class="form-label">Fecha desde</label>
-    							<input class="form-control" type="date" id="fechaDesde" name="fechaDesde">
-						</div>
 					
-						<div class="col-3">
-  							<label for="fechaHasta" class="form-label">Fecha hasta</label>
-    						<input class="form-control" type="date" id="fechaHasta" name="fechaHasta">
-						</div>
-						<div class="col-3">
-							<button type="submit" class="btn btn-success" id="button"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>					
-						</div>
-			</form> 
-			<div class="table-responsive">
-				<table id="tabla" class="table table-striped table-bordered border-primary">
-					<caption>Permisos entre Fechas y lugar determinado </caption>
-					<thead>								
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Pedido</th>
-							<th scope="col">Fecha</th>
-							<th scope="col">Cant. días</th>
-							<th scope="col">Vacaciones</th>
-							<th scope="col">Rodado</th>
-						</tr>	 
-					</thead>
-					<tbody>
-						<tr th:each="permiso : ${permisos}">
-							<td id="idTd" scope="row" th:text="${permiso.idPermiso}"></td>
-							<td th:text="${permiso.pedido}"></td>
-							<td th:text="${permiso.fecha}"></td>
-							<td th:text="${permiso.cantDias}"></td>
-							<td th:text="${permiso.vacaciones}"></td>
-							<td th:text="${permiso.rodado}"></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>		
-		</div>
+				<div class="col-3">
+					<label class="form-label" for="lugar">Lugar</label>
+       				<input class="form-control" type="number" name="lugar" placeholder="Ingrese idLugar" required>
+    			</div>
+    				
+				<div class="col-3">
+  					<label for="fechaDesde" class="form-label">Fecha desde</label>
+    				<input class="form-control" type="date" id="fechaDesde" name="fechaDesde" required>
+				</div>				
+				<div class="col-3">
+  					<label for="fechaHasta" class="form-label">Fecha hasta</label>
+    				<input class="form-control" type="date" id="fechaHasta" name="fechaHasta" required>
+				</div>
+				<div class="col-3">
+					<button type="submit" class="btn btn-success" id="button"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>					
+				</div>
+		</form> 
+		<div class="table-responsive">
+			<table id="tabla" class="table table-striped table-bordered border-primary">
+				<caption>Permisos entre Fechas y lugar determinado </caption>
+				<thead>								
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Pedido</th>
+						<th scope="col">Fecha</th>
+						<th scope="col">Cant. días</th>
+						<th scope="col">Vacaciones</th>
+						<th scope="col">Rodado</th>
+					</tr>	 
+				</thead>
+				<tbody>
+					<tr th:each="permiso : ${permisos}">
+						<td id="idTd" scope="row" th:text="${permiso.idPermiso}"></td>
+						<td th:text="${permiso.pedido}"></td>
+						<td th:text="${permiso.fecha}"></td>
+						<td th:text="${permiso.cantDias}"></td>
+						<td th:text="${permiso.vacaciones}"></td>
+						<td th:text="${permiso.rodado}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>		
 	</div>
-
+	</div>
+	
 	<footer class="bg-dark py-5">
     <div class="container">
         <div class="small text-center text-muted">
@@ -120,7 +113,7 @@
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            - Universidad Nacional de Lanus
+            - Universidad Nacional de Lanús
         </div>
     </div>
 	</footer>
@@ -149,11 +142,7 @@
 	
 <!--===============================================================================================-->
 	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	
-	  
-	
-	
-	
+
 	<script>
 		$('.js-pscroll').each(function(){
 			var ps = new PerfectScrollbar(this);
