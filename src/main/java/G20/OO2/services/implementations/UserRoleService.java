@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import G20.OO2.converters.UserRoleConverter;
 import G20.OO2.entities.UserRole;
 import G20.OO2.models.UserRoleModel;
+import G20.OO2.models.UserModel;
 import G20.OO2.repositories.IUserRoleRepository;
 import G20.OO2.services.IUserRoleService;
+
 
 @Service("userRoleService")
 public class UserRoleService implements  IUserRoleService{
@@ -23,6 +25,10 @@ public class UserRoleService implements  IUserRoleService{
 	@Autowired
 	@Qualifier("userRoleRepository")
 	private IUserRoleRepository userRoleRepository;	
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	public List<UserRoleModel> getAll() {
 		List<UserRoleModel> roles = new ArrayList<>();
@@ -39,6 +45,12 @@ public class UserRoleService implements  IUserRoleService{
 	
 	public UserRoleModel insertOrUpdate(UserRoleModel userRoleModel) {
 		UserRole role = userRoleRepository.save(userRoleConverter.modelToEntity(userRoleModel));
+		if (!userRoleModel.isEnabled()) {
+			for (UserModel u: userService.findByUserRole(userRoleModel.getId())) {
+				u.setEnabled(false);
+				userService.insertOrUpdate(u);
+			}
+		}
 		return userRoleConverter.entityToModel(role);
 	}
 	
@@ -46,7 +58,6 @@ public class UserRoleService implements  IUserRoleService{
 		UserRole rol = userRoleRepository.findById(id);
 		return userRoleConverter.entityToModel(rol);
 	}
-	
 	
 	public UserRoleModel update(UserRoleModel userRoleModel) {
 		UserRole role = userRoleConverter.modelToEntity(listarId(userRoleModel.getId()));
