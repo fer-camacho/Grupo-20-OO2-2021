@@ -23,8 +23,8 @@ public interface IPermisoRepository extends JpaRepository<Permiso, Serializable>
 			+ "join permiso_periodo on permiso_periodo.id_permiso = permiso.id_permiso\r\n"
 			+ "join permiso_lugar on permiso_lugar.permiso_id = permiso.id_permiso\r\n"
 			+ "join lugar on lugar.id_lugar = permiso_lugar.lugar_id\r\n"
-			+ "where lugar.id_lugar = (:idLugar)"
+			+ "where lugar.lugar = (:lugar)"
 			+ "and permiso.fecha between (:fechaDesde) and (:fechaHasta)",
 			nativeQuery = true)
-	public abstract List<PermisoPeriodo> findByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta);
+	public abstract List<PermisoPeriodo> findByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta);
 }

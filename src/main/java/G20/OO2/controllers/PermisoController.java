@@ -131,7 +131,7 @@ public class PermisoController {
 	
 	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@PostMapping("/by_Lugar_Fechas")
-	public ModelAndView traerPermisoPorLugaryFechas(@RequestParam(name="lugar") int lugar, 
+	public ModelAndView traerPermisoPorLugaryFechas(@RequestParam(name="lugar") String lugar, 
 			@RequestParam("fechaDesde") @DateTimeFormat(pattern= "yyyy-MM-dd") LocalDate fechaDesde, 
 			@RequestParam("fechaHasta") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaHasta) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_BY_LUGARYFECHAS);
