@@ -139,7 +139,9 @@ public class PermisoController {
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		asignarPerfil(mAV, roleString);
 		
-		mAV.addObject("permisos", permisoService.findPermisoByLugaryFechas(lugar, fechaDesde, fechaHasta));
+		mAV.addObject("permisosPeriodo", permisoService.findPermisoByLugaryFechas(lugar, fechaDesde, fechaHasta));
+		mAV.addObject("permisosDiario", permisoService.findPermisoDiarioByLugaryFechas(lugar, fechaDesde, fechaHasta));
+
 		return mAV;
 	}
 }

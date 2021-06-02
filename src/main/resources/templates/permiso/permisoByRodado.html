@@ -85,9 +85,10 @@
 						<tr th:each="permiso : ${permisos}">
 							<td id="idTd" scope="row" th:text="${permiso.idPermiso}"></td>
 							<td th:text="${permiso.pedido}"></td>
-							<td th:text="${permiso.fecha}"></td>
-							<td th:text="${permiso.cantDias}"></td>
-							<td th:text="${permiso.vacaciones}"></td>
+							<td th:text="${permiso.fecha}" class="text-center"></td>
+							<td th:text="${permiso.cantDias}" class="text-center"></td>
+							<td th:if="${permiso.vacaciones==true}" th:text="Si" class="text-center"></td>
+							<td th:if="${permiso.vacaciones==false}" th:text="No" class="text-center"></td>
 							<td th:text="${permiso.rodado}"></td>
 						</tr>
 					</tbody>

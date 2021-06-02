@@ -78,7 +78,7 @@
 		</form> 
 		<div class="table-responsive">
 			<table id="tabla" class="table table-striped table-bordered border-primary">
-				<caption>Permisos entre Fechas y lugar determinado </caption>
+				<caption>Permisos Periodo </caption>
 				<thead>								
 					<tr>
 						<th scope="col">Id</th>
@@ -90,17 +90,39 @@
 					</tr>	 
 				</thead>
 				<tbody>
-					<tr th:each="permiso : ${permisos}">
+					<tr th:each="permiso : ${permisosPeriodo}">
 						<td id="idTd" scope="row" th:text="${permiso.idPermiso}"></td>
 						<td th:text="${permiso.pedido}"></td>
-						<td th:text="${permiso.fecha}"></td>
-						<td th:text="${permiso.cantDias}"></td>
-						<td th:text="${permiso.vacaciones}"></td>
+						<td th:text="${permiso.fecha}" class="text-center"></td>
+						<td th:text="${permiso.cantDias}" class="text-center"></td>
+						<td th:if="${permiso.vacaciones==true}" th:text="Si" class="text-center"></td>
+						<td th:if="${permiso.vacaciones==false}" th:text="No" class="text-center"></td>
 						<td th:text="${permiso.rodado}"></td>
 					</tr>
 				</tbody>
 			</table>
-		</div>		
+		</div>
+		<div class="table-responsive">
+			<table id="tabla" class="table table-striped table-bordered border-primary">
+				<caption>Permisos Diario </caption>
+				<thead>								
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Pedido</th>
+						<th scope="col">Fecha</th>
+						<th scope="col">Motivo</th>
+					</tr>	 
+				</thead>
+				<tbody>
+					<tr th:each="permiso : ${permisosDiario}">
+						<td id="idTd" scope="row" th:text="${permiso.idPermiso}"></td>
+						<td th:text="${permiso.pedido}"></td>
+						<td th:text="${permiso.fecha}" class="text-center"></td>
+						<td th:text="${permiso.motivo}" class="text-center"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>				
 	</div>
 	</div>
 	

@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import G20.OO2.services.IPermisoService;
 import G20.OO2.converters.PermisoConverter;
+import G20.OO2.entities.PermisoDiario;
 import G20.OO2.entities.PermisoPeriodo;
+import G20.OO2.models.PermisoDiarioModel;
 import G20.OO2.models.PermisoPeriodoModel;
 import G20.OO2.repositories.IPermisoRepository;
 
@@ -32,10 +34,17 @@ public class PermisoService implements IPermisoService{
 		}
 		return models;
 	}
-	
 	public List<PermisoPeriodoModel> findPermisoByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<PermisoPeriodoModel> models = new ArrayList<PermisoPeriodoModel>();
 		for (PermisoPeriodo permiso : permisoRepository.findByLugaryFechas(lugar, fechaDesde, fechaHasta)) {
+				models.add(permisoConverter.entityToModel(permiso));
+		}
+		return models;
+	}
+	
+	public List<PermisoDiarioModel> findPermisoDiarioByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<PermisoDiarioModel> models = new ArrayList<PermisoDiarioModel>();
+		for (PermisoDiario permiso : permisoRepository.findDiarioByLugaryFechas(lugar, fechaDesde, fechaHasta)) {
 				models.add(permisoConverter.entityToModel(permiso));
 		}
 		return models;

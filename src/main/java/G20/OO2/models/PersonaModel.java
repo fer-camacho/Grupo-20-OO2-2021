@@ -84,6 +84,6 @@ public class PersonaModel {
 	
 	@Override
 	public String toString() {
-		return "idPersona=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + nroDocumento + "";
+		return "" + nombre + " " + apellido + " - " + nroDocumento + "";
 	}
 }
