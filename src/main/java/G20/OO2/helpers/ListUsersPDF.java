@@ -130,7 +130,7 @@ public class ListUsersPDF extends AbstractPdfView {
 			celda.setPadding(5);
 			tablaUsuarios.addCell(celda);
 			
-			celda = new PdfPCell(new Phrase(u.getEmail(), fuenteCeldas));
+			celda = new PdfPCell(new Phrase(u.getPersona().getEmail(), fuenteCeldas));
 			celda.setHorizontalAlignment(Element.ALIGN_CENTER);
 			celda.setVerticalAlignment(Element.ALIGN_CENTER);
 			celda.setPadding(5);

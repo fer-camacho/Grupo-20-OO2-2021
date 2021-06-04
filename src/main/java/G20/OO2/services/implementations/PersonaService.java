@@ -45,4 +45,8 @@ public class PersonaService implements IPersonaService {
 		Persona p = personaRepository.findById_(id);
 		return personaConverter.entityToModel(p);
 	}
+	
+	public String traerEmailPorId(int id) {
+		return personaRepository.traerEmailPorId(id);
+	}
 }

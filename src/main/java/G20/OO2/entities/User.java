@@ -18,9 +18,6 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="email", nullable=false, length=90)
-	private String email;
-	
 	@Column(name="username", unique=true, nullable=false, length=45)
 	private String username;
 	
@@ -40,21 +37,19 @@ public class User {
 	
 	public User() {}
 
-	public User(int id, String email, String username, String password, boolean enabled, UserRole userRole) {
+	public User(int id, String username, String password, boolean enabled, UserRole userRole) {
 		super();
 		this.id = id;
-		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
 	}
 
-	public User(int id, String email, String username, String password, boolean enabled, UserRole userRole,
+	public User(int id, String username, String password, boolean enabled, UserRole userRole,
 			Persona persona) {
 		super();
 		this.id = id;
-		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -68,14 +63,6 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getUsername() {

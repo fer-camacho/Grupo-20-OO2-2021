@@ -9,28 +9,32 @@ public class PersonaModel {
 	private String apellido;
 	private String tipo;
 	private long nroDocumento;
+	private String email;
 	private Set<UserModel> users;
 	
 	public PersonaModel() {
 		super();
 	}
 
-	public PersonaModel(int id, String nombre, String apellido, String tipo, long nroDocumento) {
+	public PersonaModel(int id, String nombre, String apellido, String tipo, long nroDocumento, String email) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipo = tipo;
 		this.nroDocumento = nroDocumento;
+		this.email = email;
 	}
 
-	public PersonaModel(int id, String nombre, String apellido, String tipo, long nroDocumento, Set<UserModel> users) {
+	public PersonaModel(int id, String nombre, String apellido, String tipo, long nroDocumento, String email,
+			Set<UserModel> users) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipo = tipo;
 		this.nroDocumento = nroDocumento;
+		this.email = email;
 		this.users = users;
 	}
 
@@ -72,6 +76,14 @@ public class PersonaModel {
 
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Set<UserModel> getUsers() {

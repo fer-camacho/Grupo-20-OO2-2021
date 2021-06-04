@@ -23,10 +23,10 @@ public class UserConverter {
 	private PersonaConverter personaConverter;
 	
 	public UserModel entityToModel(User entity) {
-		return new UserModel(entity.getId(), entity.getEmail(), entity.getUsername(), entity.getPassword(), entity.isEnabled(), userRoleConverter.entityToModel(entity.getUserRole()), personaConverter.entityToModel(entity.getPersona()));
+		return new UserModel(entity.getId(), entity.getUsername(), entity.getPassword(), entity.isEnabled(), userRoleConverter.entityToModel(entity.getUserRole()), personaConverter.entityToModel(entity.getPersona()));
 	}
 	
 	public User modelToEntity(UserModel model) {
-		return new User(model.getId(), model.getEmail(), model.getUsername(), model.getPassword(), model.isEnabled(), userRoleConverter.modelToEntity(model.getUserRole()), personaConverter.modelToEntity(model.getPersona()));
+		return new User(model.getId(), model.getUsername(), model.getPassword(), model.isEnabled(), userRoleConverter.modelToEntity(model.getUserRole()), personaConverter.modelToEntity(model.getPersona()));
 	}
 }

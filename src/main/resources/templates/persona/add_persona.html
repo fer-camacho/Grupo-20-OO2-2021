@@ -60,6 +60,10 @@
        				<input class="input100" type="number" name="Documento" placeholder="Ingrese numero del documento" th:field="*{nroDocumento}" required="required">
     			</div>
 				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "El email debe cumplir con xxx@.x.xx">
+					<span class="label-input100">Email *</span>
+					<input class="input100" type="email" name="email" placeholder="Enter Your Email" th:field="*{email}" required="required">
+				</div>
 				
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">

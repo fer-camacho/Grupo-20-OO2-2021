@@ -12,4 +12,6 @@ public interface IPersonaService {
 	public int cantidad (long dni);
 	
 	public PersonaModel listarId(int id);
+	
+	public String traerEmailPorId(int id);
 }

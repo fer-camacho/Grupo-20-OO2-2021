@@ -2,7 +2,6 @@ package G20.OO2.models;
 
 public class UserModel {
 	private int id;
-	private String email;
 	private String username;
 	private String password;
 	private boolean enabled;
@@ -13,21 +12,19 @@ public class UserModel {
 		super();
 	}
 
-	public UserModel(int id, String email, String username, String password, boolean enabled, UserRoleModel userRole) {
+	public UserModel(int id, String username, String password, boolean enabled, UserRoleModel userRole) {
 		super();
 		this.id = id;
-		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
 	}
 
-	public UserModel(int id, String email, String username, String password, boolean enabled, UserRoleModel userRole,
+	public UserModel(int id, String username, String password, boolean enabled, UserRoleModel userRole,
 			PersonaModel persona) {
 		super();
 		this.id = id;
-		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -41,14 +38,6 @@ public class UserModel {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getUsername() {

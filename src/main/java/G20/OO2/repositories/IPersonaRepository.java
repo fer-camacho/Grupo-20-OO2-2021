@@ -23,4 +23,7 @@ public interface IPersonaRepository extends JpaRepository<Persona, Serializable>
 	
 	@Query(nativeQuery=true,value="Select * from persona p where p.id=(:id)")
 	public Persona findById_(int id);
+	
+	@Query(nativeQuery=true,value="Select email from persona p where p.id=(:id)")
+	public String traerEmailPorId(int id);
 }

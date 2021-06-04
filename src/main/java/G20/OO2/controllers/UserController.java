@@ -183,21 +183,23 @@ public class UserController {
 	}
 	
 	private void mandarMailAltaUser(UserModel userModel) {
-		String email = userModel.getEmail();
+		String email = personaService.traerEmailPorId(userModel.getPersona().getId());
+		//String email = userModel.getEmail();
 		String username = userModel.getUsername();
 		String enabled;
 		if (userModel.isEnabled()) enabled = "desbloqueado";
 		else enabled = "bloqueado";
         String mailSubject = "Alta de usuario";
         String mailContent = "Le informamos que ha sido dado de alta en nuestra plataforma \n\n";
-        mailContent += "Email: " + email + "\n";
+        //mailContent += "Email: " + email + "\n";
         mailContent += "Username: " + username + "\n";
         mailContent += "Estado: " + enabled + "\n\n";
         mailService.sendMail(email, mailSubject, mailContent);
 	}
 	
 	private void mandarMailBajaUser(UserModel userModel) {
-		String email = userModel.getEmail();
+		String email = personaService.traerEmailPorId(userModel.getPersona().getId());
+		//String email = userModel.getEmail();
 		String username = userModel.getUsername();
 		String mailSubject = "Baja de usuario";
 		String mailContent = "Le informamos que su usuario " + username + " ha sido bloqueado.\n\n";

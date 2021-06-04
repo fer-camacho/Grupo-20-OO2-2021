@@ -31,20 +31,24 @@ public class Persona {
 	@Column(name="nroDocumento", nullable = false)
 	private long nroDocumento;
 	
+	@Column(name="email", nullable=false, length=90)
+	private String email;
+	
 	@OneToMany(cascade= CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="persona")
 	private Set<User> users;
 
 	public Persona() {
 		super();
 	}
-	
-	public Persona(int id, String nombre, String apellido, String tipo, long nroDocumento) {
+
+	public Persona(int id, String nombre, String apellido, String tipo, long nroDocumento, String email) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipo = tipo;
 		this.nroDocumento = nroDocumento;
+		this.email = email;
 	}
 
 	public int getId() {
@@ -85,6 +89,14 @@ public class Persona {
 
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Set<User> getUsers() {
