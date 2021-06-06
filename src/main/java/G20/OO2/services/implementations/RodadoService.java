@@ -40,4 +40,18 @@ public class RodadoService implements IRodadoService {
 	public int cantidad(String dominio) {
 		return  rodadoRepository.repetido(dominio);
 	}
+	
+	public boolean dominioValido(String dominio) {
+		boolean valido = false;
+		if (dominio.length()==7) {
+			if ((dominio.substring(0, 3).toUpperCase().matches("^[A-Z]{3}")) && (dominio.charAt(3) == ' ') && (dominio.substring(4).toUpperCase().matches("^[0-9]{3}"))) {
+				valido = true;
+			}
+		} else if (dominio.length()==9) {
+			if ((dominio.substring(0, 2).toUpperCase().matches("^[A-Z]{2}")) && (dominio.charAt(2) == ' ') && (dominio.substring(3, 6).matches("^[0-9]{3}")) && (dominio.charAt(6) == ' ') && (dominio.substring(7).toUpperCase().matches("^[A-Z]{2}"))) {
+				valido = true;
+			}
+		}
+		return valido;
+	}
 }

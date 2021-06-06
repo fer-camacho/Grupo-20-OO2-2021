@@ -73,8 +73,9 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
 			//codeText seria el id del permiso, luego hay que cambiarlo por la URL
 			@PathVariable("codeText") String codeText)
 		    throws Exception {
-		        QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
-		        
+		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
+    	
+		        QRCodeGenerator.generarQRCodeImage("diario", codeText, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_DIARIO);		
 				Asignar.asignarPerfil(mAV);
 				String email = personaService.traerEmailPorId(permisoService.listarId(Integer.parseInt(codeText)).getPedido().getId());
@@ -94,8 +95,9 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
 			//codeText seria el id del permiso, luego hay que cambiarlo por la URL
 			@PathVariable("codeText") String codeText)
 		    throws Exception {
-		        QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
-		        
+		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
+    	
+		        QRCodeGenerator.generarQRCodeImage("periodo", codeText, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_PERIODO);		
 		        Asignar.asignarPerfil(mAV);
 		        String email = personaService.traerEmailPorId(permisoService.listarId(Integer.parseInt(codeText)).getPedido().getId());

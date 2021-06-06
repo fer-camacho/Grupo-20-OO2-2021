@@ -45,10 +45,12 @@ public class RodadoController {
 		Asignar.asignarPerfil(mAV);
 		
 		if (rodadoService.cantidad(rodadoModel.getDominio()) == 0) {
-			RodadoModel r = new RodadoModel();
-			r = rodadoService.insertOrUpdate(rodadoModel);
-			mAV.addObject("rodado", new RodadoModel());
-			mAV.addObject("agregado", true);
+			if (rodadoService.dominioValido(rodadoModel.getDominio())) {
+				RodadoModel r = new RodadoModel();
+				r = rodadoService.insertOrUpdate(rodadoModel);
+				mAV.addObject("rodado", new RodadoModel());
+				mAV.addObject("agregado", true);
+			} else mAV.addObject("dominioInvalido",true);
 		} else mAV.addObject("repetido", true);
 		return mAV;
 	}

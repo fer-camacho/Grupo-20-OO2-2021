@@ -12,4 +12,6 @@ public interface IRodadoService {
 	
 	public int cantidad(String dominio);
 	
+	public boolean dominioValido(String dominio);
+	
 }

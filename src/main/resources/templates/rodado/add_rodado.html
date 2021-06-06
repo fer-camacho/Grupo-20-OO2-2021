@@ -33,7 +33,9 @@
 	
 	<div class="container-contact100">
 		<a th:if="${repetido}" id="alert-target"></a>
+		<a th:if="${dominioInvalido}" id="alert-dominio"></a>
 		<a th:if="${agregado}" id="alert-success"></a>
+		
 		<div class="wrap-contact100">
 			<form action="#" th:action="@{/rodado/save}" th:object="${rodado}" method="post" class="contact100-form validate-form">
 				<span class="contact100-form-title">
@@ -147,6 +149,9 @@
 <script>
         $("#alert-target").show(function () {
         toastr.error("El dominio ya existe")
+        });
+        $("#alert-dominio").show(function () {
+        toastr.error("El formato del dominio no es el correcto")
         });
         $("#alert-success").show(function () {
 			toastr.success("Rodado creado correctamente")

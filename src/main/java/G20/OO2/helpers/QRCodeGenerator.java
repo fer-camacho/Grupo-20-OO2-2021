@@ -4,8 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -20,7 +22,6 @@ public class QRCodeGenerator {
 
 	        Path path = FileSystems.getDefault().getPath(filePath);
 	        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
-	       
 	    }
 		
 		
@@ -33,5 +34,12 @@ public class QRCodeGenerator {
 		    byte[] pngData = pngOutputStream.toByteArray(); 
 		    return pngData;
 		}
+		
+		
+		public static void generarQRCodeImage(String tipoPermiso, String text, int width, int height, String filePath) throws Exception {
+	        String content = "http://localhost:8080/permiso/"+tipoPermiso+"/"+text;
+	        BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height);
+	        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", Paths.get(filePath));
+	    }
 
 }
