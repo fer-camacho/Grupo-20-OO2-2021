@@ -9,7 +9,7 @@ public class RangoFechasModel {
 	private LocalDate fechaInicio;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaFin;
-	private String lugar;
+	private LugarModel lugar;
 	
 	public RangoFechasModel() {
 		super();
@@ -21,7 +21,7 @@ public class RangoFechasModel {
 		this.fechaFin = fechaFin;
 	}
 	
-	public RangoFechasModel(LocalDate fechaInicio, LocalDate fechaFin, String lugar) {
+	public RangoFechasModel(LocalDate fechaInicio, LocalDate fechaFin, LugarModel lugar) {
 		super();
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -44,11 +44,11 @@ public class RangoFechasModel {
 		this.fechaFin = fechaFin;
 	}
 
-	public String getLugar() {
+	public LugarModel getLugar() {
 		return lugar;
 	}
 
-	public void setLugar(String lugar) {
+	public void setLugar(LugarModel lugar) {
 		this.lugar = lugar;
 	}
 }

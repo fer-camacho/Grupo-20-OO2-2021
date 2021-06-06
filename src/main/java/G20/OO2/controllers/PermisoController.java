@@ -1,6 +1,7 @@
 package G20.OO2.controllers;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -79,23 +80,6 @@ public class PermisoController {
 		mAV.addObject("permisoDiario", new PermisoDiarioModel());
 		return mAV;
 	}
-	/*
-	@PostMapping("/diario/save")
-	public ModelAndView saveDiario(@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiario, BindingResult result,
-			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
-		PermisoDiarioModel pD = permisoDiarioService.insertOrUpdate(permisoDiario);
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_DIARIO);
-		Asignar.asignarPerfil(mAV);
-		
-		List<PersonaModel> personas = personaService.getAll();
-		List<LugarModel> lugares = lugarService.getAll();
-		mAV.addObject("personas", personas);
-		mAV.addObject("lugares", lugares);
-		mAV.addObject("agregado", true);
-		mAV.addObject("permisoDiario", new PermisoDiarioModel());
-		return mAV;
-	}
-	*/
 	
 	@PostMapping("/diario/save")
 	public String saveDiario(@ModelAttribute("permisoDiario") PermisoDiarioModel permisoDiario, BindingResult result,
@@ -103,24 +87,6 @@ public class PermisoController {
 		PermisoDiarioModel pD = permisoDiarioService.insertOrUpdate(permisoDiario);
 		return "redirect:/permiso/diario/new/"+pD.getIdPermiso();
 	}
-	
-	/*
-	@GetMapping("/diario/add/{id}")
-	public ModelAndView newDiarioId(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_DIARIO);		
-		Asignar.asignarPerfil(mAV);
-		String email = personaService.traerEmailPorId(permisoService.listarId(id).getPedido().getId());
-		mailService.mail(email);
-		
-		List<PersonaModel> personas = personaService.getAll();
-		List<LugarModel> lugares = lugarService.getAll();
-		mAV.addObject("personas", personas);
-		mAV.addObject("lugares", lugares);
-		mAV.addObject("agregado", true);
-		mAV.addObject("permisoDiario", new PermisoDiarioModel());
-		return mAV;
-	}
-	*/
 	
 	@GetMapping("/periodo/new")
 	public ModelAndView newPeriodo() {
@@ -137,28 +103,6 @@ public class PermisoController {
 		mAV.addObject("permisoPeriodo", new PermisoPeriodoModel());
 		return mAV;
 	}
-	
-	/*
-	@PostMapping("/periodo/save")
-	public ModelAndView savePeriodo(@ModelAttribute("permisoPeriodo") PermisoPeriodoModel permisoPeriodo, BindingResult result,
-			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {	
-		
-		PermisoPeriodoModel pP = permisoPeriodoService.insertOrUpdate(permisoPeriodo);
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_PERIODO);		
-		Asignar.asignarPerfil(mAV);
-		
-		List<PersonaModel> personas = personaService.getAll();
-		List<LugarModel> lugares = lugarService.getAll();
-		List<RodadoModel> rodados = rodadoService.getAll();
-		
-		mAV.addObject("personas", personas);
-		mAV.addObject("lugares", lugares);
-		mAV.addObject("rodados", rodados);
-		mAV.addObject("agregado", true);
-		mAV.addObject("permisoPeriodo", new PermisoPeriodoModel());
-		return mAV;
-	}
-	*/
 	
 	@PostMapping("/periodo/save")
 	public String savePeriodo(@ModelAttribute("permisoPeriodo") PermisoPeriodoModel permisoPeriodo, BindingResult result,
@@ -240,7 +184,6 @@ public class PermisoController {
 		List<PermisoDiarioModel> diario = permisoDiarioService.traerPorFecha(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin().plusDays(1));
 		List<PermisoPeriodoModel> periodo = permisoPeriodoService.traerPorFecha(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin());
 		
-		
 		mAV.addObject("diario", diario);
 		mAV.addObject("periodo", periodo);
 		return mAV;
@@ -251,6 +194,8 @@ public class PermisoController {
 	public ModelAndView permisosEntreFechasYLugar() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.FECHAS_LUGAR);
 		Asignar.asignarPerfil(mAV);
+		List<LugarModel> lugares = lugarService.getAll();
+		mAV.addObject("lugares", lugares);
 		mAV.addObject("rangoFechas", new RangoFechasModel());
 		return mAV;
 	}
@@ -260,20 +205,14 @@ public class PermisoController {
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISOS);
 		Asignar.asignarPerfil(mAV);
-	
-		List<PermisoDiarioModel> diario = permisoDiarioService.traerPorFechaYLugar(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin().plusDays(1), rangoFechas.getLugar());
-		List<PermisoPeriodoModel> periodo = permisoPeriodoService.traerPorFechaYLugar(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin(), rangoFechas.getLugar());
+		
+		String lugar = lugarService.findById(rangoFechas.getLugar().getIdLugar()).getLugar();
+		
+		List<PermisoDiarioModel> diario = permisoDiarioService.traerPorFechaYLugar(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin().plusDays(1), lugar);
+		List<PermisoPeriodoModel> periodo = permisoPeriodoService.traerPorFechaYLugar(rangoFechas.getFechaInicio(), rangoFechas.getFechaFin(), lugar);
 		
 		mAV.addObject("diario", diario);
 		mAV.addObject("periodo", periodo);
 		return mAV;
 	}
-	
-	@GetMapping("/escaneo")
-	public ModelAndView escaneo() {
-		ModelAndView mAV = new ModelAndView("permiso/qr_code");
-		Asignar.asignarPerfil(mAV);
-		return mAV;
-	}
-
 }
