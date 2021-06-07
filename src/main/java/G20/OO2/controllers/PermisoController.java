@@ -259,9 +259,19 @@ public class PermisoController {
 	
 	@GetMapping("/{id}")
 	public ModelAndView permisoUnitario(@PathVariable("id") int id) {
-		ModelAndView mAV = new ModelAndView("permiso/unitario");
+		ModelAndView mAV;
 		PermisoModel permiso = permisoService.listarId(id);
-		mAV.addObject("permiso", permiso);
+		
+		if (permiso instanceof PermisoDiarioModel) {
+			PermisoDiarioModel pD = (PermisoDiarioModel) permiso;
+			mAV = new ModelAndView("permiso/diario_unitario");
+			mAV.addObject("p", pD);
+		} else {
+			PermisoPeriodoModel pP = (PermisoPeriodoModel) permiso;
+			mAV = new ModelAndView("permiso/periodo_unitario");
+			mAV.addObject("p", pP);
+		}
+		Asignar.asignarPerfil(mAV);
 		return mAV;
 	}
 }

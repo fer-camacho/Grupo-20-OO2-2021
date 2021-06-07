@@ -75,7 +75,7 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
 		    throws Exception {
 		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
     	
-		        QRCodeGenerator.generarQRCodeImage("diario", codeText, 400, 400, QR_CODE_IMAGE_PATH);
+		        QRCodeGenerator.generarQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_DIARIO);		
 				Asignar.asignarPerfil(mAV);
 				String email = personaService.traerEmailPorId(permisoService.listarId(Integer.parseInt(codeText)).getPedido().getId());
@@ -97,7 +97,7 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
 		    throws Exception {
 		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
     	
-		        QRCodeGenerator.generarQRCodeImage("periodo", codeText, 400, 400, QR_CODE_IMAGE_PATH);
+		        QRCodeGenerator.generarQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_PERIODO);		
 		        Asignar.asignarPerfil(mAV);
 		        String email = personaService.traerEmailPorId(permisoService.listarId(Integer.parseInt(codeText)).getPedido().getId());

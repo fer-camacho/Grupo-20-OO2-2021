@@ -36,8 +36,8 @@ public class QRCodeGenerator {
 		}
 		
 		
-		public static void generarQRCodeImage(String tipoPermiso, String text, int width, int height, String filePath) throws Exception {
-	        String content = "http://localhost:8080/permiso/"+tipoPermiso+"/"+text;
+		public static void generarQRCodeImage(String text, int width, int height, String filePath) throws Exception {
+	        String content = "http://localhost:8080/permiso/"+text;
 	        BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height);
 	        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", Paths.get(filePath));
 	    }
