@@ -1,0 +1,38 @@
+<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th style= "display: none" class="cell100 column1 text-left">Id</th>
+									<!-- <th class="cell100 column1">Id</th> -->
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Persona</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Fecha</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Desde</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Hasta</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Cant. dias</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Vacaciones</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Rodado</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr th:each="pe : ${periodo}" class="row100 body">
+								
+									<p style= "display: none" th:text="${pe.idPermiso}" class="cell100 column1"></p>
+									<td th:text="${pe.pedido.apellido} + ' ' + ${pe.pedido.nombre} + ' - ' + ${pe.pedido.tipo} + ' ' + ${pe.pedido.nroDocumento}" class="cell100 column5 text-center"></td>
+									<td th:text="${pe.fecha}" class="cell100 column5 text-center"></td>
+									<td th:text="${pe.lugarSalida.lugar} + ' - ' + ${pe.lugarSalida.codigoPostal}" class="cell100 column5 text-center"></td>
+									<td th:text="${pe.lugarLlegada.lugar} + ' - '+ ${pe.lugarLlegada.codigoPostal}" class="cell100 column5 text-center"></td>
+									<td th:text="${pe.cantDias}" class="cell100 column5 text-center"></td>
+									<td th:if="${pe.vacaciones==true}" th:text="Si" class="cell100 column5 text-center"></td>
+									<td th:if="${pe.vacaciones==false}" th:text="No" class="cell100 column5 text-center"></td>
+									<td th:text="${pe.rodado.dominio} + ' - ' + ${pe.rodado.vehiculo}" class="cell100 column5 text-center"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>

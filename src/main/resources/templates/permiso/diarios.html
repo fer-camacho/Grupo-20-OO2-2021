@@ -1,0 +1,33 @@
+<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th style= "display: none" class="cell100 column1 text-left">Id</th>
+									<!-- <th class="cell100 column1">Id</th> -->
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Persona</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Fecha</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Desde</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Hasta</th>
+									<th style="background-color: #f4623a;" class="cell100 column2 text-center">Motivo</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								<tr th:each="d : ${diario}" class="row100 body">
+								
+									<p style= "display: none" th:text="${d.idPermiso}" class="cell100 column1"></p>
+									<td th:text="${d.pedido.apellido} + ' ' + ${d.pedido.nombre} + ' - ' + ${d.pedido.tipo} + ' ' + ${d.pedido.nroDocumento}" class="cell100 column5 text-center"></td>
+									<td th:text="${d.fecha}" class="cell100 column5 text-center"></td>
+									<td th:text="${d.lugarSalida.lugar} + ' - ' + ${d.lugarSalida.codigoPostal}" class="cell100 column5 text-center"></td>
+									<td th:text="${d.lugarLlegada.lugar} + ' - '+ ${d.lugarLlegada.codigoPostal}" class="cell100 column5 text-center"></td>
+									<td th:text="${d.motivo}" class="cell100 column5 text-center"></td>
+									
+								</tr>
+							</tbody>
+						</table>
+					</div>

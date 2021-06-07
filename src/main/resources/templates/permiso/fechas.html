@@ -42,6 +42,8 @@
 	<nav th:if="${anonimo==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_anonimo :: div"></nav>
 		
+	<a th:if="${vacio==true}" id="alert-target"></a>	
+	
 	<div class="container-contact100">
 		<div class="wrap-contact100">
 			<form action="#" th:action="@{/permiso/fechas/grilla}" th:object="${rangoFechas}" method="post" class="contact100-form validate-form">
@@ -153,6 +155,12 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+</script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+	$("#alert-target").show(function () {
+        toastr.error("No se encontraron permisos")
+        });
 </script>
 </body>
 </html>

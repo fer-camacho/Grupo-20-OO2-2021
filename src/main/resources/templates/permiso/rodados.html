@@ -33,6 +33,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 	
 
     </head>
@@ -47,6 +48,8 @@
 
 	<nav th:if="${anonimo==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_anonimo :: div"></nav>
+	
+	<a th:if="${vacio==true}" id="alert-target"></a>
 	
    <class="limiter">
 		<div class="container-table100">
@@ -118,7 +121,12 @@
 		
 	</script>
 	<script src="/js/main-grilla.js"></script>
-
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<script>
+	$("#alert-target").show(function () {
+        toastr.error("No se encontraron permisos")
+        });
+	</script>
 	</body>
 </html>
 
