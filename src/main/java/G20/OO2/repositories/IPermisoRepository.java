@@ -24,10 +24,10 @@ public interface IPermisoRepository extends JpaRepository<Permiso, Serializable>
 			+ "join permiso_periodo on permiso_periodo.id_permiso = permiso.id_permiso\r\n"
 			+ "join permiso_lugar on permiso_lugar.permiso_id = permiso.id_permiso\r\n"
 			+ "join lugar on lugar.id_lugar = permiso_lugar.lugar_id\r\n"
-			+ "where lugar.lugar = (:lugar)"
+			+ "where lugar.id_lugar = (:idLugar)"
 			+ "and permiso.fecha between (:fechaDesde) and (:fechaHasta)",
 			nativeQuery = true)
-	public abstract List<PermisoPeriodo> findByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta);
+	public abstract List<PermisoPeriodo> findByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta);
 	
 	
 	//@Query("SELECT p FROM Permiso p  WHERE p.desdeHasta = (:idLugar) AND p.fecha between (:fechaDesde) AND (:fechaHasta) ")
@@ -35,8 +35,8 @@ public interface IPermisoRepository extends JpaRepository<Permiso, Serializable>
 				+ "join permiso_diario on permiso_diario.id_permiso = permiso.id_permiso\r\n"
 				+ "join permiso_lugar on permiso_lugar.permiso_id = permiso.id_permiso\r\n"
 				+ "join lugar on lugar.id_lugar = permiso_lugar.lugar_id\r\n"
-				+ "where lugar.lugar = (:lugar)"
+				+ "where lugar.id_lugar = (:idLugar)"
 				+ "and permiso.fecha between (:fechaDesde) and (:fechaHasta)",
 				nativeQuery = true)
-		public abstract List<PermisoDiario> findDiarioByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta);
+		public abstract List<PermisoDiario> findDiarioByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta);
 }

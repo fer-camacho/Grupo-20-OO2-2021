@@ -10,8 +10,8 @@ public interface IPermisoService {
 	
 	public List<PermisoPeriodoModel> findPermisoByRodado(int idRodado);
 	
-	public List<PermisoPeriodoModel> findPermisoByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta);
+	public List<PermisoPeriodoModel> findPermisoByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta);
 
-	public List<PermisoDiarioModel> findPermisoDiarioByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta);
+	public List<PermisoDiarioModel> findPermisoDiarioByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta);
 
 }

@@ -34,17 +34,17 @@ public class PermisoService implements IPermisoService{
 		}
 		return models;
 	}
-	public List<PermisoPeriodoModel> findPermisoByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta) {
+	public List<PermisoPeriodoModel> findPermisoByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<PermisoPeriodoModel> models = new ArrayList<PermisoPeriodoModel>();
-		for (PermisoPeriodo permiso : permisoRepository.findByLugaryFechas(lugar, fechaDesde, fechaHasta)) {
+		for (PermisoPeriodo permiso : permisoRepository.findByLugaryFechas(idLugar, fechaDesde, fechaHasta)) {
 				models.add(permisoConverter.entityToModel(permiso));
 		}
 		return models;
 	}
 	
-	public List<PermisoDiarioModel> findPermisoDiarioByLugaryFechas(String lugar, LocalDate fechaDesde, LocalDate fechaHasta) {
+	public List<PermisoDiarioModel> findPermisoDiarioByLugaryFechas(int idLugar, LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<PermisoDiarioModel> models = new ArrayList<PermisoDiarioModel>();
-		for (PermisoDiario permiso : permisoRepository.findDiarioByLugaryFechas(lugar, fechaDesde, fechaHasta)) {
+		for (PermisoDiario permiso : permisoRepository.findDiarioByLugaryFechas(idLugar, fechaDesde, fechaHasta)) {
 				models.add(permisoConverter.entityToModel(permiso));
 		}
 		return models;

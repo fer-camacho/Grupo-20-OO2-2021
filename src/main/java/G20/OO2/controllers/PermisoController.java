@@ -123,6 +123,9 @@ public class PermisoController {
 	public ModelAndView traerPermisoPorLugaryFechas() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_BY_LUGARYFECHAS);
 		
+		List<Lugar> lugares = lugarService.getAll2();
+		mAV.addObject("lugares", lugares);
+		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		asignarPerfil(mAV, roleString);
 
@@ -131,16 +134,20 @@ public class PermisoController {
 	
 	@PreAuthorize("hasRole('ROLE_AUDIT')")
 	@PostMapping("/by_Lugar_Fechas")
-	public ModelAndView traerPermisoPorLugaryFechas(@RequestParam(name="lugar") String lugar, 
+	public ModelAndView traerPermisoPorLugaryFechas(@RequestParam(name="lugar") int idLugar, 
 			@RequestParam("fechaDesde") @DateTimeFormat(pattern= "yyyy-MM-dd") LocalDate fechaDesde, 
 			@RequestParam("fechaHasta") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaHasta) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PERMISO_BY_LUGARYFECHAS);
 				
+		
+		List<Lugar> lugares = lugarService.getAll2();
+		mAV.addObject("lugares", lugares);
+		
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
 		asignarPerfil(mAV, roleString);
 		
-		mAV.addObject("permisosPeriodo", permisoService.findPermisoByLugaryFechas(lugar, fechaDesde, fechaHasta));
-		mAV.addObject("permisosDiario", permisoService.findPermisoDiarioByLugaryFechas(lugar, fechaDesde, fechaHasta));
+		mAV.addObject("permisosPeriodo", permisoService.findPermisoByLugaryFechas(idLugar, fechaDesde, fechaHasta));
+		mAV.addObject("permisosDiario", permisoService.findPermisoDiarioByLugaryFechas(idLugar, fechaDesde, fechaHasta));
 
 		return mAV;
 	}

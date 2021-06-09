@@ -58,11 +58,26 @@
 				<span class="contact100-form-title">
 					Traer permiso por lugar entre fechas
 				</span>
-					
+				
+				<!-- AGREGO -->
 				<div class="col-3">
+					<label for="lugar" class="form-label">Lugar:</label>
+					<div class="input-group mb-3">
+						<select class="form-select" name="lugar" required>
+							<option value="">Seleccione un lugar</option>
+							<option th:each="l : ${lugares}"  th:value="${(l.idLugar)}" th:text="${l.lugar}"></option>
+						</select>
+					</div>
+				</div>
+				
+				<!-- 
+					<div class="col-3">
 					<label class="form-label" for="lugar">Lugar</label>
        				<input class="form-control" type="text" name="lugar" placeholder="Ingrese Lugar" required>
     			</div>
+				
+				 -->
+			
     				
 				<div class="col-3">
   					<label for="fechaDesde" class="form-label">Fecha desde</label>
