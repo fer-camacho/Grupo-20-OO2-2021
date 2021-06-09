@@ -1,9 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <tittle> HELLO </tittle>
+ <title>Sistema integrador</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/">
 </head>
 <body>
 <h1>Hello World!!</h1>
+
+<script>
+	function getParameter(parameterName){
+		let parameter = new URLSearchParams(window.location.search);
+		return parameters.get(parameterName);
+		
+		var permiso = getParameter('permiso');
+		var nombre = getParameter('nombre');
+		var apellido = getParameter('apellido');
+		var dni = getParameter('dni');
+		var fecha = getParameter('fecha');
+		var desde = getParameter('desde');
+		var hasta = getParameter('hasta');
+		var motivo = getParameter('motivo');
+	}
+</script>
+<div class="container-contact100">
+		<div class="wrap-contact100">
+				<span class="contact100-form-title">
+					Información del permiso
+				</span>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<script type="text/javascript">
+						document.write(nombre)
+					</script>
+				</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<script type="text/javascript">
+						document.write(apellido)
+					</script>
+				</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<script type="text/javascript">
+						document.write(dni)
+					</script>
+				</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<script type="text/javascript">
+						document.write(fecha)
+					</script>
+				</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<script type="text/javascript">
+						document.write(desde)
+					</script>
+				</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<script type="text/javascript">
+						document.write(hasta)
+					</script>
+				</div>
+				
+				<div class="wrap-input100 input100-select bg1">
+					<script type="text/javascript">
+						document.write(motivo)
+					</script>
+				</div>
+		</div>
+	</div>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
