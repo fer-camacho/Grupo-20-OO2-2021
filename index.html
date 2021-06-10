@@ -15,7 +15,7 @@
 	function getParameter(parameterName){
 		let parameter = new URLSearchParams(window.location.search);
 		return parameters.get(parameterName);
-		
+	}	
 		var permiso = getParameter('permiso');
 		var nombre = getParameter('nombre');
 		var apellido = getParameter('apellido');
@@ -24,7 +24,6 @@
 		var desde = getParameter('desde');
 		var hasta = getParameter('hasta');
 		var motivo = getParameter('motivo');
-	}
 </script>
 
 <span class="contact100-form-title">
@@ -37,10 +36,6 @@ Información del permiso
 				
 <span class="contact100-form-title">
 	<script type="text/javascript">document.write(apellido)</script>
-</span>
-
-<span class="contact100-form-title">
-	<script type="text/javascript">document.write("TEST")</script>
 </span>
 				
 <span class="contact100-form-title">
