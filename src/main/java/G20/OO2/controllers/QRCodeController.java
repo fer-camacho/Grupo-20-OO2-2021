@@ -100,7 +100,7 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
     			PermisoPeriodoModel pP = (PermisoPeriodoModel) permisoService.listarId(Integer.parseInt(codeText));
 				String text = "permiso=2&nombre="+pP.getPedido().getNombre()+"&apellido="+pP.getPedido().getApellido()+"&dni="+pP.getPedido().getNroDocumento()+"&fecha="+pP.getFecha()+"&desde="+pP.getLugarSalida().getLugar()+"&hasta="+pP.getLugarLlegada().getLugar()+"&cantDias="+pP.getCantDias()+"&vacaciones"+pP.isVacaciones()+"&dominio"+pP.getRodado().getDominio()+"&vehiculo"+pP.getRodado().getVehiculo();
     			
-		        QRCodeGenerator.generarQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
+		        QRCodeGenerator.generarQRCodeImage(text, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_PERIODO);		
 		        Asignar.asignarPerfil(mAV);
 		        String email = personaService.traerEmailPorId(permisoService.listarId(Integer.parseInt(codeText)).getPedido().getId());
