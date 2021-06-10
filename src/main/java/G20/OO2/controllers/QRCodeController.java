@@ -68,14 +68,15 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
    		        return ResponseEntity.status(HttpStatus.OK).body(QRCodeGenerator.getQRCodeImage(codeText, width, height));
    		    }
    	
-    @GetMapping(value = "/permiso/diario/new/{codeText}")
+   	@GetMapping(value = "/permiso/diario/new/{codeText}")
 	public ModelAndView downloadDiarioOK(
 			//codeText seria el id del permiso, luego hay que cambiarlo por la URL
 			@PathVariable("codeText") String codeText)
 		    throws Exception {
 		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
-    	
-		        QRCodeGenerator.generarQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
+    			PermisoDiarioModel pD = (PermisoDiarioModel) permisoService.listarId(Integer.parseInt(codeText));
+    			String text = "permiso=1&nombre="+pD.getPedido().getNombre()+"&apellido="+pD.getPedido().getApellido()+"&dni="+pD.getPedido().getNroDocumento()+"&fecha="+pD.getFecha()+"&desde="+pD.getLugarSalida().getLugar()+"&hasta="+pD.getLugarLlegada().getLugar()+"&motivo="+pD.getMotivo();
+		        QRCodeGenerator.generarQRCodeImage(text, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_DIARIO);		
 				Asignar.asignarPerfil(mAV);
 				String email = personaService.traerEmailPorId(permisoService.listarId(Integer.parseInt(codeText)).getPedido().getId());
@@ -96,7 +97,9 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
 			@PathVariable("codeText") String codeText)
 		    throws Exception {
 		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
-    	
+    			PermisoPeriodoModel pP = (PermisoPeriodoModel) permisoService.listarId(Integer.parseInt(codeText));
+				String text = "permiso=2&nombre="+pP.getPedido().getNombre()+"&apellido="+pP.getPedido().getApellido()+"&dni="+pP.getPedido().getNroDocumento()+"&fecha="+pP.getFecha()+"&desde="+pP.getLugarSalida().getLugar()+"&hasta="+pP.getLugarLlegada().getLugar()+"&cantDias="+pP.getCantDias()+"&vacaciones"+pP.isVacaciones()+"&dominio"+pP.getRodado().getDominio()+"&vehiculo"+pP.getRodado().getVehiculo();
+    			
 		        QRCodeGenerator.generarQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_PERIODO);		
 		        Asignar.asignarPerfil(mAV);
