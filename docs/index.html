@@ -80,14 +80,6 @@
 		var vacaciones = getParameter('vacaciones');
 		var dominio = getParameter('dominio');
 		var vehiculo = getParameter('vehiculo');
-		
-		if (permiso==1) {
-			tab = document.getElementById('tabla2');
-			tab.style.display= 'none';
-		} else {
-			tab = document.getElementById('tabla1');
-			tab.style.display= 'none';
-		}
 </script>
 
 <!--Permiso-->
@@ -190,7 +182,15 @@
                </div>
              </div>
         </header>
-
+    <script>
+    	if (permiso==1) {
+				tab = document.getElementById('tabla2');
+				tab.style.display= 'none';
+			} else {
+				tab = document.getElementById('tabla1');
+				tab.style.display= 'none';
+			}    
+	</script>
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>
