@@ -69,13 +69,6 @@
 		return parameters.get(parameterName);
 	}
 		var permiso = getParameter('permiso');
-		
-		if (permiso==1) {
-			document.getElementById("2").style.display="none";
-		} else {
-			document.getElementById("1").style.display="none";
-		}
-		
 		var nombre = getParameter('nombre');
 		var apellido = getParameter('apellido');
 		var dni = getParameter('dni');
@@ -87,7 +80,13 @@
 		var vacaciones = getParameter('vacaciones');
 		var dominio = getParameter('dominio');
 		var vehiculo = getParameter('vehiculo');
-
+		
+		if (permiso==1) {
+			document.getElementById("tabla2").style.display="none";
+		} else {
+			document.getElementById("tabla1").style.display="none";
+		}
+		
 </script>
 
 <!--Permiso-->
@@ -96,7 +95,7 @@
               <div>
                   <div class="table100-body js-pscroll ps">
                       <span class="contact100-form-title" >Permiso</span>
-		                    <table id="1" class="table">
+		                    <table id="tabla1" class="table">
 			                       <thead class"wrap-input100 input100-select bg1">
 				                           <tr>
 					                             <th style="background-color: #f4623a;" scope="col">Nombre</th>
@@ -134,7 +133,7 @@
 			                         </tbody>
 		              </table>
 		              
-		              <table id="2" class="table">
+		              <table id="tabla2" class="table">
 			                       <thead class"wrap-input100 input100-select bg1">
 				                           <tr>
 					                             <th style="background-color: #f4623a;" scope="col">Nombre</th>
