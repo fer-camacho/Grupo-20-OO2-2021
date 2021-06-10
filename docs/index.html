@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <title>Sistema integrador</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+  <!--===============================================================================================-->
+  	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
+  <!--===============================================================================================-->
+  	<link rel="stylesheet" type="text/css" href="css/util.css">
+  	<link rel="stylesheet" type="text/css" href="css/main.css">
+  <!--===============================================================================================-->
+</head>
+<body>
+
+
+<script>
+	function getParameter(parameterName){
+		let parameters = new URLSearchParams(window.location.search);
+		return parameters.get(parameterName);
+	}
+		var permiso = getParameter('permiso');
+		var nombre = getParameter('nombre');
+		var apellido = getParameter('apellido');
+		var dni = getParameter('dni');
+		var fecha = getParameter('fecha');
+		var desde = getParameter('desde');
+		var hasta = getParameter('hasta');
+		var motivo = getParameter('motivo');
+		var cantDias = getParameter('cantDias');
+		var vacaciones = getParameter('vacaciones');
+		var dominio = getParameter('dominio');
+		var vehiculo = getParameter('vehiculo');
+
+</script>
+	<div class="container">
+	<div class="table100-body js-pscroll">
+    <span class="contact100-form-title">
+					Permiso
+				</span>
+		<table class="table">
+			<thead class"wrap-input100 input100-select bg1">
+				<tr>
+					<th style="background-color: #f4623a;" scope="col">Nombre</th>
+					<th style="background-color: #f4623a;" scope="col">Apellido</th>
+					<th style="background-color: #f4623a;" scope="col">DNI</th>
+					<th style="background-color: #f4623a;" scope="col">Fecha</th>
+					<th style="background-color: #f4623a;" scope="col">Desde</th>
+					<th style="background-color: #f4623a;" scope="col">Hasta</th>
+					<th style="background-color: #f4623a;" scope="col">Motivo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th scrope="row">
+					|<script type="text/javascript">document.write(nombre)</script>
+				</th>
+
+				<th scrope="row">
+					<script type="text/javascript">document.write(apellido)</script>
+				</th>
+
+				<th scrope="row">
+					<script type="text/javascript">document.write(dni)</script>
+				</th>
+
+				<th scrope="row">
+					<script type="text/javascript">document.write(fecha)</script>
+				</th>
+
+				<th scrope="row">
+					<script type="text/javascript">document.write(desde)</script>
+				</th>
+
+				<th scrope="row">
+					<script type="text/javascript">document.write(hasta)</script>
+				</th>
+
+				<th scrope="row">
+					<script type="text/javascript">document.write(motivo)</script>
+				</th>
+			</tbody>
+		</table>
+	</div>
+  </div>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+
+
+<!--el footer-->
+  <footer class="bg-dark py-5">
+      <div class="container" >
+          <div class="small text-center text-muted">
+              Copyright &copy;
+              <script>
+                  document.write(new Date().getFullYear());
+              </script>
+              - Universidad Nacional de Lanus
+          </div>
+      </div>
+  	</footer>
+
+  	<!--===============================================================================================-->
+  	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+  	<script src="vendor/bootstrap/js/popper.js"></script>
+  	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+  	<script src="vendor/select2/select2.min.js"></script>
+  <!--===============================================================================================-->
+  	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  	<script>
+  		$('.js-pscroll').each(function(){
+  			var ps = new PerfectScrollbar(this);
+
+  			$(window).on('resize', function(){
+  				ps.update();
+  			})
+  		});
+
+
+  	</script>
+  <!--===============================================================================================-->
+  	<script src="js/main-grilla.js"></script>
+
+
+</body>
+</html>
