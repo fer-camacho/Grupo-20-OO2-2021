@@ -8,10 +8,12 @@
 </head>
 <body>
 <h1>Hello World!!</h1>
-
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
 <script>
 	function getParameter(parameterName){
-		let parameter = new URLSearchParams(window.location.search);
+		let parameters = new URLSearchParams(window.location.search);
 		return parameters.get(parameterName);
 	}	
 		var permiso = getParameter('permiso');
@@ -22,58 +24,40 @@
 		var desde = getParameter('desde');
 		var hasta = getParameter('hasta');
 		var motivo = getParameter('motivo');
-	
 </script>
-<div class="container-contact100">
-		<div class="wrap-contact100">
-				<span class="contact100-form-title">
-					Información del permiso
-				</span>
+
+	<span class="contact100-form-title">Información del permiso</span>
 				
-				<span class="contact100-form-title">
-					<script type="text/javascript">
-						document.write(nombre)
-					</script>
-				</span>
+	<span class="contact100-form-title">
+		<script type="text/javascript">document.write(nombre)</script>
+	</span>
 				
-				<span class="contact100-form-title">
-					<script type="text/javascript">
-						document.write(apellido)
-					</script>
-				</span>
+	<span class="contact100-form-title">
+		<script type="text/javascript">document.write(apellido)</script>
+	</span>
 				
-				<span class="contact100-form-title">
-					<script type="text/javascript">
-						document.write(dni)
-					</script>
-				</span>
+	<span class="contact100-form-title">
+		<script type="text/javascript">document.write(dni)</script>
+	</span>
 				
-				<span class="contact100-form-title">
-					<script type="text/javascript">
-						document.write(fecha)
-					</script>
-				</span>
+	<span class="contact100-form-title">
+		<script type="text/javascript">document.write(fecha)</script>
+	</span>
 				
-				<span class="contact100-form-title">
-					<script type="text/javascript">
-						document.write(desde)
-					</script>
-				</span>
+	<span class="contact100-form-title">
+		<script type="text/javascript">document.write(desde)</script>
+	</span>
 				
-				<span class="contact100-form-title">
-					<script type="text/javascript">
-						document.write(hasta)
-					</script>
-				</span>
+	<span class="contact100-form-title">
+		<script type="text/javascript">document.write(hasta)</script>
+	</span>
 				
-				<span class="contact100-form-title">
-					<script type="text/javascript">
-						document.write(motivo)
-					</script>
-				</span>
-		</div>
-	</div>
+	<span class="contact100-form-title">
+		<script type="text/javascript">document.write(motivo)</script>
+	</span>
+	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>
