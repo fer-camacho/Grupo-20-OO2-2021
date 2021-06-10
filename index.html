@@ -13,7 +13,7 @@
 	function getParameter(parameterName){
 		let parameter = new URLSearchParams(window.location.search);
 		return parameters.get(parameterName);
-		
+	}	
 		var permiso = getParameter('permiso');
 		var nombre = getParameter('nombre');
 		var apellido = getParameter('apellido');
@@ -22,7 +22,7 @@
 		var desde = getParameter('desde');
 		var hasta = getParameter('hasta');
 		var motivo = getParameter('motivo');
-	}
+	
 </script>
 <div class="container-contact100">
 		<div class="wrap-contact100">
@@ -30,47 +30,47 @@
 					Información del permiso
 				</span>
 				
-				<div class="wrap-input100 input100-select bg1">
+				<span class="contact100-form-title">
 					<script type="text/javascript">
 						document.write(nombre)
 					</script>
-				</div>
+				</span>
 				
-				<div class="wrap-input100 input100-select bg1">
+				<span class="contact100-form-title">
 					<script type="text/javascript">
 						document.write(apellido)
 					</script>
-				</div>
+				</span>
 				
-				<div class="wrap-input100 input100-select bg1">
+				<span class="contact100-form-title">
 					<script type="text/javascript">
 						document.write(dni)
 					</script>
-				</div>
+				</span>
 				
-				<div class="wrap-input100 input100-select bg1">
+				<span class="contact100-form-title">
 					<script type="text/javascript">
 						document.write(fecha)
 					</script>
-				</div>
+				</span>
 				
-				<div class="wrap-input100 input100-select bg1">
+				<span class="contact100-form-title">
 					<script type="text/javascript">
 						document.write(desde)
 					</script>
-				</div>
+				</span>
 				
-				<div class="wrap-input100 input100-select bg1">
+				<span class="contact100-form-title">
 					<script type="text/javascript">
 						document.write(hasta)
 					</script>
-				</div>
+				</span>
 				
-				<div class="wrap-input100 input100-select bg1">
+				<span class="contact100-form-title">
 					<script type="text/javascript">
 						document.write(motivo)
 					</script>
-				</div>
+				</span>
 		</div>
 	</div>
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
