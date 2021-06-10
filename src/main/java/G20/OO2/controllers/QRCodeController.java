@@ -1,5 +1,6 @@
 package G20.OO2.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +101,9 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
     			PermisoPeriodoModel pP = (PermisoPeriodoModel) permisoService.listarId(Integer.parseInt(codeText));
     			String vacaciones = "Si";
     			if (!pP.isVacaciones()) vacaciones = "No";
-				String text = "permiso=2&nombre="+pP.getPedido().getNombre()+"&apellido="+pP.getPedido().getApellido()+"&dni="+pP.getPedido().getNroDocumento()+"&fecha="+pP.getFecha()+"&desde="+pP.getLugarSalida().getLugar()+"&hasta="+pP.getLugarLlegada().getLugar()+"&cantDias="+pP.getCantDias()+"&vacaciones="+vacaciones+"&dominio="+pP.getRodado().getDominio()+"&vehiculo="+pP.getRodado().getVehiculo();
+    			
+    			LocalDate fechaFin = pP.getFecha().plusDays(pP.getCantDias());
+				String text = "permiso=2&nombre="+pP.getPedido().getNombre()+"&apellido="+pP.getPedido().getApellido()+"&dni="+pP.getPedido().getNroDocumento()+"&fecha="+pP.getFecha()+"&desde="+pP.getLugarSalida().getLugar()+"&hasta="+pP.getLugarLlegada().getLugar()+"&fechaFin="+fechaFin+"&vacaciones="+vacaciones+"&dominio="+pP.getRodado().getDominio()+"&vehiculo="+pP.getRodado().getVehiculo();
     			
 		        QRCodeGenerator.generarQRCodeImage(text, 400, 400, QR_CODE_IMAGE_PATH);
 		        ModelAndView mAV = new ModelAndView(ViewRouteHelper.ADD_PERIODO);		
