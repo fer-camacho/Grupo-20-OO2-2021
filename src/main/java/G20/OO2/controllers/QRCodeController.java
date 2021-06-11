@@ -71,10 +71,9 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
    	
    	@GetMapping(value = "/permiso/diario/new/{codeText}")
 	public ModelAndView downloadDiarioOK(
-			//codeText seria el id del permiso, luego hay que cambiarlo por la URL
 			@PathVariable("codeText") String codeText)
 		    throws Exception {
-		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
+
     			PermisoDiarioModel pD = (PermisoDiarioModel) permisoService.listarId(Integer.parseInt(codeText));
     			String text = "permiso=1&nombre="+pD.getPedido().getNombre()+"&apellido="+pD.getPedido().getApellido()+"&dni="+pD.getPedido().getNroDocumento()+"&fecha="+pD.getFecha()+"&desde="+pD.getLugarSalida().getLugar()+"&hasta="+pD.getLugarLlegada().getLugar()+"&motivo="+pD.getMotivo();
 		        QRCodeGenerator.generarQRCodeImage(text, 400, 400, QR_CODE_IMAGE_PATH);
@@ -94,10 +93,9 @@ private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/QRCode.pn
     
     @GetMapping(value = "/permiso/periodo/new/{codeText}")
 	public ModelAndView downloadPeriodoOK(
-			//codeText seria el id del permiso, luego hay que cambiarlo por la URL
 			@PathVariable("codeText") String codeText)
 		    throws Exception {
-		        //QRCodeGenerator.generateQRCodeImage(codeText, 400, 400, QR_CODE_IMAGE_PATH);
+
     			PermisoPeriodoModel pP = (PermisoPeriodoModel) permisoService.listarId(Integer.parseInt(codeText));
     			String vacaciones = "Si";
     			if (!pP.isVacaciones()) vacaciones = "No";
