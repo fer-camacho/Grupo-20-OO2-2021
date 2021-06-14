@@ -16,4 +16,6 @@ public interface IRodadoService {
 	
 	public List<Rodado> getAll2();
 	
+	public RodadoModel findById(int id);
+	
 }

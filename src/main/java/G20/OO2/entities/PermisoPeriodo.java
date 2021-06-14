@@ -37,14 +37,14 @@ public class PermisoPeriodo extends Permiso {
 		this.vacaciones = vacaciones;
 		this.rodado = rodado;
 	}
-
+/*
 	public PermisoPeriodo(int idPermiso, Persona pedido, LocalDate fecha, Set<Lugar> desdeHasta, int cantDias,
 			boolean vacaciones, Rodado rodado) {
 		super(idPermiso, pedido, fecha, desdeHasta);
 		this.cantDias = cantDias;
 		this.vacaciones = vacaciones;
 		this.rodado = rodado;
-	}
+	}*/
 
 	public int getCantDias() {
 		return cantDias;
@@ -70,5 +70,8 @@ public class PermisoPeriodo extends Permiso {
 		this.rodado = rodado;
 	}
 	
-	
+	public boolean activo (LocalDate diaHasta){
+		LocalDate fechaVto = fecha.plusDays(cantDias);
+		return !(diaHasta.isAfter(fechaVto));
+	}
 }

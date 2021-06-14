@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import G20.OO2.converters.PersonaConverter;
+import G20.OO2.entities.Lugar;
 import G20.OO2.entities.Persona;
 import G20.OO2.models.PersonaModel;
 import G20.OO2.repositories.IPersonaRepository;
@@ -39,5 +40,9 @@ public class PersonaService implements IPersonaService {
 	
 	public int cantidad (long dni) {
 		return personaRepository.repetido(dni);
+	}
+	
+	public PersonaModel findById(int id) {
+		return personaConverter.entityToModel(personaRepository.findById(id));
 	}
 }

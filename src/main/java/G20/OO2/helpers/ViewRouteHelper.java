@@ -26,13 +26,16 @@ public class ViewRouteHelper {
 	//RODADO
 	public final static String RODADO_ADD = "rodado/add_rodado";
 	
-	//PEDIDO
+	//PERMISO
+	public final static String PERMISO_INDEX = "permiso/permisosAll";
+	public final static String PERMISO_DIARIO_NEW = "permiso/newPermisoDiario";
+	public final static String PERMISO_PERIODO_NEW = "permiso/newPermisoPeriodo";
+	public final static String PERMISO_BY_PERSONA = "permiso/permisoPorPersona";
 	public final static String PERMISO_BY_RODADO = "permiso/permisoByRodado";
 	public final static String PERMISO_BY_LUGARYFECHAS = "permiso/permisoLugarEntreFechas";
 
-	
 	/**** Redirects ****/
-	public final static String ROUTE = "/index";
-	public final static String DEGREE_ROOT = "/degrees/";
-	public final static String PERSON_ROOT = "/person";
+	public final static String PERMISO_ROOT = "/permiso/by_Persona";
+	public final static String USER_ROOT = "/usuario/abm";
+
 }

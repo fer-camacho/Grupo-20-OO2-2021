@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import G20.OO2.entities.Lugar;
 import G20.OO2.entities.Persona;
 
 @Repository("personaRepository")
@@ -20,4 +21,7 @@ public interface IPersonaRepository extends JpaRepository<Persona, Serializable>
 	
 	@Query(nativeQuery=true,value="Select count(*) from persona p where p.nro_documento=(:nro_documento)")
 	public int repetido(long nro_documento);
+	
+	@Query(nativeQuery=true,value="Select * from persona where persona.id=(:id)")
+	public Persona findById(int id);
 }

@@ -38,4 +38,10 @@ public class LugarService implements ILugarService{
 	public List<Lugar> getAll2() {
 		return lugarRepository.findAll();
 	}
+	
+	public Lugar findById(int id) {
+		//return lugarConverter.entityToModel(lugarRepository.findById(id));
+		return lugarRepository.findById(id);
+
+	}
 }

@@ -10,4 +10,6 @@ public interface ILugarService {
 	public List<LugarModel> getAll();
 	
 	public List<Lugar> getAll2();
+	
+	public Lugar findById(int id);
 }

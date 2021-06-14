@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import G20.OO2.converters.RodadoConverter;
 import G20.OO2.entities.Rodado;
+import G20.OO2.models.PersonaModel;
 import G20.OO2.models.RodadoModel;
 import G20.OO2.repositories.IRodadoRepository;
 import G20.OO2.services.IRodadoService;
@@ -44,5 +45,9 @@ public class RodadoService implements IRodadoService {
 	@Override
 	public List<Rodado> getAll2() {
 		return rodadoRepository.findAll();
+	}
+	
+	public RodadoModel findById(int id) {
+		return rodadoConverter.entityToModel(rodadoRepository.findById(id));
 	}
 }

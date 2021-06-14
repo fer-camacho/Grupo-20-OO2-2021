@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import G20.OO2.converters.UserConverter;
 import G20.OO2.helpers.ViewRouteHelper;
@@ -105,6 +107,50 @@ public class UserController {
 	}
 	
 	@PostMapping("/save")
+	//public RedirectView saveUser(
+	public ModelAndView saveUser(	
+			@ModelAttribute("user") UserModel userModel, 
+			@RequestParam(name="persona.nombre") String nombre , 
+			@RequestParam(name="persona.apellido") String apellido ,
+			@RequestParam(name="persona.tipo") String tipo, 
+			@RequestParam(name="persona.nroDocumento") long nroDocumento,  
+			BindingResult result,
+			RedirectAttributes redirect) 
+		throws UnsupportedEncodingException, MessagingException {
+		
+		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.USER_ADD);
+		
+		List<UserRoleModel> roles = userRoleService.getAll();
+		
+		asignarPerfil(mAV, roleString);
+		mAV.addObject("roles", roles);
+
+		String username = userModel.getUsername();
+		
+		if (userService.cantidad(username)==0) { //si puedo insertar
+			if (userModel.getPassword().length() >= 5) {
+				UserModel u = new UserModel();
+				
+				BCryptPasswordEncoder p = new BCryptPasswordEncoder();
+				userModel.setPassword(p.encode(userModel.getPassword()));
+			
+				u = userService.insertOrUpdate(userModel);
+								
+				mandarMailAltaUser(userModel);
+				mAV.addObject("user", new UserModel()); //limpia el formulario
+				mAV.addObject("agregado", true);
+			} else {
+				mAV.addObject("formatoIncorrecto", true);
+			}	
+		} else mAV.addObject("repetido", true);
+		//return new RedirectView(ViewRouteHelper.USER_ROOT);
+		return mAV;
+	}
+	
+	
+	/*
+	@PostMapping("/save")
 	public ModelAndView saveUser(@ModelAttribute("user") UserModel userModel, BindingResult result,
 			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {
 		String roleString = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
@@ -132,19 +178,6 @@ public class UserController {
 			}	
 		} else mAV.addObject("repetido", true);
 		return mAV;
-	}
-	
-	/*
-	@PostMapping("/save")
-	public String saveuser(@ModelAttribute("user") UserModel userModel, BindingResult result,
-			RedirectAttributes redirect) throws UnsupportedEncodingException, MessagingException {
-		UserModel u = new UserModel();
-		BCryptPasswordEncoder p = new BCryptPasswordEncoder();
-		userModel.setPassword(p.encode(userModel.getPassword()));
-		u = userService.insertOrUpdate(userModel);
-		
-		//mandarMailAltaUser(userModel);
-		return "redirect:/usuario/abm";
 	}
 	*/
 	

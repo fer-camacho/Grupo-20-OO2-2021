@@ -1,6 +1,7 @@
 package G20.OO2.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,11 +18,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name="permiso")
@@ -33,36 +29,29 @@ public abstract class Permiso {
 	protected int idPermiso;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name="permiso_id", nullable=false)
 	@JoinColumn(name="pedido_id", nullable=false)
 	protected Persona pedido;
 	
 	@Column(name="fecha", nullable = false)
 	protected LocalDate fecha;
 	
-	@ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable ( name ="permiso_lugar",
-			joinColumns = { @JoinColumn(name= "permiso_id")},
-			inverseJoinColumns = { @JoinColumn (name = "lugar_id")})
-	protected Set<Lugar> desdeHasta;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name="permiso_lugar", joinColumns={@JoinColumn(name="permiso_id", nullable = false)}, inverseJoinColumns={@JoinColumn(name="lugar_id", nullable = false)})
+	protected Set<Lugar> desdeHasta = new HashSet<Lugar>();
 
 	public Permiso() {
-		super();
 	}
 
 	public Permiso(int idPermiso, Persona pedido, LocalDate fecha) {
-		super();
 		this.idPermiso = idPermiso;
 		this.pedido = pedido;
 		this.fecha = fecha;
 	}
 
-	public Permiso(int idPermiso, Persona pedido, LocalDate fecha, Set<Lugar> desdeHasta) {
-		super();
-		this.idPermiso = idPermiso;
-		this.pedido = pedido;
-		this.fecha = fecha;
-		this.desdeHasta = desdeHasta;
+	@Override
+	public String toString() {
+		return "Permiso [idPermiso=" + idPermiso + ", pedido=" + pedido + ", fecha=" + fecha + ", desdeHasta="
+				+ desdeHasta + "]";
 	}
 
 	public int getIdPermiso() {
@@ -92,9 +81,13 @@ public abstract class Permiso {
 	public Set<Lugar> getDesdeHasta() {
 		return desdeHasta;
 	}
-
-	public void setDesdeHasta(Set<Lugar> desdeHasta) {
-		this.desdeHasta = desdeHasta;
-	}
+	
+	public void addLugar(Lugar lugar){
+        if(this.desdeHasta == null){
+            this.desdeHasta = new HashSet<>();
+        }
+        
+        this.desdeHasta.add(lugar);
+    }
 	
 }

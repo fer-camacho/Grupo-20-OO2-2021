@@ -19,6 +19,8 @@ public class PermisoPeriodoModel extends PermisoModel {
 		this.vacaciones = vacaciones;
 		this.rodado = rodado;
 	}
+	
+	/*
 
 	public PermisoPeriodoModel(int idPermiso, PersonaModel pedido, LocalDate fecha, Set<LugarModel> desdeHasta,
 			int cantDias, boolean vacaciones, RodadoModel rodado) {
@@ -26,7 +28,7 @@ public class PermisoPeriodoModel extends PermisoModel {
 		this.cantDias = cantDias;
 		this.vacaciones = vacaciones;
 		this.rodado = rodado;
-	}
+	}*/
 
 	public int getCantDias() {
 		return cantDias;
@@ -51,7 +53,4 @@ public class PermisoPeriodoModel extends PermisoModel {
 	public void setRodado(RodadoModel rodado) {
 		this.rodado = rodado;
 	}
-	
-	
-	
 }

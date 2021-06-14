@@ -25,10 +25,11 @@ public class PermisoDiario extends Permiso {
 		this.motivo = motivo;
 	}
 
+	/*
 	public PermisoDiario(int idPermiso, Persona pedido, LocalDate fecha, Set<Lugar> desdeHasta, String motivo) {
 		super(idPermiso, pedido, fecha, desdeHasta);
 		this.motivo = motivo;
-	}
+	}*/
 
 	public String getMotivo() {
 		return motivo;
@@ -37,5 +38,4 @@ public class PermisoDiario extends Permiso {
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
-	
 }

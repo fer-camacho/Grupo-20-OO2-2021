@@ -12,13 +12,12 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">	
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--================================
-===============================================================-->
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
@@ -31,38 +30,56 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
 </head>
+
+	<style>
+		select{
+			width:100%;
+		}
+		
+		.wrap-contact100{
+			width: 100%;
+		}
+		
+		table caption{
+			caption-side:top;
+		}
+		
+	</style>
 <body>
+
 	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_admin :: div"></nav>
 			
 	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_audit :: div"></nav>
-
+	
+	<nav th:if="${anonimo==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
+	th:include="nav_anonimo :: div"></nav>
+	
 	<div class="container-contact100">
-		<a th:if="${repetido}" id="alert-target"></a>
-		<a th:if="${agregado}" id="alert-success"></a>
 		<div class="wrap-contact100">
-			<form th:action="@{/perfil/save}"th:object="${userRole}" method="post" class="contact100-form validate-form">
-				<span class="contact100-form-title">
-					Información del perfil
-				</span>
-
-				<div class="wrap-input100 validate-input bg1" data-validate="Escriba el nombre del perfil">
-					<span class="label-input100">Nombre perfil *</span>
-					<input class="input100" type="text" th:field="*{role}" name="role" placeholder="Nombre del perfil" required="required">
-				</div>
-				
-				
-				<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn">
-						<span>
-							Submit
-							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-						</span>
-					</button>
-				</div>
-			</form>
+			<h3 align="center">Permisos generados</h3>
+			<div class="table-responsive">
+				<table id="tabla1" class="table table-striped table-bordered border-primary">
+					<caption>Permisos Periodo </caption>
+					<thead>								
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Pedido</th>
+							<th scope="col">Fecha</th>
+						</tr>	 
+					</thead>
+					<tbody>
+						<tr th:each="permiso : ${permisos}">
+							<td id="idTd1" scope="row" th:text="${permiso.idPermiso}"></td>
+							<td th:text="${permiso.pedido.nroDocumento}"></td>
+							<td th:text="${permiso.fecha}" class="text-center"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	
@@ -75,22 +92,79 @@
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            - Universidad Nacional de Lanus
+            - Universidad Nacional de Lanús
         </div>
     </div>
 	</footer>
 
-
-
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	
 <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	
+	<script>
+	
+	$(document).ready(function(){
+	     
+		
+	    if( $("#idTd1").text() == ""){
+	        $("#tabla1").hide(); //Oculta la tabla
+	    }
+	    
+	    if( $("#idTd2").text() == ""){
+	        $("#tabla2").hide(); //Oculta la tabla
+	    }
+	    
+	    /*
+	    $("#button").click(function(){
+	    	if( $("#idTd2").text() == ""){
+				('.alert').disabled
+	    	}
+	    });*/
+	});
+	</script>
+	
+
+	
+	
+	
+	
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript">
+        $(function() {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+	
+	
 <!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
+	
+<!--===============================================================================================-->
+	<script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src="/js/main-grilla.js"></script>
+	
+	<!--===============================================================================================-->
+	
 	<script>
 		$(".js-select2").each(function(){
 			$(this).select2({
@@ -155,15 +229,7 @@
 
   gtag('config', 'UA-23581568-13');
 </script>
-<script>
-		$("#alert-target").show(function () {
-        toastr.error("El nombre del perfil ya existe")
-        });
-        
-        $("#alert-success").show(function () {
-			toastr.success("Perfil agregado correctamente")
-		});
-</script>
+
 
 </body>
 </html>

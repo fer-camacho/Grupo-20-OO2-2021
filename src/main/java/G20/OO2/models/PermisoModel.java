@@ -1,13 +1,16 @@
 package G20.OO2.models;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
+
+import G20.OO2.entities.Lugar;
 
 public abstract class PermisoModel {
 	protected int idPermiso;
 	protected PersonaModel pedido;
 	protected LocalDate fecha;
-	protected Set<LugarModel> desdeHasta;
+	protected Set<LugarModel> desdeHasta = new HashSet<LugarModel>();
 	
 	public PermisoModel() {
 		super();
@@ -20,14 +23,6 @@ public abstract class PermisoModel {
 		this.fecha = fecha;
 	}
 
-	public PermisoModel(int idPermiso, PersonaModel pedido, LocalDate fecha, Set<LugarModel> desdeHasta) {
-		super();
-		this.idPermiso = idPermiso;
-		this.pedido = pedido;
-		this.fecha = fecha;
-		this.desdeHasta = desdeHasta;
-	}
-
 	public int getIdPermiso() {
 		return idPermiso;
 	}
@@ -38,6 +33,12 @@ public abstract class PermisoModel {
 
 	public PersonaModel getPedido() {
 		return pedido;
+	}
+
+	@Override
+	public String toString() {
+		return "PermisoModel [idPermiso=" + idPermiso + ", pedido=" + pedido + ", fecha=" + fecha + ", desdeHasta="
+				+ desdeHasta + "]";
 	}
 
 	public void setPedido(PersonaModel pedido) {
@@ -55,10 +56,5 @@ public abstract class PermisoModel {
 	public Set<LugarModel> getDesdeHasta() {
 		return desdeHasta;
 	}
-
-	public void setDesdeHasta(Set<LugarModel> desdeHasta) {
-		this.desdeHasta = desdeHasta;
-	}
-	
 	
 }

@@ -1,5 +1,6 @@
 package G20.OO2.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,8 @@ public class User {
 	@JoinColumn(name="userRole_id", nullable=false)
 	private UserRole userRole;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	//@ManyToOne(fetch = FetchType.LAZY) CAMBIO
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="persona_id", nullable=false)
 	private Persona persona;
 	

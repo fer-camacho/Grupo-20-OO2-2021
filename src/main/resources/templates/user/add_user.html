@@ -33,10 +33,10 @@
 </head>
 <body>
 
-	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	<nav th:if="${admin==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_admin :: div"></nav>
 			
-	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #023E8A;"
+	<nav th:if="${audit==true}" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #f4623a;"
 	th:include="nav_audit :: div"></nav>
 	
 	<div class="container-contact100">
@@ -48,7 +48,7 @@
 				<span class="contact100-form-title">
 					Información del usuario
 				</span>
-				
+				<!-- 
 				<div class="wrap-input100 input100-select bg1">
 					<span class="label-input100">Persona *</span>
 					<div>
@@ -56,6 +56,30 @@
 							<option th:each="p : ${personas}"  th:value="${(p.id)}" th:text=" ${p.apellido} + ' ' + ${p.nombre} + ' - ' + ${p.tipo} + ' ' + ${p.nroDocumento}"></option>
 						</select>
 					</div>
+				</div>
+				
+				 -->
+				
+				
+				<!-- AGREGO -->
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Nombre *</span>
+					<input class="input100" type="text" name="nombre" placeholder="Ingrese el nombre" th:field="*{persona.nombre}" required="required">
+				</div>
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Apellido *</span>
+					<input class="input100" type="text" name="apellido" placeholder="Ingrese el apellido" th:field="*{persona.apellido}" required="required">
+				</div>
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Tipo Documento *</span>
+					<input class="input100" type="text" name="tipo" placeholder="Ingrese el tipo de documento" th:field="*{persona.tipo}" required="required">
+				</div>
+				
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100" >Nro Documento *</span>
+					<input class="input100" type="text" name="nombre" placeholder="Ingrese el nro de documento" th:field="*{persona.nroDocumento}" required="required">
 				</div>
 
 				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "El email debe cumplir con xxx@.x.xx">
